@@ -1,0 +1,18 @@
+{
+  "name": "fyley-frontend",
+  "description": "The frontend project of fyley",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
+    "build:ui-lib": "lerna run build --scope=@classifier/ui-lib",
+    "build:web": "lerna run build --scope={@classifier/ui-lib,@classifier/web}"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "prettier": "2.1.2"
+  }
+}

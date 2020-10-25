@@ -1,0 +1,41 @@
+$border-color: #dfe0eb;
+$border: 1px solid $border-color;
+$border-radius: 8px;
+$bg-color: #ffffff;
+
+.list {
+  .list-item {
+    padding: 10px 20px;
+    border: $border;
+    border-radius: $border-radius;
+    margin-bottom: 6px;
+    background-color: $bg-color;
+
+    &:hover {
+      background-color: darken($bg-color, 3%);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.list-compact {
+  .list-item {
+    padding: 10px 20px;
+    border-top: none;
+    border-radius: 0;
+    margin-bottom: 0;
+
+    &:first-child {
+      border-top: $border;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+}
+

@@ -1,0 +1,9 @@
+@import "src/base/colors";
+
+.icon {
+  display: inline-block;
+
+  svg {
+    fill: $icon-color
+  }
+}

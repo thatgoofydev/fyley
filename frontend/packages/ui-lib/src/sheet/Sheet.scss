@@ -1,0 +1,7 @@
+@import "src/base/vars";
+
+.sheet {
+  background-color: $sheet-bg;
+  border: $sheet-border;
+  border-radius: $sheet-border-radius;
+}

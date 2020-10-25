@@ -1,0 +1,8 @@
+@import "src/base/vars";
+
+.sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: $sheet-padding;
+}

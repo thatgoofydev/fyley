@@ -1,0 +1,19 @@
+.layout-container {
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  grid-template-rows: 128px 1fr;
+  gap: 0 0;
+  grid-template-areas: "Sidebar Header" "Sidebar Content";
+}
+
+.layout-sidebar {
+  grid-area: Sidebar;
+}
+
+.layout-header {
+  grid-area: Header;
+}
+
+.layout-content {
+  grid-area: Content;
+}
