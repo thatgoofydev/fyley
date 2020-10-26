@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{B12BC75B-D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Util.Migrations", "Util\Fyley.Util.Migrations\Fyley.Util.Migrations.csproj", "{E9508454-C6EC-4798-852E-F7064AD650F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Dossiers.Tests", "Components\Fyley.Components.Dossiers.Tests\Fyley.Components.Dossiers.Tests.csproj", "{C5D5776B-7B4A-48AE-A432-A8C3940387ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,7 @@ Global
 		{64656349-1040-4892-9B2E-78BDA170F344} = {EC997F74-2F22-4486-8D48-B4A94F44BD17}
 		{C3EBFDEA-10ED-4B3B-AE42-B102D130A949} = {10CD4A81-E379-4598-A214-415F9292A190}
 		{E9508454-C6EC-4798-852E-F7064AD650F0} = {B12BC75B-D9E0-4D1F-BEE4-2AB918FD7C25}
+		{C5D5776B-7B4A-48AE-A432-A8C3940387ED} = {10CD4A81-E379-4598-A214-415F9292A190}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{77067D48-565C-4801-9CA0-9C65B48A4029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -75,5 +78,9 @@ Global
 		{E9508454-C6EC-4798-852E-F7064AD650F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9508454-C6EC-4798-852E-F7064AD650F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9508454-C6EC-4798-852E-F7064AD650F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D5776B-7B4A-48AE-A432-A8C3940387ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D5776B-7B4A-48AE-A432-A8C3940387ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D5776B-7B4A-48AE-A432-A8C3940387ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D5776B-7B4A-48AE-A432-A8C3940387ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
