@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
 using System.Threading.Tasks;
 using Dapper;
 using Fyley.Components.Dossiers.Application.DataAccess;
 using Fyley.Components.Dossiers.Application.QueryModels;
 using Fyley.Components.Dossiers.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Fyley.Components.Dossiers.Infrastructure.DataAccess
 {
     public class DossiersQueries : IDossiersQueries
     {
-        private readonly DbConnection _connection; 
+        private readonly IDossiersUnitOfWork _unitOfWork;
 
-        public DossiersQueries(DossiersContext context)
+        public DossiersQueries(IDossiersUnitOfWork unitOfWork)
         {
-            _connection = context.Database.GetDbConnection();
+            _unitOfWork = unitOfWork;
         }
         
         public Task<FullDossierQueryModel> FetchSingle(DossierId id)
@@ -28,7 +26,7 @@ namespace Fyley.Components.Dossiers.Infrastructure.DataAccess
                 WHERE d.DossierId = @DossierId
             ";
             
-            var result = _connection.QuerySingleAsync<FullDossierQueryModel>(query, new { DossierId = id.Value });
+            var result = _unitOfWork.GetConnection().QuerySingleAsync<FullDossierQueryModel>(query, new { DossierId = id.Value });
             return result;
         }
 
@@ -41,7 +39,7 @@ namespace Fyley.Components.Dossiers.Infrastructure.DataAccess
                 FROM Dossiers.Dossiers d
             ";
             
-            var result = _connection.QueryAsync<FullDossierQueryModel>(query);
+            var result = _unitOfWork.GetConnection().QueryAsync<FullDossierQueryModel>(query);
             return result;
         }
     }

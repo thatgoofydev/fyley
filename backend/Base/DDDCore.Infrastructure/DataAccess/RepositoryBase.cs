@@ -11,15 +11,15 @@ namespace DDDCore.Infrastructure.DataAccess
         where TIdentifier : Identifier
         where TState : class, IAggregateState
     {
-
-        protected readonly DbSet<TState> Repository;
-        
+        private readonly IUnitOfWork _unitOfWork;
         private readonly DbContext _context;
+        protected readonly DbSet<TState> Repository;
         private readonly string _idColumn;
 
-        protected RepositoryBase(DbContext context, DbSet<TState> repository, string idColumn)
+        protected RepositoryBase(IUnitOfWork unitOfWork, DbSet<TState> repository, string idColumn)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+            _context = unitOfWork as DbContext;
             Repository = repository;
             _idColumn = idColumn;
         }
