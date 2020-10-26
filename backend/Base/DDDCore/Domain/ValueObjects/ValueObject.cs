@@ -5,7 +5,7 @@ namespace DDDCore.Domain.ValueObjects
 {
     public abstract class ValueObject
     {
-        protected static bool EqualOperator(ValueObject left, ValueObject right)
+        public static bool operator ==(ValueObject left, ValueObject right)
         {
             if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
             {
@@ -13,10 +13,10 @@ namespace DDDCore.Domain.ValueObjects
             }
             return ReferenceEquals(left, null) || left.Equals(right);
         }
-
-        protected static bool NotEqualOperator(ValueObject left, ValueObject right)
+        
+        public static bool operator !=(ValueObject left, ValueObject right)
         {
-            return !EqualOperator(left, right);
+            return !(left == right);
         }
 
         protected abstract IEnumerable<object> GetEqualityComponents();
