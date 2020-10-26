@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Fyley.Components.Dossiers.Application;
 using Fyley.Components.Dossiers.Contracts.QueryService.FetchDossier;
 using Fyley.Components.Dossiers.Contracts.QueryService.ListDossiers;
