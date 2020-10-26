@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Fyley.Components.Dossiers.Infrastructure;
+using Fyley.Core.Asp.Middleware.CorrelationId;
 
 namespace Fyley.BFF.Desktop
 {
@@ -21,6 +22,9 @@ namespace Fyley.BFF.Desktop
             services.AddControllers();
             services.AddCors();
             
+            // Core Infrastructure
+            services.AddCorrelationIds();
+            
             // Components
             services.RegisterDossiers(Configuration);
         }
@@ -32,7 +36,8 @@ namespace Fyley.BFF.Desktop
                 app.UseDeveloperExceptionPage();
                 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
-
+            app.UseCorrelationIds();
+            
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

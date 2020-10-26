@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Fyley.Core.Asp.Controllers
 {
-    public class BaseController : Microsoft.AspNetCore.Mvc.ControllerBase
+    public class BaseController : ControllerBase
     {
         
         protected async Task<IActionResult> ExecuteAsync(Func<Task> func)

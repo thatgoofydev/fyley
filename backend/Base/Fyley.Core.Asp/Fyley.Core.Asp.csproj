@@ -10,7 +10,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DDDCore.Infrastructure\DDDCore.Infrastructure.csproj" />
       <ProjectReference Include="..\DDDCore\DDDCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
     </ItemGroup>
 
 
