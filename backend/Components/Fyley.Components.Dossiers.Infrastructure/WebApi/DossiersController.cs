@@ -13,10 +13,10 @@ namespace Fyley.Components.Dossiers.Infrastructure.WebApi
     [Route("/bff/dossiers")]
     public class DossiersController : BaseController
     {
-        private readonly DossiersService _dossiersService;
-        private readonly DossiersQueryService _dossiersQueryService;
+        private readonly IDossiersService _dossiersService;
+        private readonly IDossiersQueryService _dossiersQueryService;
 
-        public DossiersController(DossiersService dossiersService, DossiersQueryService dossiersQueryService)
+        public DossiersController(IDossiersService dossiersService, IDossiersQueryService dossiersQueryService)
         {
             _dossiersService = dossiersService;
             _dossiersQueryService = dossiersQueryService;

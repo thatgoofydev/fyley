@@ -5,7 +5,7 @@ using Fyley.Components.Dossiers.Domain;
 
 namespace Fyley.Components.Dossiers.Application
 {
-    public class DossiersService
+    public class DossiersService : IDossiersService
     {
         private readonly IDossiersUnitOfWork _unitOfWork;
         private readonly IDossiersRepository _repository;

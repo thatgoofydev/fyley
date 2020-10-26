@@ -7,7 +7,7 @@ using Fyley.Components.Dossiers.Domain;
 
 namespace Fyley.Components.Dossiers.Application
 {
-    public class DossiersQueryService
+    public class DossiersQueryService : IDossiersQueryService
     {
         private readonly IDossiersQueries _queries;
 
