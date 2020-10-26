@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using DDDCore.Infrastructure.DataAccess;
+﻿using DDDCore.Infrastructure.DataAccess;
 using Fyley.Components.Dossiers.Application.DataAccess;
 using Fyley.Components.Dossiers.Domain;
 using JetBrains.Annotations;
