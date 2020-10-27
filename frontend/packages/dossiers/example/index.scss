@@ -1,1 +1,5 @@
 @import "~@fyley/ui-lib/src/base/base.scss";
+
+.example-wrapper {
+  margin: 200px calc(50% - 325px);
+}
