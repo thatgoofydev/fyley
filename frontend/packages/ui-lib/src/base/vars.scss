@@ -2,6 +2,13 @@ $border-radius: 8px;
 
 $sheet-bg: #FFFFFF;
 $sheet-border: 1px solid #DFE0EB;
-$sheet-border--hover: 1px solid #3751FF;
 $sheet-border-radius: $border-radius;
-$sheet-padding: 32px
+$sheet-padding: 32px;
+
+$field-error-color: #FF0033;
+$field-error-text-size: 0.9em;
+$field-bg: darken(#FFFFFF, 2.5%);
+$field-border: 1px solid #DFE0EB;
+$field-border--error: 1px solid $field-error-color;
+$field-border-radius: $border-radius;
+$field-padding: 10px 16px;
