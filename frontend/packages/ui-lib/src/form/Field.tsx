@@ -19,7 +19,7 @@ export const Field: FunctionComponent<FieldProps> = ({
     return <h1>Field can only be used inside a &lt;Form&gt; component</h1>;
   }
 
-  const { value, error, touched } = context.getField(name);
+  const { value, error, focused, touched } = context.getField(name);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     context.setValue(name, event.target.value);
@@ -35,7 +35,7 @@ export const Field: FunctionComponent<FieldProps> = ({
 
   const errorState = touched && error;
 
-  const classes = classNames("field", { error: errorState });
+  const classes = classNames("field", { error: errorState, focused });
   return (
     <>
       <div className={classes}>

@@ -33,7 +33,7 @@ export const FormExample: Story = () => {
       }}
     >
       <Field label="Full name" name="name" type="text" />
-      <Field name="Birthdate" type="date" />
+      <Field label="Birthdate" name="birthdate" type="date" />
       <button type="submit">Submit</button>
     </Form>
   );
