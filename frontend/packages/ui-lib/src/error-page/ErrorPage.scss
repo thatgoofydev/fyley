@@ -1,0 +1,17 @@
+.error-page {
+  margin: 0 auto;
+  width: 500px;
+
+  &__icon {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__content {
+    text-align: center;
+  }
+}

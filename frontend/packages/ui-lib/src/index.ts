@@ -4,3 +4,4 @@ export * from "./icons";
 export * from "./buttons";
 export * from "./sheet";
 export * from "./form";
+export * from "./error-page";
