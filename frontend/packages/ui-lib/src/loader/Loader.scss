@@ -1,16 +1,10 @@
-.loader-wrapper {
-  width: 100%;
-  height: 100%;
-}
 .lds-ellipsis {
   display: block;
   position: relative;
   width: 80px;
   height: 80px;
 
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  margin: 40px auto;
 }
 .lds-ellipsis div {
   position: absolute;
