@@ -6,7 +6,7 @@ using Fyley.Components.Dossiers.Contracts.Service.CreateDossier;
 using Fyley.Core.Asp.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fyley.Components.Dossiers.Infrastructure.WebApi
+namespace Fyley.BFF.Desktop.Components.Dossiers
 {
     [ApiController]
     [Route("/bff/dossiers")]
@@ -53,6 +53,5 @@ namespace Fyley.Components.Dossiers.Infrastructure.WebApi
                 return result;
             });
         }
-        
     }
 }
