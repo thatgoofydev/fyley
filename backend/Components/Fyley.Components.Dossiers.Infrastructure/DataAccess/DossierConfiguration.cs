@@ -9,7 +9,7 @@ namespace Fyley.Components.Dossiers.Infrastructure.DataAccess
     {
         public void Configure(EntityTypeBuilder<DossierState> builder)
         {
-            builder.ConfigureBase("Dossiers", "Dossiers", "DossierId");
+            builder.ConfigureBase("Dossiers", "DossierId");
 
             builder.Property(e => e.Name)
                 .HasConversion(valueObj => valueObj.Value, stringVal => new DossierName(stringVal));

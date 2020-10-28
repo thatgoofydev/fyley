@@ -9,13 +9,13 @@ namespace Fyley.Components.Dossiers.Infrastructure.DataAccess
     public class DossiersContext : ContextBase<DossiersContext>, IDossiersUnitOfWork
     {
         public DbSet<DossierState> Dossiers { get; [UsedImplicitly] set; }
-        
-        public DossiersContext(DbContextOptions<DossiersContext> options) : base(options)
+
+        public DossiersContext(DbContextOptions<DossiersContext> options) : base(options, "Dossiers")
         { }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        public override void Configure(ModelBuilder modelBuilder)
         {
-            builder.ApplyConfiguration(new DossierConfiguration());
+            modelBuilder.ApplyConfiguration(new DossierConfiguration());
         }
     }
 }

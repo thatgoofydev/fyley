@@ -1,5 +1,37 @@
-﻿namespace DDDCore.Infrastructure.DataAccess
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DDDCore.Application.DataAccess;
+using DDDCore.Domain.Aggregates;
+using DDDCore.Domain.Events;
+using Microsoft.EntityFrameworkCore;
+
+namespace DDDCore.Infrastructure.DataAccess.EventStore
 {
+    public class EventStoreBase : IEventStore
+    {
+        private readonly DbSet<Event> _repository;
+
+        public EventStoreBase(DbSet<Event> repository)
+        {
+            _repository = repository;
+        }
+        public async Task<IEnumerable<DomainEvent>> LoadEventsAsync<TIdentifier>(TIdentifier identifier, int startingFrom) where TIdentifier : Identifier
+        {
+            var events = await _repository.Where(efEvent =>
+                    efEvent.AggregateId == identifier.ToString() && efEvent.AggregateVersion >= startingFrom)
+                .ToListAsync();
+            // TODO transform to DomainEvent
+            return new DomainEvent[0];
+        }
+
+        public async Task StoreEventsAsync<TIdentifier>(TIdentifier id, long expectedVersion, IEnumerable<DomainEvent> events) where TIdentifier : Identifier
+        {
+            var efEvents = events.Select(@event => new Event(id.ToString(), @event));
+            await _repository.AddRangeAsync(efEvents);
+        }
+    }
     // public abstract class EventStoreBase : IEventStore
     // {
     //     private const int SliceSize = 200;

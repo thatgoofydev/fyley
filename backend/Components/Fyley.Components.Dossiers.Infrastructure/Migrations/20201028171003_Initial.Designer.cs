@@ -10,16 +10,46 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fyley.Components.Dossiers.Infrastructure.Migrations
 {
     [DbContext(typeof(DossiersContext))]
-    [Migration("20201023205430_Added_Dossiers")]
-    partial class Added_Dossiers
+    [Migration("20201028171003_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("Dossiers")
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("DDDCore.Infrastructure.DataAccess.EventStore.Event", b =>
+                {
+                    b.Property<Guid>("EventId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AggregateId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("AggregateVersion")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EventId");
+
+                    b.ToTable("Events");
+                });
 
             modelBuilder.Entity("Fyley.Components.Dossiers.Domain.DossierState", b =>
                 {
@@ -35,7 +65,7 @@ namespace Fyley.Components.Dossiers.Infrastructure.Migrations
 
                     b.HasKey("DossierId");
 
-                    b.ToTable("Dossiers","Dossiers");
+                    b.ToTable("Dossiers");
                 });
 #pragma warning restore 612, 618
         }

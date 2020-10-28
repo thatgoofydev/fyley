@@ -9,7 +9,7 @@ namespace DDDCore.Application.DataAccess
         where TState : class, IAggregateState
     {
         Task<TAggregate> FetchAsync(TIdentifier id);
-        void Add(TAggregate aggregate);
-        void Update(TAggregate aggregate);
+        Task Add(TAggregate aggregate);
+        Task Update(TAggregate aggregate);
     }
 }

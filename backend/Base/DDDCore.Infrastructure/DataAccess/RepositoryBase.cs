@@ -33,14 +33,16 @@ namespace DDDCore.Infrastructure.DataAccess
             return (TAggregate) Activator.CreateInstance(typeof(TAggregate), id, state, version);
         }
 
-        public void Add(TAggregate aggregate)
+        public async Task Add(TAggregate aggregate)
         {
+            await _unitOfWork.EventStore.StoreEventsAsync(aggregate.Id, aggregate.Version, aggregate.FlushUncommitedEvents());
             SetShadowProperties(aggregate);
-            Repository.Add(aggregate.State);
+            await Repository.AddAsync(aggregate.State);
         }
 
-        public void Update(TAggregate aggregate)
+        public async Task Update(TAggregate aggregate)
         {
+            await _unitOfWork.EventStore.StoreEventsAsync(aggregate.Id, aggregate.Version, aggregate.FlushUncommitedEvents());
             SetShadowProperties(aggregate);
             Repository.Update(aggregate.State);
         }
