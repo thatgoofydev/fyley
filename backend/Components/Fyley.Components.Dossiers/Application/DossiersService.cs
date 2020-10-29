@@ -20,7 +20,7 @@ namespace Fyley.Components.Dossiers.Application
         {
             var dossierName = new DossierName(request.Name);
             var dossier = new Dossier(dossierName);
-            _repository.Add(dossier);
+            await _repository.Add(dossier);
             await _unitOfWork.Commit();
             
             return new CreateDossierResponse
