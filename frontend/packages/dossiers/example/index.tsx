@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react";
 import ReactDOM from "react-dom";
-import { DossiersOverview } from "../src/DossiersOverview";
+import { DossiersOverviewPage } from "../src/";
 
 const DossiersExamples: FunctionComponent = () => {
   return (
     <main>
       <h1>Dossiers Example App</h1>
       <div className="example-wrapper">
-        <DossiersOverview />
+        <DossiersOverviewPage />
       </div>
     </main>
   );

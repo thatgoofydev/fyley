@@ -1,82 +1,71 @@
 import { useEffect, useState } from "react";
-import { url } from "inspector";
 
-interface ApiResponse {
+interface ApiResponse<TData> {
   ok: boolean;
   error: string;
+  data: TData;
 }
 
-interface DataApiResponse<Data> extends ApiResponse {
-  data: Data;
+export interface ApiResult<TData = null> {
+  loading: boolean;
+  hasError: boolean;
+  statusCode: number;
+  data: TData | undefined;
+  error: any;
+  refresh: () => void;
 }
 
-type ApiResponseType<Data> = ApiResponse | DataApiResponse<Data>;
+export const useApi = <TData = any>(
+  url: string,
+  content: any = {}
+): ApiResult<TData> => {
+  const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [statusCode, setStatusCode] = useState();
+  const [response, setResponse] = useState<ApiResponse<TData>>();
+  const [refreshIndex, setRefreshIndex] = useState(0);
 
-interface TypedFetchResponse<Data = any> extends Response {
-  json<P = Data>(): Promise<ApiResponseType<P>>;
-}
-
-function myFetch<Data = any>(
-  input: RequestInfo,
-  init?: RequestInit
-): Promise<TypedFetchResponse<Data>> {
-  return fetch.apply(window, [input, init]);
-}
-
-export const useApi = <Data = any>(url: string, content: any = null) => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<Data>();
-  const [hasError, setHasError] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [statusCode, setStatusCode] = useState<number | undefined>(undefined);
+  const refresh = () => {
+    setRefreshIndex(refreshIndex + 1);
+  };
 
   useEffect(() => {
-    fetchData();
-  }, [url]);
-
-  const fetchData = () => {
+    let cancelled = false;
     setLoading(true);
     setHasError(false);
-    setError(undefined);
-    setData(undefined);
+    setResponse(undefined);
 
-    myFetch<Data>(`https://localhost:5001${url}`, {
+    let initRequest: RequestInit = {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=utf-8"
       },
-      body: "{}"
-    })
+      body: JSON.stringify(content)
+    };
+    fetch(`https://localhost:5001${url}`, initRequest)
       .then(res => {
         setStatusCode(res.status);
-        return res.json();
+        return res.json() as Promise<ApiResponse<TData>>;
       })
-      .then(res => {
-        setHasError(!res.ok);
-        setError(res.error);
-
-        setData((res as DataApiResponse<Data>).data);
-      })
+      .then(response => setResponse(response))
       .catch(error => {
-        setError(undefined);
         setHasError(true);
+        console.error(error);
       })
       .finally(() => setLoading(false));
 
-    // fetch<TypedFetchResponse>("url", { method: "POST" });
-    //   .then(res => {
-    //     setStatusCode(res.status);
-    //     return res;
-    //   })
-    //   .then(res => res.json())
-    //   .then(response => {})
-    //   .catch(error => {
-    //     setError("");
-    //     console.error(error);
-    //   })
-    //   .finally(() => setLoading(false));
-  };
+    return () => {
+      cancelled = true;
+    };
+  }, [url, refreshIndex]);
 
-  return { loading, data, hasError, error, statusCode };
+  return {
+    loading,
+    hasError,
+    statusCode,
+    data: response?.data,
+    error: response?.error || null,
+    refresh
+  };
 };

@@ -3,46 +3,16 @@ import {
   LinkButton,
   List,
   ListItem,
-  Loader,
-  Sheet,
   SheetContent,
   SheetHeader
 } from "@fyley/ui-lib";
-import { useListDossiers } from "../helpers/api/useListDossiers";
-import "./DossiersOverview.scss";
+import { DossierDto } from "../helpers/api/useListDossiers";
 
-export const DossiersOverview: FunctionComponent = () => {
-  return (
-    <div className="dossier-overview-wrapper">
-      <Sheet>
-        <DossiersOverviewContent />
-      </Sheet>
-    </div>
-  );
-};
+interface IProps {
+  dossiers: DossierDto[];
+}
 
-const DossiersOverviewContent: FunctionComponent = () => {
-  const { loading, hasError, data } = useListDossiers();
-
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (hasError) {
-    return (
-      <>
-        <SheetHeader title="Oops" />
-        <SheetContent>
-          An error had occurred! Please contact an administrator.
-        </SheetContent>
-      </>
-    );
-  }
-
-  if (data?.dossiers.length == 0) {
-    return <>Create form for first dossier</>;
-  }
-
+export const DossiersOverview: FunctionComponent<IProps> = ({ dossiers }) => {
   return (
     <>
       <SheetHeader
@@ -51,7 +21,7 @@ const DossiersOverviewContent: FunctionComponent = () => {
       />
       <SheetContent>
         <List>
-          {data?.dossiers.map(dossier => (
+          {dossiers.map(dossier => (
             <ListItem key={dossier.id}>{dossier.name}</ListItem>
           ))}
         </List>

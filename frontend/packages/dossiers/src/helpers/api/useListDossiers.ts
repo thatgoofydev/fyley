@@ -1,10 +1,10 @@
 import { useApi } from "../useApi";
 
-interface ListDossiersResponse {
+export interface ListDossiersResponse {
   dossiers: DossierDto[];
 }
 
-interface DossierDto {
+export interface DossierDto {
   id: string;
   name: string;
 }
