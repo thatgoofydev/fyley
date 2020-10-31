@@ -1,1 +1,0 @@
-export { DossiersOverviewPage } from "./DossiersOverviewPage";
