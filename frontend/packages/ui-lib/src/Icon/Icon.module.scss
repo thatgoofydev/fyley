@@ -1,0 +1,9 @@
+@import "src/base-styling/vars";
+
+.icon {
+  display: inline-block;
+
+  svg {
+    fill: $icon-color
+  }
+}

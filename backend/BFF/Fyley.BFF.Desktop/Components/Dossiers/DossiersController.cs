@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Fyley.BFF.Desktop.Components.Dossiers
 {
     [ApiController]
-    [Route("/bff/dossiers")]
+    [Route("/bff/desktop/dossiers")]
     public class DossiersController : BaseController
     {
         private readonly IDossiersService _dossiersService;
@@ -21,8 +21,8 @@ namespace Fyley.BFF.Desktop.Components.Dossiers
             _dossiersQueryService = dossiersQueryService;
         }
 
-        [HttpPost("createDossier")]
-        public Task<IActionResult> CreateDossier([FromBody] CreateDossierRequest request)
+        [HttpPost("submit-form")]
+        public Task<IActionResult> SubmitForm([FromBody] CreateDossierRequest request)
         {
             return ExecuteAsync(async () =>
             {
@@ -31,25 +31,27 @@ namespace Fyley.BFF.Desktop.Components.Dossiers
             });
         }
 
-        [HttpPost("fetchDossier")]
-        public Task<IActionResult> FetchDossier([FromBody] FetchDossierRequest request)
+        [HttpPost("fetch-form")]
+        public Task<IActionResult> FetchForm([FromBody] FetchDossierRequest request)
         {
             return ExecuteAsync(async () =>
             {
+                if (request.Id == "new")
+                {
+                    return new FetchDossierResponse();
+                }
+                
                 var result = await _dossiersQueryService.FetchDossier(request);
                 return result;
             });
         }
 
-        [HttpPost("listDossiers")]
-        public Task<IActionResult> ListDossiers([FromBody] ListDossiersRequest request)
+        [HttpPost("overview-dossiers")]
+        public Task<IActionResult> OverviewDossiers([FromBody] ListDossiersRequest request)
         {
             return ExecuteAsync(async () =>
             {
                 var result = await _dossiersQueryService.ListDossiers(request);
-
-                await Task.Delay(1); // TODO remove
-                
                 return result;
             });
         }

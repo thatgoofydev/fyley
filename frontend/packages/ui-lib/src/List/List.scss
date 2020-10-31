@@ -1,0 +1,38 @@
+@import "src/base-styling/vars";
+
+.list {
+  .list-item {
+    padding: 10px 20px;
+    border: $list-item-border;
+    border-radius: $border-radius;
+    margin-bottom: 6px;
+    background-color: $list-item-bg-color;
+
+    &:hover {
+      background-color: darken($list-item-bg-color, 3%);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.list-compact {
+  .list-item {
+    padding: 10px 20px;
+    border-top: none;
+    border-radius: 0;
+    margin-bottom: 0;
+
+    &:first-child {
+      border-top: $list-item-border;
+      border-top-left-radius: $list-item-border-radius;
+      border-top-right-radius: $list-item-border-radius;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $list-item-border-radius;
+      border-bottom-right-radius: $list-item-border-radius;
+    }
+  }
+}
+

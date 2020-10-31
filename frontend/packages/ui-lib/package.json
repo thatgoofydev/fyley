@@ -1,0 +1,55 @@
+{
+  "name": "@fyley/ui-lib",
+  "version": "1.0.0",
+  "description": "A regular component library",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "storybook": "start-storybook -p 6006 --no-dll",
+    "storybook:build": "build-storybook --no-dll"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-essentials": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/react": "^6.0.28",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@types/classnames": "^2.2.11",
+    "@types/jest": "^26.0.15",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "@types/styled-components": "^5.1.4",
+    "babel-loader": "^8.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.1",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.1.2",
+    "react-is": "^17.0.1",
+    "rollup": "^2.32.1",
+    "rollup-plugin-postcss": "^3.1.8",
+    "rollup-plugin-typescript2": "^0.28.0",
+    "sass-loader": "^10.0.4",
+    "ts-jest": "^26.4.3",
+    "typescript": "^4.0.5"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  },
+  "dependencies": {
+    "@fyley/utils": "^1.0.0"
+  }
+}

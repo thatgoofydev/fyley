@@ -1,0 +1,30 @@
+@import "src/base-styling/vars";
+
+.link-button {
+  display: flex;
+  width: fit-content;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+
+    span {
+      color: darken($btn-text-color, 10%);
+      text-decoration: underline;
+    }
+  }
+
+  .icon {
+    margin: 0 4px 0 0;
+    transform: translateY(1px);
+  }
+
+  span {
+    display: inline-block;
+    color: $btn-text-color;
+  }
+}
+
+a.link-button {
+  display: inline-block;
+}

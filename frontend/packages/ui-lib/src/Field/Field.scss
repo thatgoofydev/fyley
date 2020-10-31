@@ -1,0 +1,51 @@
+@import "src/base-styling/vars";
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+
+  label {
+    padding: 2px 0;
+  }
+
+  input {
+    display: block;
+    border: none;
+    outline: none;
+
+    padding: $field-padding;
+    border: $field-border;
+    border-radius: $field-border-radius;
+    background-color: $field-bg;
+  }
+
+  .error-spacing {
+    min-height: 20px;
+  }
+
+  .error-message {
+    display: block;
+    color: $field-error-color;
+    font-size: $field-error-text-size;
+    line-height: $field-error-text-size;
+  }
+
+  &.focused {
+    input {
+      border: $field-border--focus;
+      -webkit-box-shadow: $field-focus-shadow;
+      -moz-box-shadow: $field-focus-shadow;
+      box-shadow: $field-focus-shadow;
+    }
+  }
+
+  &.error {
+    input {
+      border: $field-border--error;
+      -webkit-box-shadow: $field-error-shadow;
+      -moz-box-shadow: $field-error-shadow;
+      box-shadow: $field-error-shadow;
+    }
+  }
+}
