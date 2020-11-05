@@ -10,7 +10,7 @@ namespace DDDCore.Domain.ValueObjects
         private static readonly Type Type = typeof(T);
         private static readonly TypeInfo TypeInfo = typeof(T).GetTypeInfo();
 
-        public T Value { get; }
+        public T Value { get; protected set; }
 
         protected SingleValueObject(T value)
         {

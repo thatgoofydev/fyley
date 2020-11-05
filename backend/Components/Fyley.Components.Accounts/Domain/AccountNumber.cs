@@ -13,9 +13,15 @@ namespace Fyley.Components.Accounts.Domain
         public AccountNumber(AccountNumberType type, string value)
         {
             Type = type ?? throw new ArgumentNullException(nameof(type));
-            Value = value ?? throw new ArgumentNullException(nameof(value));
-            
-            if (!Type.IsValid(value)) throw new InvalidAccountNumber();
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            Value = Type.Format(value);
+
+            var validationResult = Type.IsValid(value);
+            if (!validationResult.IsValid) throw new InvalidAccountNumber(validationResult.Error);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

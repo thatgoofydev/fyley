@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DDDCore.Domain.ValueObjects;
 
@@ -13,21 +14,47 @@ namespace Fyley.Components.Accounts.Domain
         {
         }
 
-        public abstract bool IsValid(string value);
+        public abstract ValidationResult IsValid(string value);
+
+        public abstract string Format(string value);
+        
+        public class ValidationResult
+        {
+            public bool IsValid { get; }
+            public string Error { get; }
+
+            private ValidationResult(bool isValid, string error)
+            {
+                IsValid = isValid;
+                Error = error;
+            }
+
+            internal static ValidationResult OfError(string error)
+            {
+                return new ValidationResult(false, error);
+            }
+
+            internal static ValidationResult Success()
+            {
+                return new ValidationResult(true, null);
+            }
+        }
         
         private sealed class OtherAccountNumberType : AccountNumberType
         {
             public OtherAccountNumberType() : base(1, "Other")
             { }
 
-            public override bool IsValid(string value) => true;
+            public override ValidationResult IsValid(string value) => ValidationResult.Success();
+
+            public override string Format(string value) => value;
         }
         
         private sealed class IbanAccountNumberType : AccountNumberType
         {
             private const int MinLength = 5;
             private const int MaxLength = 34;
-            private static readonly Regex AlphanumericRegex = new Regex("^[a-zA-Z0-9]*$");
+            private static readonly Regex AlphanumericRegex = new Regex("^[a-zA-Z0-9\\s]*$");
             private static readonly Dictionary<string, int> LengthByCountryCode = new Dictionary<string, int>
             {
                 { "AL", 28 }, { "AD", 24 }, { "AT", 20 }, { "AZ", 28 }, { "BH", 22 },
@@ -51,33 +78,45 @@ namespace Fyley.Components.Accounts.Domain
             public IbanAccountNumberType() : base(2, "IBAN")
             { }
 
-            public override bool IsValid(string value)
+            public override ValidationResult IsValid(string value)
             {
+                value = Format(value);
+                
                 if (!AlphanumericRegex.IsMatch(value))
                 {
-                    return false;
+                    return ValidationResult.OfError("A IBAN can only contain alphanumeric characters.");
                 }
                 
-                if (value.Length < MinLength || value.Length > MaxLength)
+                if (value.Length < MinLength)
                 {
-                    return false;
+                    return ValidationResult.OfError($"A IBAN should have a length of at least '{MinLength}' characters.");
+                }
+
+                if (value.Length > MaxLength)
+                {
+                    return ValidationResult.OfError($"A IBAN cannot exceed the maximum length of '{MaxLength}' characters.");
                 }
                 
-                var countrycode = value.Substring(0, 2);
-                if (!LengthByCountryCode.TryGetValue(countrycode, out var expectedLength))
+                var isoCountryCode = value.Substring(0, 2);
+                if (!LengthByCountryCode.TryGetValue(isoCountryCode, out var expectedLength))
                 {
-                    return false;
+                    return ValidationResult.OfError($"'{isoCountryCode}' is not a valid country code for an IBAN");
                 }
                 
                 var actualLength = value.Length;
                 if (actualLength != expectedLength)
                 {
-                    return false;
+                    return ValidationResult.OfError($"A IBAN from '{isoCountryCode}' should have a length of '{expectedLength}'.");
                 }
                 
                 // TODO validate check digits
                 
-                return true;
+                return ValidationResult.Success();
+            }
+
+            public override string Format(string value)
+            {
+                return value.Replace(" ", string.Empty);
             }
         }
     }

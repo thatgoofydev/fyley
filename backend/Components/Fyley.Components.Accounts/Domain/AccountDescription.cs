@@ -6,11 +6,11 @@ namespace Fyley.Components.Accounts.Domain
 {
     public class AccountDescription : SingleValueObject<string>
     {
-        private const int MaxLength = 60;
+        private const int MaxLength = 120;
         
         public AccountDescription(string value) : base(value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
             if (value.Length > MaxLength) throw new AccountDescriptionToLong(MaxLength);
         }
     }
