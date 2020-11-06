@@ -16,29 +16,21 @@ namespace Fyley.Components.Accounts.Tests.Domain
             [TestCase("   ")]
             public void ThrowArgumentNullException_WhenValueIsNullOrEmptyOrWhitespace(string value)
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                {
-                    var _ = new AccountName(value);
-                });
+                Assert.Throws<ArgumentNullException>(() => new AccountName(value));
             }
 
             [Test]
             public void ThrowAccountNameToLong_WhenNameIsLongerThan40()
             {
                 Assert.Throws<AccountNameToLong>(() =>
-                {
-                    var _ = new AccountName("Some Weirdly long name that is way more than 40 characters.");
-                });
+                    new AccountName("Some Weirdly long name that is way more than 40 characters."));
             }
 
             [TestCase("{}[]&|é\"'(§^è!ç{à})[^$]")]
             [TestCase("¨*ù´µ`%£,?;.:/=~+<>\\²³")]
             public void ThrowInvalidAccountName_WhenNameContainsAnythingNon_Alphanumeric_Spaces_Dashed_Underscore_At_Hashtag_LeftBrace_Or_RightBrace(string value)
             {
-                Assert.Throws<InvalidAccountName>(() =>
-                {
-                    var _ = new AccountName(value);
-                });
+                Assert.Throws<InvalidAccountName>(() => new AccountName(value));
             }
 
             [TestCase("abcdefghijklmnopqrstuvwxyz")]

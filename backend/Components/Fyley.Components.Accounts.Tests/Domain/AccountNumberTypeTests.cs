@@ -22,6 +22,14 @@ namespace Fyley.Components.Accounts.Tests.Domain
                 var result = AccountNumberType.Other.IsValid(value);
                 Assert.That(result.IsValid, Is.True);
             }
+
+            [TestCase("", "")]
+            [TestCase("test", "test")]
+            public void Format_ShouldReturnInput(string input, string expectedOutput)
+            {
+                var result = AccountNumberType.Other.Format(input);
+                Assert.That(result, Is.EqualTo(expectedOutput));
+            }
         }
         
         public class IbanAccountNumberType  : AccountNumberTypeTests
@@ -80,11 +88,15 @@ namespace Fyley.Components.Accounts.Tests.Domain
                 Assert.That(result.IsValid, Is.True);
             }
 
-            [Test]
-            public void Format_ShouldRemoveAllSpaces()
+            [TestCase("BE43663898875201", "BE43 6638 9887 5201")]
+            [TestCase("NL18RABO3831267707", "NL18 RABO 3831 2677 07")]
+            [TestCase("HU77109180013534179746911573", "HU77 1091 8001 3534 1797 4691 1573")]
+            [TestCase("BR3254274185863838743133472Y3", "BR32 5427 4185 8638 3874 3133 472Y 3")]
+            [TestCase("LC66TJCT285256978619516477412846", "LC66 TJCT 2852 5697 8619 5164 7741 2846")]
+            public void Format_ShouldFormatCorrectly(string input, string expectedOutput)
             {
-                var result = AccountNumberType.Iban.Format("BE43 6638 9887 5201");
-                Assert.That(result, Is.EqualTo("BE43663898875201"));
+                var result = AccountNumberType.Iban.Format(input);
+                Assert.That(result, Is.EqualTo(expectedOutput));
             }
         }
     }

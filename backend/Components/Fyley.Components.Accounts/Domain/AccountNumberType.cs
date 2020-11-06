@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DDDCore.Domain.ValueObjects;
+using JetBrains.Annotations;
 
 namespace Fyley.Components.Accounts.Domain
 {
@@ -54,7 +55,7 @@ namespace Fyley.Components.Accounts.Domain
         {
             private const int MinLength = 5;
             private const int MaxLength = 34;
-            private static readonly Regex AlphanumericRegex = new Regex("^[a-zA-Z0-9\\s]*$");
+            private static readonly Regex AlphanumericRegex = new Regex("^[a-zA-Z0-9]*$");
             private static readonly Dictionary<string, int> LengthByCountryCode = new Dictionary<string, int>
             {
                 { "AL", 28 }, { "AD", 24 }, { "AT", 20 }, { "AZ", 28 }, { "BH", 22 },
@@ -80,7 +81,7 @@ namespace Fyley.Components.Accounts.Domain
 
             public override ValidationResult IsValid(string value)
             {
-                value = Format(value);
+                value = StripSpaces(value);
                 
                 if (!AlphanumericRegex.IsMatch(value))
                 {
@@ -114,9 +115,15 @@ namespace Fyley.Components.Accounts.Domain
                 return ValidationResult.Success();
             }
 
-            public override string Format(string value)
+            private string StripSpaces(string value)
             {
                 return value.Replace(" ", string.Empty);
+            }
+
+            public override string Format(string value)
+            {
+                value = StripSpaces(value);
+                return Regex.Replace(value, ".{4}", "$0 ").Trim();
             }
         }
     }

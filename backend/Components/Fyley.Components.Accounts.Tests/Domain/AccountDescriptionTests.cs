@@ -16,19 +16,14 @@ namespace Fyley.Components.Accounts.Tests.Domain
             [TestCase(" ")]
             public void ThrowArgumentNullException_WhenValueIsNullOrEmptyOrWhitespace(string value)
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                {
-                    var _ = new AccountDescription(value);
-                });
+                Assert.Throws<ArgumentNullException>(() => new AccountDescription(value));
             }
 
             [Test]
             public void ThrowAccountDescriptionToLong_WhenValueIsLongerThan120()
             {
-                Assert.Throws<AccountDescriptionToLong>(() =>
-                {
-                    var _ = new AccountDescription("This is an even more ridiculously long string than the one in the account name test. This is because the description can have a total length of 120 characters. So this one is 179!");
-                });
+                Assert.Throws<AccountDescriptionToLong>(() => 
+                    new AccountDescription("This is an even more ridiculously long string than the one in the account name test. This is because the description can have a total length of 120 characters. So this one is 179!"));
             }
 
             [TestCase("A-valid_description#1")]

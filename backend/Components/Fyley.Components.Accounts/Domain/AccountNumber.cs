@@ -13,11 +13,7 @@ namespace Fyley.Components.Accounts.Domain
         public AccountNumber(AccountNumberType type, string value)
         {
             Type = type ?? throw new ArgumentNullException(nameof(type));
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
+            if (value == null) throw new ArgumentNullException(nameof(value));
             Value = Type.Format(value);
 
             var validationResult = Type.IsValid(value);
