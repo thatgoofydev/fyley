@@ -1,4 +1,6 @@
-﻿using DDDCore.Domain.Aggregates;
+﻿using System;
+using DDDCore.Domain.Aggregates;
+using Fyley.Components.Accounts.Domain.Events;
 
 namespace Fyley.Components.Accounts.Domain
 {
@@ -8,12 +10,18 @@ namespace Fyley.Components.Accounts.Domain
         public AccountName Name => State.Name;
         public AccountDescription Description => State.Description;
         public AccountNumber AccountNumber => State.AccountNumber;
+        public Money Balance => State.Balance;
 
-        protected Account()
+        public Account(AccountName name, AccountDescription description, AccountNumber accountNumber, Money startingBalance)
         {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (description == null) throw new ArgumentNullException(nameof(description));
+            if (accountNumber == null) throw new ArgumentNullException(nameof(accountNumber));
+            if (startingBalance == null) throw new ArgumentNullException(nameof(startingBalance));
+            Emit(new AccountDefined(name, description, accountNumber, startingBalance));
         }
 
-        protected Account(AccountId id, AccountState state, long version) : base(id, state, version)
+        public Account(AccountId id, AccountState state, long version) : base(id, state, version)
         {
         }
     }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DDDCore.Domain.ValueObjects;
-using JetBrains.Annotations;
 
 namespace Fyley.Components.Accounts.Domain
 {

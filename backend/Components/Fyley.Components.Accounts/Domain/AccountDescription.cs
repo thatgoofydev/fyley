@@ -1,6 +1,6 @@
-﻿using System;
-using DDDCore.Domain.ValueObjects;
+﻿using DDDCore.Domain.ValueObjects;
 using Fyley.Components.Accounts.Domain.Errors;
+using JetBrains.Annotations;
 
 namespace Fyley.Components.Accounts.Domain
 {
@@ -8,10 +8,14 @@ namespace Fyley.Components.Accounts.Domain
     {
         private const int MaxLength = 120;
         
-        public AccountDescription(string value) : base(value)
+        public AccountDescription([CanBeNull] string value) : base(value)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-            if (value.Length > MaxLength) throw new AccountDescriptionToLong(MaxLength);
+            if (value != null && value.Length > MaxLength) throw new AccountDescriptionToLong(MaxLength);
+        }
+
+        public bool HasValue()
+        {
+            return Value != null;
         }
     }
 }

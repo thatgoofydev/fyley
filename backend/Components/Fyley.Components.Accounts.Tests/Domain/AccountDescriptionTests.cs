@@ -10,15 +10,6 @@ namespace Fyley.Components.Accounts.Tests.Domain
     {
         public class ConstructorShould : AccountDescriptionTests
         {
-            
-            [TestCase(null)]
-            [TestCase("")]
-            [TestCase(" ")]
-            public void ThrowArgumentNullException_WhenValueIsNullOrEmptyOrWhitespace(string value)
-            {
-                Assert.Throws<ArgumentNullException>(() => new AccountDescription(value));
-            }
-
             [Test]
             public void ThrowAccountDescriptionToLong_WhenValueIsLongerThan120()
             {
@@ -49,6 +40,23 @@ namespace Fyley.Components.Accounts.Tests.Domain
             public void DoesNotEqual()
             {
                 Assert.That(new AccountDescription("description123"), Is.Not.EqualTo(new AccountDescription("--------------")));
+            }
+        }
+        
+        public class HasValueShould : AccountDescriptionTests
+        {
+            [Test]
+            public void ReturnTrue_WhenValueIsNotNull()
+            {
+                var result = new AccountDescription("something");
+                Assert.That(result.HasValue(), Is.True);
+            }
+            
+            [Test]
+            public void ReturnFalse_WhenValueIsNotNull()
+            {
+                var result = new AccountDescription(null);
+                Assert.That(result.HasValue(), Is.False);
             }
         }
     }
