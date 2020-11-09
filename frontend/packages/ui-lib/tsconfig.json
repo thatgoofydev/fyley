@@ -70,9 +70,6 @@
   "exclude": [
     "node_modules",
     "dist",
-    "rollup.config.js",
-    "**/*.spec.tsx",
-    "**/*.spec.ts",
-    "**/*.stories.tsx"
+    "rollup.config.js"
   ]
 }
