@@ -1,4 +1,5 @@
 ﻿using System;
+using DDDCore.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +18,5 @@ namespace DDDCore.Infrastructure.Extensions.DataAccess
             
             builder.Property<long>("Version");
         }
-        
     }
 }

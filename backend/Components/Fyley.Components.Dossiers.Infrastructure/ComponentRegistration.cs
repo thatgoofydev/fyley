@@ -15,7 +15,7 @@ namespace Fyley.Components.Dossiers.Infrastructure
             services.AddScoped<IDossiersService, DossiersService>();
             services.AddScoped<IDossiersQueryService, DossiersQueryService>();
 
-            // Database
+            // DataAccess
             services.AddDbContext<DossiersContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("Dossiers")));
             services.AddScoped<IDossiersUnitOfWork>(sp => sp.GetService<DossiersContext>());
             services.AddScoped<IDossiersRepository, DossiersRepository>();

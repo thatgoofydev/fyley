@@ -1,3 +1,4 @@
+using Fyley.Components.Accounts.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace Fyley.BFF.Desktop
             
             // Components
             services.RegisterDossiers(Configuration);
+            services.RegisterAccounts(Configuration);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

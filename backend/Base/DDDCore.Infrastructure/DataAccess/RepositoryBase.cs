@@ -33,7 +33,7 @@ namespace DDDCore.Infrastructure.DataAccess
             return (TAggregate) Activator.CreateInstance(typeof(TAggregate), id, state, version);
         }
 
-        public async Task Add(TAggregate aggregate)
+        public async Task AddAsync(TAggregate aggregate)
         {
             await _unitOfWork.EventStore.StoreEventsAsync(aggregate.Id, aggregate.Version, aggregate.FlushUncommitedEvents());
             SetShadowProperties(aggregate);

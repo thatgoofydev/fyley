@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Base\DDDCore\DDDCore.csproj" />
+      <ProjectReference Include="..\Fyley.Components.Accounts.Contracts\Fyley.Components.Accounts.Contracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>
