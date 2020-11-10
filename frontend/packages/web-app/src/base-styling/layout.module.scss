@@ -1,0 +1,23 @@
+@import "src/base-styling/vars";
+
+.container {
+  display: grid;
+  grid-template-columns: $sidebar-width 1fr;
+  grid-template-rows: $header-height 1fr;
+  grid-template-areas: "sidebar header" "sidebar content";
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}

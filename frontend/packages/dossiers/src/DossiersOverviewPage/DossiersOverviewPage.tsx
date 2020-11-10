@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Loader, Sheet } from "@fyley/ui-lib";
+import { Loader, setPageTitle, Sheet } from "@fyley/ui-lib";
 import { RequestState } from "@fyley/utils";
 import { useDossiersOverview } from "../helpers/api/useDossiersOverview";
 
@@ -8,6 +8,7 @@ import { DossierOnboarding } from "../DossierOnboarding";
 
 export const DossiersOverviewPage: FC = () => {
   const { state, data, refresh } = useDossiersOverview();
+  setPageTitle("hello");
 
   if (state == RequestState.LOADING) {
     return (

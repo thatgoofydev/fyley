@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styles from "./Icon.module.scss";
+import "./Icon.scss";
 
 export type IconType = "add" | "warning";
 
@@ -23,7 +23,7 @@ export const Icon: FC<IProps> = ({ type, size = 24 }) => {
   };
 
   return (
-    <div className={styles.icon} style={{ width: `${size}px`, height: `${size}px` }}>
+    <div className="icon" style={{ width: `${size}px`, height: `${size}px` }}>
       <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 24 24`}>
         {renderSwitch()}
       </svg>

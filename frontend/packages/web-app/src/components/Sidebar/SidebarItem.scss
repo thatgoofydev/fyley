@@ -1,0 +1,28 @@
+@import "src/base-styling/vars";
+
+$padding-left: 30px;
+$padding: 18px 0 18px $padding-left;
+$border-width: 3px;
+
+.nav-item {
+  display: block;
+  padding: $padding;
+  height: $nav-item-height;
+
+  color: $nav-item-text-color;
+  text-decoration: none;
+
+  span {
+    vertical-align: middle;
+    padding-left: 15px;
+  }
+
+  &:hover, &.active {
+    background-color: $nav-item-bgc--hover;
+  }
+
+  &.active {
+    border-left: $border-width solid $nav-item-border-color--active;
+    padding-left: $padding-left - $border-width;
+  }
+}

@@ -1,14 +1,18 @@
 import React, { FC } from "react";
 import ReactDom from "react-dom";
 import { DossiersOverviewPage } from "../src/DossiersOverviewPage";
+import { PageTitle, PageTitleProvider } from "@fyley/ui-lib";
 
 const Example: FC = () => {
   return (
     <main>
-      <h1>Dossiers Example App</h1>
-      <div className="example-wrapper">
-        <DossiersOverviewPage />
-      </div>
+      <PageTitleProvider>
+        <PageTitle />
+        <h1>Dossiers Example App</h1>
+        <div className="example-wrapper">
+          <DossiersOverviewPage />
+        </div>
+      </PageTitleProvider>
     </main>
   );
 };
