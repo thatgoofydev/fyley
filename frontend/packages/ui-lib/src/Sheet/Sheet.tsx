@@ -1,5 +1,5 @@
 import React, { FC, FunctionComponent, ReactNode } from "react";
-import "./Sheet.module.scss";
+import "./Sheet.scss";
 
 /* Sheet */
 

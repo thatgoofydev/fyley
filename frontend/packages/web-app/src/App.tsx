@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 
 import layout from "./base-styling/layout.module.scss";
+import { TempContent } from "./components/TempContent/TempContent";
 
 function App() {
   return (
@@ -21,10 +22,10 @@ function App() {
           <main className={layout.content}>
             <Switch>
               <Route exact path="/">
-                <h1>Dashboard</h1>
+                <TempContent name="Dashboard" />
               </Route>
               <Route exact path="/transactions">
-                <h1>Transactions</h1>
+                <TempContent name="Transactions" />
               </Route>
             </Switch>
           </main>

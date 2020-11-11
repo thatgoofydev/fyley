@@ -9,9 +9,7 @@ const plugins = [
     typescript: require("typescript")
   }),
   postcss({
-    modules: false,
-    autoModules: false,
-    minimize: true
+    minimize: false
   })
 ];
 
