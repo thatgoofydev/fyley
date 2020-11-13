@@ -1,1 +1,0 @@
-export { DossiersOverview } from "./DossiersOverview";
