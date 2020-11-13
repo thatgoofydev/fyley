@@ -1,11 +1,9 @@
 using Fyley.BFF.Desktop.Components.Financial;
-using Fyley.Components.Accounts.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Fyley.Components.Dossiers.Infrastructure;
 using Fyley.Core.Asp.Middleware.CorrelationId;
 
 namespace Fyley.BFF.Desktop
@@ -28,8 +26,6 @@ namespace Fyley.BFF.Desktop
             services.AddCorrelationIds();
             
             // Components
-            services.RegisterDossiers(Configuration);
-            services.RegisterAccounts(Configuration);
             services.AddFinancial(Configuration);
         }
         
