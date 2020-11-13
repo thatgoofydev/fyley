@@ -40,6 +40,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Accounts.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Accounts.Migrations", "Components\Fyley.Components.Accounts.Migrations\Fyley.Components.Accounts.Migrations.csproj", "{C0FF65D1-F495-401B-B65F-FE0E2AF987C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Financial", "Financial", "{C94028CB-E033-4549-B4A2-8F775D1ABC6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Financial", "Components\Fyley.Components.Financial\Fyley.Components.Financial.csproj", "{50B39E86-1DD2-4137-ACF9-353BA91F3EED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Financial.Contracts", "Components\Fyley.Components.Financial.Contracts\Fyley.Components.Financial.Contracts.csproj", "{BD73AA69-82F3-47F8-8AD8-5ADC653AC522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Financial.Infrastructure", "Components\Fyley.Components.Financial.Infrastructure\Fyley.Components.Financial.Infrastructure.csproj", "{96B573F0-A31B-49F0-8A8A-F2A42A7D2645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.Components.Financial.Migrations", "Components\Fyley.Components.Financial.Migrations\Fyley.Components.Financial.Migrations.csproj", "{9F070352-D6D4-4114-B440-23DBE1B7E002}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +72,11 @@ Global
 		{5D0094AF-181A-4CB7-AC58-967C5A0BFB8F} = {C2D9D618-02B4-4565-9CAD-173B11F24BDF}
 		{B0330AC0-A958-4FBB-9478-9F73F2A35214} = {C2D9D618-02B4-4565-9CAD-173B11F24BDF}
 		{C0FF65D1-F495-401B-B65F-FE0E2AF987C5} = {C2D9D618-02B4-4565-9CAD-173B11F24BDF}
+		{C94028CB-E033-4549-B4A2-8F775D1ABC6D} = {FDA3388A-CC9D-4CB0-9C82-AA8ADC5C683F}
+		{50B39E86-1DD2-4137-ACF9-353BA91F3EED} = {C94028CB-E033-4549-B4A2-8F775D1ABC6D}
+		{BD73AA69-82F3-47F8-8AD8-5ADC653AC522} = {C94028CB-E033-4549-B4A2-8F775D1ABC6D}
+		{96B573F0-A31B-49F0-8A8A-F2A42A7D2645} = {C94028CB-E033-4549-B4A2-8F775D1ABC6D}
+		{9F070352-D6D4-4114-B440-23DBE1B7E002} = {C94028CB-E033-4549-B4A2-8F775D1ABC6D}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{77067D48-565C-4801-9CA0-9C65B48A4029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -120,5 +135,21 @@ Global
 		{C0FF65D1-F495-401B-B65F-FE0E2AF987C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0FF65D1-F495-401B-B65F-FE0E2AF987C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0FF65D1-F495-401B-B65F-FE0E2AF987C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B39E86-1DD2-4137-ACF9-353BA91F3EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B39E86-1DD2-4137-ACF9-353BA91F3EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B39E86-1DD2-4137-ACF9-353BA91F3EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B39E86-1DD2-4137-ACF9-353BA91F3EED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD73AA69-82F3-47F8-8AD8-5ADC653AC522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD73AA69-82F3-47F8-8AD8-5ADC653AC522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD73AA69-82F3-47F8-8AD8-5ADC653AC522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD73AA69-82F3-47F8-8AD8-5ADC653AC522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B573F0-A31B-49F0-8A8A-F2A42A7D2645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B573F0-A31B-49F0-8A8A-F2A42A7D2645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B573F0-A31B-49F0-8A8A-F2A42A7D2645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B573F0-A31B-49F0-8A8A-F2A42A7D2645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F070352-D6D4-4114-B440-23DBE1B7E002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F070352-D6D4-4114-B440-23DBE1B7E002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F070352-D6D4-4114-B440-23DBE1B7E002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F070352-D6D4-4114-B440-23DBE1B7E002}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

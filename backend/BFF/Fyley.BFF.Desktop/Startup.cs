@@ -1,3 +1,4 @@
+using Fyley.BFF.Desktop.Components.Financial;
 using Fyley.Components.Accounts.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,7 @@ namespace Fyley.BFF.Desktop
             // Components
             services.RegisterDossiers(Configuration);
             services.RegisterAccounts(Configuration);
+            services.AddFinancial(Configuration);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
