@@ -2,10 +2,22 @@
 {
     public class SubmitTransactionRequest
     {
-        public string Payor { get; set; }
-        public string Payee { get; set; }
+        public AccountReferenceOrTransactionAccount Payor { get; set; }
+        public AccountReferenceOrTransactionAccount Payee { get; set; }
         public decimal Amount { get; set; }
         public string Reference { get; set; }
         public string OccuredOn { get; set; }
+        
+        public class AccountReferenceOrTransactionAccount
+        {
+            public string AccountReference { get; set; }
+            public TransactionAccount Account { get; set; }
+        }
+        
+        public class TransactionAccount
+        {
+            public string Name { get; set; }
+            public string AccountNumber { get; set; }
+        }
     }
 }

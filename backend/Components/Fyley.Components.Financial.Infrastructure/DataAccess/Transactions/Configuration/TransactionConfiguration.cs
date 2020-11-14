@@ -14,18 +14,42 @@ namespace Fyley.Components.Financial.Infrastructure.DataAccess.Transactions.Conf
 
             builder.OwnsOne(e => e.Payor, rb =>
             {
-                rb.Property(e => e.Type)
-                    .HasConversion(valueObj => valueObj.Value, value => AccountNumberType.FromValue(value));
+                rb.Property(e => e.AccountReference)
+                    .HasConversion(valueObj => valueObj.ToString(), value => new AccountReference(value));
 
-                rb.Property(e => e.Value);
+                rb.OwnsOne(e => e.TransactionAccount, tarb =>
+                {
+                    tarb.Property(e => e.Name)
+                        .HasConversion(valueObj => valueObj.Value, value => new AccountName(value));
+
+                    tarb.OwnsOne(e => e.Number, anrb =>
+                    {
+                        anrb.Property(e => e.Type)
+                            .HasConversion(valueObj => valueObj.Value, value => AccountNumberType.FromValue(value));
+
+                        anrb.Property(e => e.Value);
+                    });
+                });
             });
             
             builder.OwnsOne(e => e.Payee, rb =>
             {
-                rb.Property(e => e.Type)
-                    .HasConversion(valueObj => valueObj.Value, value => AccountNumberType.FromValue(value));
+                rb.Property(e => e.AccountReference)
+                    .HasConversion(valueObj => valueObj.ToString(), value => new AccountReference(value));
 
-                rb.Property(e => e.Value);
+                rb.OwnsOne(e => e.TransactionAccount, tarb =>
+                {
+                    tarb.Property(e => e.Name)
+                        .HasConversion(valueObj => valueObj.Value, value => new AccountName(value));
+
+                    tarb.OwnsOne(e => e.Number, anrb =>
+                    {
+                        anrb.Property(e => e.Type)
+                            .HasConversion(valueObj => valueObj.Value, value => AccountNumberType.FromValue(value));
+
+                        anrb.Property(e => e.Value);
+                    });
+                });
             });
             
             builder.Property(e => e.Amount)

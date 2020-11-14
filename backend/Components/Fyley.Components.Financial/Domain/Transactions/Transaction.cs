@@ -1,21 +1,25 @@
 ﻿using System;
 using DDDCore.Domain.Aggregates;
-using Fyley.Components.Financial.Domain.Shared;
 using Fyley.Components.Financial.Domain.Transactions.Events;
 
 namespace Fyley.Components.Financial.Domain.Transactions
 {
     public class Transaction : AggregateBase<TransactionId, TransactionState>
     {
-        public AccountNumber Payor => State.Payor;
-        public AccountNumber Payee => State.Payee;
+        public AccountReferenceOrTransactionAccount Payor => State.Payor;
+        public AccountReferenceOrTransactionAccount Payee => State.Payee;
         public Money Amount => State.Amount;
         public OptionalReference OptionalReference => State.OptionalReference;
         public TransactionDateTime OccuredOn => State.OccuredOn;
         public TransactionDateTime LoggedOn => State.LoggedOn;
         // TODO Tags
 
-        public Transaction(AccountNumber payor, AccountNumber payee, Money amount, OptionalReference optionalReference, TransactionDateTime occuredOn)
+        public Transaction(
+            AccountReferenceOrTransactionAccount payor,
+            AccountReferenceOrTransactionAccount payee,
+            Money amount,
+            OptionalReference optionalReference,
+            TransactionDateTime occuredOn)
         {
             if (payor == null) throw new ArgumentNullException(nameof(payor));
             if (payee == null) throw new ArgumentNullException(nameof(payee));

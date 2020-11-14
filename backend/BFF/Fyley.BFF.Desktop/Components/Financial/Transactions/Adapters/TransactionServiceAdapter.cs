@@ -18,12 +18,32 @@ namespace Fyley.BFF.Desktop.Components.Financial.Transactions.Adapters
         {
             await _service.LogTransaction(new LogTransactionRequest
             {
-                Payor = request.Payor,
-                Payee = request.Payee,
+                Payor = Map(request.Payor),
+                Payee = Map(request.Payee),
                 Amount = request.Amount,
                 Reference = request.Reference,
                 OccuredOn = request.OccuredOn
             });
+        }
+
+        private static LogTransactionRequest.AccountReferenceOrTransactionAccount Map(SubmitTransactionRequest.AccountReferenceOrTransactionAccount referenceOrAccount)
+        {
+            if (referenceOrAccount == null) return null;
+            return new LogTransactionRequest.AccountReferenceOrTransactionAccount
+            {
+                AccountReference = referenceOrAccount.AccountReference,
+                TransactionAccount = Map(referenceOrAccount.Account)
+            };
+        }
+
+        private static LogTransactionRequest.TransactionAccount Map(SubmitTransactionRequest.TransactionAccount account)
+        {
+            if (account == null) return null;
+            return new LogTransactionRequest.TransactionAccount
+            {
+                Name = account.Name,
+                AccountNumber = account.AccountNumber
+            };
         }
     }
 }

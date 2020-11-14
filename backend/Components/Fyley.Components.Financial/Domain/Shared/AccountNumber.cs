@@ -17,7 +17,7 @@ namespace Fyley.Components.Financial.Domain.Shared
             Value = Type.Format(value);
 
             var validationResult = Type.IsValid(value);
-            if (!validationResult.IsValid) throw new InvalidAccountNumber(validationResult.Error);
+            if (!validationResult.IsValid) throw new AccountNumberInvalid(validationResult.Error);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

@@ -1,6 +1,5 @@
 ﻿using DDDCore.Domain.Aggregates;
 using DDDCore.Domain.Events;
-using Fyley.Components.Financial.Domain.Shared;
 using Fyley.Components.Financial.Domain.Transactions.Events;
 using JetBrains.Annotations;
 
@@ -9,8 +8,8 @@ namespace Fyley.Components.Financial.Domain.Transactions
     public class TransactionState : IAggregateState,
         IHandle<TransactionLogged>
     {
-        public AccountNumber Payor { get; set; }
-        public AccountNumber Payee { get; set; }
+        public AccountReferenceOrTransactionAccount Payor { get; set; }
+        public AccountReferenceOrTransactionAccount Payee { get; set; }
         public Money Amount { get; set; }
         public OptionalReference OptionalReference { get; set; }
         public TransactionDateTime OccuredOn { get; set; }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DDDCore.Application.DataAccess;
@@ -17,13 +16,13 @@ namespace DDDCore.Infrastructure.DataAccess.EventStore
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<DomainEvent>> LoadEventsAsync<TIdentifier>(TIdentifier identifier, int startingFrom) where TIdentifier : Identifier
+        public Task<IEnumerable<DomainEvent>> LoadEventsAsync<TIdentifier>(TIdentifier identifier, int startingFrom) where TIdentifier : Identifier
         {
-            var events = await _repository.Where(efEvent =>
-                    efEvent.AggregateId == identifier.ToString() && efEvent.AggregateVersion >= startingFrom)
-                .ToListAsync();
+            // var events = await _repository.Where(efEvent =>
+            //         efEvent.AggregateId == identifier.ToString() && efEvent.AggregateVersion >= startingFrom)
+            //     .ToListAsync();
             // TODO transform to DomainEvent
-            return new DomainEvent[0];
+            return Task.FromResult(new DomainEvent[0].AsEnumerable());
         }
 
         public async Task StoreEventsAsync<TIdentifier>(TIdentifier id, long expectedVersion, IEnumerable<DomainEvent> events) where TIdentifier : Identifier

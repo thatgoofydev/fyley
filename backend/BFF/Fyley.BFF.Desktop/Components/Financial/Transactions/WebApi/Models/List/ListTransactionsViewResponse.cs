@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Fyley.Components.Financial.Contracts.Transactions.ListTransactions
+namespace Fyley.BFF.Desktop.Components.Financial.Transactions.WebApi.Models.List
 {
-    public class ListTransactionsResponse
+    public class ListTransactionsViewResponse
     {
         public TransactionDto[] Transactions { get; set; }
         

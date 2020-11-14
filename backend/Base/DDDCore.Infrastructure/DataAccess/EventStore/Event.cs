@@ -1,6 +1,5 @@
 ﻿using System;
 using DDDCore.Domain.Events;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace DDDCore.Infrastructure.DataAccess.EventStore
