@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+
+  thead {
+    color: #8C8FA1;
+  }
+
+  tbody {
+    color: #252733;
+  }
+
+  td, th {
+    text-align: left;
+    padding: 12px 6px;
+    border-bottom: 1px solid #DFE0EB;
+
+    &.money {
+      text-align: right;
+
+      &::before {
+        content: "€";
+      }
+    }
+  }
+}
