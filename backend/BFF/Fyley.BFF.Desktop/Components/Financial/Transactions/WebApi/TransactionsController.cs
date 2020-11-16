@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Transactions.Adapters;
+using Fyley.BFF.Desktop.Components.Financial.Transactions.ViewModelFactories;
 using Fyley.BFF.Desktop.Components.Financial.Transactions.WebApi.Models.Submit;
 using Fyley.Core.Asp.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,12 @@ namespace Fyley.BFF.Desktop.Components.Financial.Transactions.WebApi
     public class TransactionsController : BaseController
     {
         private readonly TransactionServiceAdapter _serviceAdapter;
-        private readonly TransactionQueryServiceAdapter _queryServiceAdapter;
+        private readonly TransactionViewModelFactory _viewModelFactory;
 
-        public TransactionsController(TransactionServiceAdapter serviceAdapter, TransactionQueryServiceAdapter queryServiceAdapter)
+        public TransactionsController(TransactionServiceAdapter serviceAdapter, TransactionViewModelFactory viewModelFactory)
         {
             _serviceAdapter = serviceAdapter;
-            _queryServiceAdapter = queryServiceAdapter;
+            _viewModelFactory = viewModelFactory;
         }
 
         [HttpPost("submit")]
@@ -25,10 +26,10 @@ namespace Fyley.BFF.Desktop.Components.Financial.Transactions.WebApi
             return ExecuteAsync(async () => await _serviceAdapter.LogTransaction(request));
         }
 
-        [HttpPost("list")]
+        [HttpPost("overview")]
         public Task<IActionResult> List()
         {
-            return ExecuteAsync(async () => await _queryServiceAdapter.ListTransactions());
+            return ExecuteAsync(async () => await _viewModelFactory.GetOverviewViewModel());
         }
         
     }

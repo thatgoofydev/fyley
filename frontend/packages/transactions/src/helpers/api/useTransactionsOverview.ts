@@ -6,8 +6,8 @@ export interface TransactionsOverview {
 
 export interface TransactionDto {
   transactionId: string;
-  payor: AccountDetails;
-  payee: AccountDetails;
+  otherName: string;
+  otherAccountNumber: string;
   amount: number;
   reference: string;
   occuredOn: string;
@@ -19,6 +19,6 @@ export interface AccountDetails {
 }
 
 export const useTransactionsOverview = () => {
-  const url = "/transactions/list";
+  const url = "/transactions/overview";
   return useApi<TransactionsOverview>(url);
 };

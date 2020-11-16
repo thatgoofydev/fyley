@@ -18,7 +18,15 @@ table {
       text-align: right;
 
       &::before {
-        content: "€";
+        content: "€ ";
+      }
+    }
+
+    p {
+      margin: 0;
+
+      &:last-child {
+        color: #8C8FA1;
       }
     }
   }

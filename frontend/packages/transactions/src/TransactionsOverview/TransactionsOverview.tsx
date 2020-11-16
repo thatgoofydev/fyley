@@ -24,26 +24,6 @@ export const TransactionsOverview: FunctionComponent = () => {
     );
   }
 
-  const renderTableRow = (transaction: TransactionDto) => {
-    const otherParty = transaction.amount > 0 ? transaction.payor : transaction.payee;
-    return (
-      <tr key={transaction.transactionId}>
-        <td>{transaction.occuredOn}</td>
-        <td>
-          <p>{otherParty.name}</p>
-          <p>{otherParty.accountNumber}</p>
-        </td>
-        <td className="money">
-          {transaction.amount > 0 ? formatMoney(transaction.amount) : " -,--"}
-        </td>
-        <td className="money">
-          {transaction.amount < 0 ? formatMoney(transaction.amount) : " -,--"}
-        </td>
-        <td>{transaction.reference}</td>
-      </tr>
-    );
-  };
-
   return (
     <>
       <table>
@@ -57,7 +37,24 @@ export const TransactionsOverview: FunctionComponent = () => {
           </tr>
         </thead>
 
-        <tbody>{data.transactions.map(renderTableRow)}</tbody>
+        <tbody>
+          {data.transactions.map(transaction => (
+            <tr key={transaction.transactionId}>
+              <td>{transaction.occuredOn}</td>
+              <td>
+                <p>{transaction.otherName}</p>
+                <p>{transaction.otherAccountNumber}</p>
+              </td>
+              <td className="money">
+                {transaction.amount > 0 ? formatMoney(transaction.amount) : " -,--"}
+              </td>
+              <td className="money">
+                {transaction.amount < 0 ? formatMoney(transaction.amount) : " -,--"}
+              </td>
+              <td>{transaction.reference}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </>
   );
