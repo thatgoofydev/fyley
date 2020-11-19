@@ -11,14 +11,19 @@ table {
 
   td, th {
     text-align: left;
-    padding: 12px 6px;
+    padding: 6px 20px;
     border-bottom: 1px solid #DFE0EB;
 
     &.money {
       text-align: right;
+      width: 120px;
 
-      &::before {
-        content: "€ ";
+      &.in {
+        color: green;
+      }
+
+      &.out {
+        color: red;
       }
     }
 
@@ -28,6 +33,12 @@ table {
       &:last-child {
         color: #8C8FA1;
       }
+    }
+  }
+
+  td.money {
+    &::before {
+      content: "€ ";
     }
   }
 }

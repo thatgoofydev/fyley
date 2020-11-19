@@ -7,12 +7,14 @@ export interface IProps {
   text: string;
   icon?: IconType;
   href?: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export const LinkButton: FunctionComponent<IProps> = ({
   text,
   icon = undefined,
-  href = undefined
+  href = undefined,
+  onClick = undefined
 }) => {
   const classes = classNames("link-button");
 
@@ -35,7 +37,7 @@ export const LinkButton: FunctionComponent<IProps> = ({
 
   const renderButton = () => {
     return (
-      <div className={classes} role="button">
+      <div role="button" className={classes} onClick={onClick}>
         {renderContent()}
       </div>
     );

@@ -29,10 +29,12 @@ export const TransactionsOverview: FunctionComponent = () => {
       <table>
         <thead>
           <tr>
-            <th>Date</th>
+            <th style={{ width: "120px" }}>Date</th>
             <th>Payee/Payor</th>
-            <th>IN</th>
-            <th>OUT</th>
+            <th className="money">Balance</th>
+            <th className="money in">IN</th>
+            <th className="money out">OUT</th>
+            <th>Tags</th>
             <th>Reference</th>
           </tr>
         </thead>
@@ -45,12 +47,14 @@ export const TransactionsOverview: FunctionComponent = () => {
                 <p>{transaction.otherName}</p>
                 <p>{transaction.otherAccountNumber}</p>
               </td>
-              <td className="money">
+              <td className="money">-,--</td>
+              <td className="money in">
                 {transaction.amount > 0 ? formatMoney(transaction.amount) : " -,--"}
               </td>
-              <td className="money">
+              <td className="money out">
                 {transaction.amount < 0 ? formatMoney(transaction.amount) : " -,--"}
               </td>
+              <td>TODO</td>
               <td>{transaction.reference}</td>
             </tr>
           ))}

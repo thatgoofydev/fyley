@@ -15,7 +15,7 @@ describe("<LinkButton />", function () {
     expect(rendered).toMatchSnapshot();
   });
 
-  test("should render a tag when a link has been defined", () => {
+  test("should render an a tag when a link has been defined", () => {
     render(<LinkButton href="http://google.com" text="test-button" />);
 
     const link = document.getElementsByTagName("a");

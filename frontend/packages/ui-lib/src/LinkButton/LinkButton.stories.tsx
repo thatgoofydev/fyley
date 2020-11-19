@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Meta, Story } from "@storybook/react";
 import { LinkButton, IProps } from "./LinkButton";
 
@@ -23,5 +23,27 @@ export const IconButton = Template.bind({});
 IconButton.storyName = "icon";
 IconButton.args = {
   text: "New button",
+  icon: "add"
+};
+
+export const OnClickExample: Story<IProps> = args => {
+  const [state, setState] = useState<string[]>([]);
+
+  const add = () => {
+    setState([...state, `${new Date().toString()} - new message`]);
+  };
+
+  return (
+    <>
+      <LinkButton {...args} onClick={add} />
+      {state.map(message => (
+        <p key={message}>{message}</p>
+      ))}
+    </>
+  );
+};
+OnClickExample.storyName = "on click";
+OnClickExample.args = {
+  text: "Add Message",
   icon: "add"
 };
