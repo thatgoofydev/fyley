@@ -1,0 +1,19 @@
+@import "src/base-styling/vars";
+
+.sidepanel-header {
+  padding: $sidepanel-header-padding;
+  border-bottom: $sidepanel-header-border;
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+  }
+
+  .close:after {
+    content: "\00d7";
+    font-size: 2em;
+    line-height: 28px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,48 @@
+@import "src/base-styling/vars";
+
+.sidepanel-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: $sidepanel-mask-bg;
+  pointer-events: auto;
+
+  transition: background-color .5s;
+}
+
+.sidepanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $sidepanel-width;
+  background-color: $sidepanel-bg;
+  pointer-events: auto;
+
+  margin-right: 0;
+  transition: margin-right .5s;
+}
+
+.closed {
+  .mask {
+    //display: none;
+    pointer-events: none;
+    background-color: transparent;
+  }
+
+  .sidepanel {
+    margin-right: -$sidepanel-width;
+  }
+}
