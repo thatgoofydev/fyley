@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidePanel should render closed if !isOpen 1`] = `
+<div>
+  <div
+    class="sidepanel-wrapper closed"
+    data-testid="panel"
+  >
+    <div
+      class="mask"
+    />
+    <div
+      class="sidepanel"
+    >
+      <div
+        class="sidepanel-header"
+      >
+        <div
+          class="title"
+        >
+          <h2>
+            some title
+          </h2>
+        </div>
+        <div
+          class="close"
+        />
+      </div>
+      <div
+        class="sidepanel-content"
+      >
+        <p>
+          Some content inside of the panel...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SidePanel should render open if isOpen 1`] = `
+<div>
+  <div
+    class="sidepanel-wrapper"
+    data-testid="panel"
+  >
+    <div
+      class="mask"
+    />
+    <div
+      class="sidepanel"
+    >
+      <div
+        class="sidepanel-header"
+      >
+        <div
+          class="title"
+        >
+          <h2>
+            some title
+          </h2>
+        </div>
+        <div
+          class="close"
+        />
+      </div>
+      <div
+        class="sidepanel-content"
+      >
+        <p>
+          Some content inside of the panel...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
