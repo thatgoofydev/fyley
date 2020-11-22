@@ -10,8 +10,7 @@ namespace Fyley.Components.Financial.Domain.Shared
         public static readonly AccountNumberType Iban = new IbanAccountNumberType();
 
         private AccountNumberType(int value, string name) : base(value, name)
-        {
-        }
+        { }
 
         public abstract ValidationResult IsValid(string value);
 
