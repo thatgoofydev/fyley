@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using DDDCore.Domain.ValueObjects;
-using Fyley.Components.Accounts.Domain.Errors;
+using Fyley.Components.Financial.Domain.Accounts.Errors;
 
-namespace Fyley.Components.Accounts.Domain
+namespace Fyley.Components.Financial.Domain.Accounts
 {
     public class AccountName : SingleValueObject<string>
     {
-        private static readonly Regex NameRegex = new Regex("^[a-zA-Z0-9\\s-_@#()]*$");
         private const int MaxLength = 40;
         
         public AccountName(string value) : base(value)
@@ -15,9 +13,7 @@ namespace Fyley.Components.Accounts.Domain
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
             var trimmed = value.Trim();
             if (trimmed.Length > MaxLength) throw new AccountNameToLong(MaxLength);
-            if (!NameRegex.IsMatch(trimmed)) throw new InvalidAccountName(trimmed);
-
-            Value = value.Trim(); // override to trim
+            Value = value.Trim();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using DDDCore.Domain.Aggregates;
 
-namespace Fyley.Components.Accounts.Domain
+namespace Fyley.Components.Financial.Domain.Accounts
 {
     public class AccountId : Identifier
     {

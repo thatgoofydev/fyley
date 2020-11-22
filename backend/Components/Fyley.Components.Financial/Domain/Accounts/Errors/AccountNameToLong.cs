@@ -1,6 +1,6 @@
 ﻿using DDDCore.Domain.Errors;
 
-namespace Fyley.Components.Accounts.Domain.Errors
+namespace Fyley.Components.Financial.Domain.Accounts.Errors
 {
     public class AccountNameToLong : DomainError
     {
