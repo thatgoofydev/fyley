@@ -9,8 +9,8 @@ namespace Fyley.Components.Financial.Domain.Accounts
     public class AccountState : IAggregateState,
         IHandle<AccountDefined>
     {
-        public AccountName Name { get; set; }
-        public AccountNumber AccountNumber { get; set; }
+        public AccountName Name { get; [UsedImplicitly] set; }
+        public AccountNumber AccountNumber { get; [UsedImplicitly] set; }
         
         [UsedImplicitly]
         public AccountState()

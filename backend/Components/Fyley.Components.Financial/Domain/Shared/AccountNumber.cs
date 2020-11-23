@@ -14,10 +14,11 @@ namespace Fyley.Components.Financial.Domain.Shared
         {
             Type = type ?? throw new ArgumentNullException(nameof(type));
             if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = Type.Format(value);
 
             var validationResult = Type.IsValid(value);
             if (!validationResult.IsValid) throw new AccountNumberInvalid(validationResult.Error);
+
+            Value = Type.Format(value);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

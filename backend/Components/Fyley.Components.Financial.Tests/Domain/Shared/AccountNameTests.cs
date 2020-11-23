@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace Fyley.Components.Financial.Tests.Domain.Shared
 {
+    // ReSharper disable ObjectCreationAsStatement
     [TestFixture]
     public class AccountNameTests
     { 
@@ -14,10 +15,8 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
             public void ThrowArgumentNullException_WhenValueIsNull()
             {
                 // Act + Assert
-                var exception = Assert.Throws<ArgumentNullException>(() =>
-                {
-                    var _ = new AccountName(null);
-                });
+                var exception = Assert.Throws<ArgumentNullException>(() => 
+                    new AccountName(null));
                 
                 Assert.That(exception.ParamName, Is.EqualTo("value"));
             }
@@ -25,16 +24,14 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
             [Test]
             public void ThrowAccountNameToLong_WhenNameToLong()
             {
-                var exception = Assert.Throws<AccountNameToLong>(() =>
-                {
-                    var _ = new AccountName("abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz");
-                });
+                var exception = Assert.Throws<AccountNameToLong>(() => 
+                    new AccountName("abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz"));
                 
                 Assert.That(exception.Message, Contains.Substring("is to long"));
             }
 
             [Test]
-            public void NowChangeValue()
+            public void NotChangeValue()
             {
                 // Act
                 var accountName = new AccountName("Some account name");

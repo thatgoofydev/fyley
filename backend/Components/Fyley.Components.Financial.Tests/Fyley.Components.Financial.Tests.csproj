@@ -16,8 +16,4 @@
       <ProjectReference Include="..\Fyley.Components.Financial\Fyley.Components.Financial.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Domain\Accounts" />
-    </ItemGroup>
-
 </Project>

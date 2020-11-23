@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DDDCore.Domain.ValueObjects;
 
@@ -27,7 +28,7 @@ namespace Fyley.Components.Financial.Domain.Shared
                 Error = error;
             }
 
-            internal static ValidationResult OfError(string error)
+            internal static ValidationResult Failed(string error)
             {
                 return new ValidationResult(false, error);
             }
@@ -73,38 +74,38 @@ namespace Fyley.Components.Financial.Domain.Shared
                 { "VA", 22 }, { "VG", 24 }, { "LY", 25 }
             };
             
-            public IbanAccountNumberType() : base(2, "IBAN")
+            public IbanAccountNumberType() : base(2, "Iban")
             { }
 
             public override ValidationResult IsValid(string value)
             {
-                value = StripSpaces(value);
-                
-                if (!AlphanumericRegex.IsMatch(value))
-                {
-                    return ValidationResult.OfError("A IBAN can only contain alphanumeric characters.");
-                }
+                value = Strip(value);
                 
                 if (value.Length < MinLength)
                 {
-                    return ValidationResult.OfError($"A IBAN should have a length of at least '{MinLength}' characters.");
+                    return ValidationResult.Failed($"A IBAN should have a length of at least '{MinLength}' characters.");
                 }
 
                 if (value.Length > MaxLength)
                 {
-                    return ValidationResult.OfError($"A IBAN cannot exceed the maximum length of '{MaxLength}' characters.");
+                    return ValidationResult.Failed($"A IBAN cannot exceed the maximum length of '{MaxLength}' characters.");
+                }
+                
+                if (!AlphanumericRegex.IsMatch(value))
+                {
+                    return ValidationResult.Failed("A IBAN can only contain alphanumeric characters.");
                 }
                 
                 var isoCountryCode = value.Substring(0, 2);
                 if (!LengthByCountryCode.TryGetValue(isoCountryCode, out var expectedLength))
                 {
-                    return ValidationResult.OfError($"'{isoCountryCode}' is not a valid country code for an IBAN");
+                    return ValidationResult.Failed($"'{isoCountryCode}' is not a valid country code for an IBAN");
                 }
                 
                 var actualLength = value.Length;
                 if (actualLength != expectedLength)
                 {
-                    return ValidationResult.OfError($"A IBAN from '{isoCountryCode}' should have a length of '{expectedLength}'.");
+                    return ValidationResult.Failed($"A IBAN from '{isoCountryCode}' should have a length of '{expectedLength}'.");
                 }
                 
                 // TODO validate check digits
@@ -112,15 +113,15 @@ namespace Fyley.Components.Financial.Domain.Shared
                 return ValidationResult.Success();
             }
 
-            private string StripSpaces(string value)
-            {
-                return value.Replace(" ", string.Empty);
-            }
-
             public override string Format(string value)
             {
-                value = StripSpaces(value);
-                return Regex.Replace(value, ".{4}", "$0 ").Trim();
+                return Strip(value);
+            }
+
+            private static string Strip(string value)
+            {
+                return value.Replace(" ", string.Empty)
+                    .Replace("-", string.Empty);
             }
         }
     }
