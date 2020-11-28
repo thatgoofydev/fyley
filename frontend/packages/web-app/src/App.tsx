@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Switch, Route, NavLink, useLocation, useRouteMatch } from "react-router-dom";
-import { Page } from "@fyley/ui-lib";
+import { Switch, Route, useLocation } from "react-router-dom";
 
 import styles from "./App.module.scss";
+import { FinancialContent, FinancialNavMenu } from "@fyley/financial";
 
 enum NavMenu {
   FINANCIAL,
@@ -67,20 +67,11 @@ function App() {
               >
                 Financial
               </span>
-              {menu === NavMenu.FINANCIAL && (
-                <ul>
-                  <li>
-                    <NavLink to="/financial/overview" onClick={closeNav}>
-                      Overview
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/financial/accounts" onClick={closeNav}>
-                      Accounts
-                    </NavLink>
-                  </li>
-                </ul>
-              )}
+              <FinancialNavMenu
+                isOpen={menu === NavMenu.FINANCIAL}
+                baseRoute="/financial"
+                onClick={closeNav}
+              />
             </li>
             {/*<li>*/}
             {/*  <span*/}
@@ -106,27 +97,10 @@ function App() {
       </header>
 
       <Switch>
-        <Route path="/financial" component={TempFinancial} />
+        <Route path="/financial" component={FinancialContent} />
       </Switch>
     </>
   );
 }
-
-const TempFinancial = () => {
-  const { path } = useRouteMatch();
-
-  return (
-    <>
-      <Switch>
-        <Route path={`${path}/overview`}>
-          <Page title="Overview">financial overview page</Page>
-        </Route>
-        <Route path={`${path}/accounts`}>
-          <Page title="Accounts">accounts overview page</Page>
-        </Route>
-      </Switch>
-    </>
-  );
-};
 
 export default App;

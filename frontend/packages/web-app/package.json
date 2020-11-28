@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fyley/component-transactions": "^1.0.0",
+    "@fyley/financial": "^1.0.0",
     "@fyley/ui-lib": "^1.0.0",
     "@fyley/utils": "^1.0.0",
     "@types/node": "^12.0.0",
-    "@types/react-router-dom": "^5.1.6",
     "classnames": "^2.2.6",
     "react-router-dom": "^5.2.0"
   },

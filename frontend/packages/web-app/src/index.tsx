@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BaseStyleSetup } from "@fyley/ui-lib";
 
 import App from "./App";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>

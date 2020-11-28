@@ -74,6 +74,10 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 color: $primary-text;
               }
+
+              &.active {
+                color: $blue;
+              }
             }
           }
         }
