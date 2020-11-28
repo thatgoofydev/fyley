@@ -14,7 +14,8 @@ namespace Fyley.Components.Financial.Tests.Domain.Accounts
             // Arrange
             var state = new AccountState();
             var @event = new AccountDefined(
-                new AccountName("Savings"), 
+                new AccountName("Savings"),
+                new AccountDescription("Description"), 
                 new AccountNumber(AccountNumberType.Iban, "BE13131141229739")
             );
             
@@ -25,6 +26,10 @@ namespace Fyley.Components.Financial.Tests.Domain.Accounts
             Assert.That(
                 state.Name, 
                 Is.EqualTo(new AccountName("Savings"))
+            );
+            Assert.That(
+                state.Description,
+                Is.EqualTo(new AccountDescription("Description"))
             );
             Assert.That(
                 state.AccountNumber,

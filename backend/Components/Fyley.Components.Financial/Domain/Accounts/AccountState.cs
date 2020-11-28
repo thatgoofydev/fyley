@@ -10,6 +10,7 @@ namespace Fyley.Components.Financial.Domain.Accounts
         IHandle<AccountDefined>
     {
         public AccountName Name { get; [UsedImplicitly] set; }
+        public AccountDescription Description { get; [UsedImplicitly] set; }
         public AccountNumber AccountNumber { get; [UsedImplicitly] set; }
         
         [UsedImplicitly]
@@ -19,6 +20,7 @@ namespace Fyley.Components.Financial.Domain.Accounts
         public void Apply(AccountDefined @event)
         {
             Name = @event.Name;
+            Description = @event.Description;
             AccountNumber = @event.AccountNumber;
         }
     }
