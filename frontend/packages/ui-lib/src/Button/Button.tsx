@@ -10,6 +10,8 @@ export interface IButtonProps {
   color?: "blue" | "red";
   disabled?: boolean;
   actionState?: "submitting" | "success" | "error" | "none";
+  onClick?: () => void;
+  "data-testid"?: string;
 }
 
 export const Button: FunctionComponent<IButtonProps> = ({
@@ -19,7 +21,9 @@ export const Button: FunctionComponent<IButtonProps> = ({
   size = "normal",
   color = "blue",
   disabled,
-  actionState = "none"
+  actionState = "none",
+  onClick,
+  "data-testid": dataTestId
 }) => {
   const classes: string = classNames(
     styles.button,
@@ -31,7 +35,13 @@ export const Button: FunctionComponent<IButtonProps> = ({
 
   const svgSize = size === "small" ? 18 : 24;
   return (
-    <button type={type} disabled={disabled} className={classes}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={classes}
+      onClick={onClick}
+      data-testid={dataTestId}
+    >
       {label}
       {actionState === "success" && (
         <svg

@@ -11,6 +11,18 @@ exports[`Button should render correctly when default 1`] = `
 </div>
 `;
 
+exports[`Button should render correctly when disabled 1`] = `
+<div>
+  <button
+    class="button blue"
+    disabled=""
+    type="button"
+  >
+    Button
+  </button>
+</div>
+`;
+
 exports[`Button should render correctly when error state 1`] = `
 <div>
   <button
