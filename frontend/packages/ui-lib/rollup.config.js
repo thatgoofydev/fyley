@@ -10,8 +10,7 @@ const plugins = [
   }),
   postcss({
     sourceMap: true,
-    extract: true,
-    minimize: true
+    minimize: false
   })
 ];
 
@@ -24,7 +23,6 @@ export default {
   input,
   plugins,
   external,
-  preserveModules: true,
 
   output: [
     {

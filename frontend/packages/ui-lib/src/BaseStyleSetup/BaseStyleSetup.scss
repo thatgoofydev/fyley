@@ -1,0 +1,17 @@
+@import "src/base-styling/colors";
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Mulish", sans-serif;
+  color: $primary-text;
+  background-color: #F7F9FB;
+}
