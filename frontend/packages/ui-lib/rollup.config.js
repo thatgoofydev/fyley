@@ -9,7 +9,9 @@ const plugins = [
     typescript: require("typescript")
   }),
   postcss({
-    minimize: false
+    sourceMap: true,
+    extract: true,
+    minimize: true
   })
 ];
 
@@ -22,6 +24,7 @@ export default {
   input,
   plugins,
   external,
+  preserveModules: true,
 
   output: [
     {
