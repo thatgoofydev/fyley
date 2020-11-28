@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render correctly when default 1`] = `
+<div>
+  <button
+    class="button blue"
+    type="button"
+  >
+    Button
+  </button>
+</div>
+`;
+
+exports[`Button should render correctly when error state 1`] = `
+<div>
+  <button
+    class="button blue error"
+    type="button"
+  >
+    Button
+    <svg
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M24 20.2L15.7 12l8.2-8.3L20.2 0 12 8.3 3.7.1 0 3.8 8.3 12 .1 20.3 3.8 24l8.2-8.3 8.3 8.2z"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`Button should render correctly when secondary style 1`] = `
+<div>
+  <button
+    class="button secondary blue"
+    type="button"
+  >
+    Button
+  </button>
+</div>
+`;
+
+exports[`Button should render correctly when small size 1`] = `
+<div>
+  <button
+    class="button small blue"
+    type="button"
+  >
+    Button
+  </button>
+</div>
+`;
+
+exports[`Button should render correctly when submitting state 1`] = `
+<div>
+  <button
+    class="button blue submitting"
+    type="button"
+  >
+    Button
+  </button>
+</div>
+`;
+
+exports[`Button should render correctly when success state 1`] = `
+<div>
+  <button
+    class="button blue success"
+    type="button"
+  >
+    Button
+    <svg
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M20.3 2L9 13.6l-5.3-5L0 12.3 9 21 24 5.7z"
+      />
+    </svg>
+  </button>
+</div>
+`;

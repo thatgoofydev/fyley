@@ -26,7 +26,7 @@ export const Button: FunctionComponent<IButtonProps> = ({
     style === "secondary" ? styles.secondary : undefined,
     size === "small" ? styles.small : undefined,
     styles[color],
-    actionState ? styles[actionState] : undefined
+    actionState !== "none" ? styles[actionState] : undefined
   );
 
   const svgSize = size === "small" ? 18 : 24;
