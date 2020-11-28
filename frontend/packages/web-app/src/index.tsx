@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./base-styling/reset.css";
-import "./index.css";
+import { BaseStyleSetup } from "@fyley/ui-lib";
+
 import App from "./App";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <BaseStyleSetup>
+        <App />
+      </BaseStyleSetup>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

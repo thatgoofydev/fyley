@@ -1,38 +1,132 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { PageTitleProvider } from "@fyley/ui-lib";
+import React, { useEffect, useRef, useState } from "react";
+import { Switch, Route, NavLink, useLocation, useRouteMatch } from "react-router-dom";
+import { Page } from "@fyley/ui-lib";
 
-import { Header } from "./components/Header";
-import { Sidebar } from "./components/Sidebar";
+import styles from "./App.module.scss";
 
-import layout from "./base-styling/layout.module.scss";
-import { TempContent } from "./components/TempContent/TempContent";
+enum NavMenu {
+  FINANCIAL,
+  DOCUMENTS
+}
+
+function useNavState() {
+  const [currentMenu, setState] = useState<NavMenu>();
+  const navRef = useRef<HTMLElement>(null);
+
+  const handleChange = (menu: NavMenu): void => {
+    if (currentMenu === menu) {
+      setState(undefined);
+    } else {
+      setState(menu);
+    }
+  };
+
+  const closeNav = (): void => {
+    setState(undefined);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as any)) {
+        setState(undefined);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [navRef]);
+
+  return {
+    menu: currentMenu,
+    handleChange,
+    closeNav,
+    navRef
+  };
+}
 
 function App() {
+  const { pathname } = useLocation();
+  const { menu, handleChange, closeNav, navRef } = useNavState();
+
+  const getRootNavStyle = (path: string) => {
+    return pathname.startsWith(`/${path}`) ? styles.active : undefined;
+  };
+
   return (
-    <PageTitleProvider>
-      <BrowserRouter>
-        <div className={layout.container}>
-          <header className={layout.header}>
-            <Header />
-          </header>
-          <section className={layout.sidebar}>
-            <Sidebar />
-          </section>
-          <main className={layout.content}>
-            <Switch>
-              <Route exact path="/">
-                <TempContent name="Dashboard" />
-              </Route>
-              <Route exact path="/transactions">
-                <TempContent name="Transactions" />
-              </Route>
-            </Switch>
-          </main>
+    <>
+      <header className={styles.header}>
+        <div>
+          <h1>FYLEY</h1>
         </div>
-      </BrowserRouter>
-    </PageTitleProvider>
+        <nav ref={navRef}>
+          <ul>
+            <li>
+              <span
+                className={getRootNavStyle("financial")}
+                onClick={() => handleChange(NavMenu.FINANCIAL)}
+              >
+                Financial
+              </span>
+              {menu === NavMenu.FINANCIAL && (
+                <ul>
+                  <li>
+                    <NavLink to="/financial/overview" onClick={closeNav}>
+                      Overview
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/financial/accounts" onClick={closeNav}>
+                      Accounts
+                    </NavLink>
+                  </li>
+                </ul>
+              )}
+            </li>
+            {/*<li>*/}
+            {/*  <span*/}
+            {/*    className={getRootNavStyle("documents")}*/}
+            {/*    onClick={() => handleChange(NavMenu.DOCUMENTS)}*/}
+            {/*  >*/}
+            {/*    Documents*/}
+            {/*  </span>*/}
+            {/*  {menu === NavMenu.DOCUMENTS && (*/}
+            {/*    <ul>*/}
+            {/*      <li>*/}
+            {/*        <NavLink to="/documents/overview">Overview</NavLink>*/}
+            {/*      </li>*/}
+            {/*      <li>*/}
+            {/*        <NavLink to="/documents/something">Something</NavLink>*/}
+            {/*      </li>*/}
+            {/*    </ul>*/}
+            {/*  )}*/}
+            {/*</li>*/}
+          </ul>
+        </nav>
+        <div />
+      </header>
+
+      <Switch>
+        <Route path="/financial" component={TempFinancial} />
+      </Switch>
+    </>
   );
 }
+
+const TempFinancial = () => {
+  const { path } = useRouteMatch();
+
+  return (
+    <>
+      <Switch>
+        <Route path={`${path}/overview`}>
+          <Page title="Overview">financial overview page</Page>
+        </Route>
+        <Route path={`${path}/accounts`}>
+          <Page title="Accounts">accounts overview page</Page>
+        </Route>
+      </Switch>
+    </>
+  );
+};
 
 export default App;
