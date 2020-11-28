@@ -1,4 +1,5 @@
 import typescript from "rollup-plugin-typescript2";
+import postcss from "rollup-plugin-postcss";
 import pkg from "./package.json";
 
 const input = "src/index.ts";
@@ -6,6 +7,10 @@ const input = "src/index.ts";
 const plugins = [
   typescript({
     typescript: require("typescript")
+  }),
+  postcss({
+    sourceMap: true,
+    minimize: false
   })
 ];
 
