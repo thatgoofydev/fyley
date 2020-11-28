@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FinancialNavMenu should add class to active route 1`] = `
+<div>
+  <ul>
+    <li>
+      <a
+        aria-current="page"
+        class="active"
+        href="/financial/overview"
+      >
+        Overview
+      </a>
+    </li>
+    <li>
+      <a
+        href="/financial/accounts"
+      >
+        Accounts
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`FinancialNavMenu should render 1`] = `
+<div>
+  <ul>
+    <li>
+      <a
+        href="/financial/overview"
+      >
+        Overview
+      </a>
+    </li>
+    <li>
+      <a
+        href="/financial/accounts"
+      >
+        Accounts
+      </a>
+    </li>
+  </ul>
+</div>
+`;
