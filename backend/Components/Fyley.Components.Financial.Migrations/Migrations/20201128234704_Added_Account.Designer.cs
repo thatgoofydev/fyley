@@ -4,14 +4,16 @@ using Fyley.Components.Financial.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fyley.Components.Financial.Migrations.Migrations
 {
     [DbContext(typeof(FinancialContext))]
-    partial class FinancialContextModelSnapshot : ModelSnapshot
+    [Migration("20201128234704_Added_Account")]
+    partial class Added_Account
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

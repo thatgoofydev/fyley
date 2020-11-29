@@ -28,7 +28,7 @@ namespace DDDCore.Domain.Aggregates
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
             State = state ?? throw new ArgumentNullException(nameof(state));
-            Version = version >= -1 ? version : throw new ArgumentException("Cannot create an entity with version lower than -1.");
+            Version = version >= -1 ? version : throw new ArgumentException("Cannot create an entity with version lower than -1.", nameof(version));
         }
         
         public DomainEvent[] FlushUncommitedEvents()
@@ -74,7 +74,7 @@ namespace DDDCore.Domain.Aggregates
                 var aggregateEventType = emitInterface.GenericTypeArguments.First();
                 var applyMethod = emitInterface.GetMethod(nameof(IHandle<IAggregateEvent>.Apply));
                 var delegateType = typeof(Action<>).MakeGenericType(aggregateEventType);
-                var action = Delegate.CreateDelegate(delegateType, State, applyMethod);
+                var action = Delegate.CreateDelegate(delegateType, State, applyMethod ?? throw new InvalidOperationException());
                 _eventAppliers.Add(aggregateEventType, action);
             }
         }

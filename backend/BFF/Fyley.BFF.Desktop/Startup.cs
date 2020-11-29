@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Fyley.BFF.Desktop.Components.Financial;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +20,8 @@ namespace Fyley.BFF.Desktop
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson();
             services.AddCors();
             
             // Core Infrastructure
