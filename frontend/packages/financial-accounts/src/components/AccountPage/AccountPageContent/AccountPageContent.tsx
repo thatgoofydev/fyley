@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { RequestState } from "@fyley/utils";
-import { Loader, PageError } from "@fyley/ui-lib";
+import { Loader, PageContent, PageError } from "@fyley/ui-lib";
 
 import { useAccountList } from "../../../helpers/api/useAccountList/useAccountList";
 import { AccountBlankSlate } from "../../AccountBlankSlate/AccountBlankSlate";
+import { AccountOverview } from "../../AccountOverview/AccountOverview";
 
 export const AccountPageContent: FunctionComponent = () => {
   const { state, data, refresh } = useAccountList();
@@ -13,16 +14,24 @@ export const AccountPageContent: FunctionComponent = () => {
   }
 
   if (state === RequestState.ERROR) {
-    return <PageError details="Failed to load data." />;
+    return (
+      <PageContent>
+        <PageError details="Failed to load data." />
+      </PageContent>
+    );
   }
 
   if (data.accounts.length === 0) {
-    return <AccountBlankSlate onSubmitted={refresh} />;
+    return (
+      <PageContent>
+        <AccountBlankSlate onSubmitted={refresh} />
+      </PageContent>
+    );
   }
 
   return (
     <>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <AccountOverview accounts={data.accounts} />
     </>
   );
 };

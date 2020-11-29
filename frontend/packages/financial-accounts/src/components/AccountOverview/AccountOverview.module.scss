@@ -1,0 +1,45 @@
+@import "~@fyley/ui-lib/src/base-styling/colors";
+
+.overviewWrapper {
+  display: flex;
+  height: 100%;
+  min-height: 600px;
+
+  ul {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    justify-content: center;
+
+    li {
+      display: block;
+      text-align: right;
+      padding: 9px 38px;
+      font-size: 20px;
+      font-weight: bold;
+      border-right: 2px solid transparent;
+      cursor: pointer;
+
+      &.selected {
+        border-color: $blue;
+      }
+
+      &:hover, &.selected {
+        background-color: $grey;
+      }
+    }
+  }
+
+  .formWrapper {
+    flex: 1;
+    position: relative;
+
+    form {
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: fit-content;
+    }
+  }
+}

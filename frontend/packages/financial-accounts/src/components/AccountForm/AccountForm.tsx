@@ -4,11 +4,12 @@ import { AccountNumberType, IAccountFormModel } from "../../helpers/api/submitAc
 import { submitAccount } from "../../helpers/api/submitAccount/submitAccount";
 
 interface IAccountFormProps {
+  id?: string;
   account: IAccountFormModel;
   onSubmitted: () => void;
 }
 
-export const AccountForm: FunctionComponent<IAccountFormProps> = ({ account, onSubmitted }) => {
+export const AccountForm: FunctionComponent<IAccountFormProps> = ({ id, account, onSubmitted }) => {
   const handleValidate = (values: FormValues) => {
     const errors: FormValues = {};
 
@@ -24,7 +25,7 @@ export const AccountForm: FunctionComponent<IAccountFormProps> = ({ account, onS
   };
 
   const handleSubmit = async (values: FormValues, actions: FormActions) => {
-    const result = await submitAccount("new", {
+    const result = await submitAccount(id || "new", {
       ...(values as IAccountFormModel),
       accountNumberType: AccountNumberType.IBAN
     });
@@ -47,7 +48,7 @@ export const AccountForm: FunctionComponent<IAccountFormProps> = ({ account, onS
       />
       <Field name="accountNumber" label="Account Nr." placeholder="Ex. BE68 9535 7828 1734" />
       <FormControl>
-        <Button label="Create" type="submit" />
+        <Button label={id ? "Save" : "Create"} type="submit" />
       </FormControl>
     </Form>
   );
