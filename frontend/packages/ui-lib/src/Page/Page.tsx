@@ -11,7 +11,7 @@ export const Page: FunctionComponent<IPageProps> = ({ title, children }) => {
       <header className={styles.pageHeader}>
         <h1>{title}</h1>
       </header>
-      <div className={styles.pageContent}>{children}</div>
+      <div className={styles.pageContentWrapper}>{children}</div>
     </div>
   );
 };

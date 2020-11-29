@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { IPageProps, Page } from "./Page";
+import { PageContent } from "./PageContent/PageContent";
 
 export default {
   title: "Pages/Page",
@@ -10,8 +11,10 @@ export default {
 export const PageStory: Story<IPageProps> = args => {
   return (
     <Page {...args}>
-      <p>Some content</p>
-      <p>Some content</p>
+      <PageContent>
+        <p>Some content</p>
+        <p>Some content</p>
+      </PageContent>
     </Page>
   );
 };

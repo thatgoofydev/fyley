@@ -2,6 +2,7 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { Page } from "../Page";
 import { IPageErrorProps, PageError } from "./PageError";
+import { PageContent } from "../PageContent/PageContent";
 
 export default {
   title: "Pages/PageError",
@@ -11,7 +12,9 @@ export default {
 export const PageErrorStory: Story<IPageErrorProps> = args => {
   return (
     <Page title="Page title">
-      <PageError {...args} />
+      <PageContent>
+        <PageError {...args} />
+      </PageContent>
     </Page>
   );
 };
