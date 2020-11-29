@@ -31,6 +31,7 @@ namespace Fyley.Components.Financial.Infrastructure
             
             // DataAccess
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAccountQueries, AccountQueries>();
 
             #endregion Accounts
             
