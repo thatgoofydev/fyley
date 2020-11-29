@@ -1,0 +1,50 @@
+@import "src/base-styling/colors";
+
+.formControl {
+  font-size: 12px;
+  display: flex;
+  width: 460px;
+
+  label {
+    display: block;
+    position: absolute;
+    align-self: center;
+    padding-left: 14px;
+
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #9096A9;
+    user-select: none;
+    cursor: text;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 14px 14px 114px;
+    border: 1px solid $grey;
+    border-radius: 2px;
+
+    box-shadow: none !important;
+
+    &:focus {
+      outline: none !important;
+      border-color: $mid-grey;
+    }
+  }
+}
+
+.error {
+  label {
+    color: $red;
+  }
+
+  input {
+    border-color: $red;
+  }
+}
+
+.errorText {
+  margin: 4px 0 0 14px;
+  color: $red;
+  font-size: 12px;
+}

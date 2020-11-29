@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Field should render 1`] = `
+<div>
+  <div
+    class="formControlWrapper"
+  >
+    <div
+      class="formControl"
+    >
+      <label
+        for="name"
+      >
+        Name
+      </label>
+      <input
+        autocomplete="off"
+        id="name"
+        name="name"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Field should render error 1`] = `
+<div>
+  <div
+    class="formControlWrapper error"
+  >
+    <div
+      class="formControl"
+    >
+      <label
+        for="name"
+      >
+        Name
+      </label>
+      <input
+        autocomplete="off"
+        id="name"
+        name="name"
+        type="text"
+        value=""
+      />
+    </div>
+    <p
+      class="errorText"
+    >
+      Name is required
+    </p>
+  </div>
+</div>
+`;

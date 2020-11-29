@@ -1,13 +1,22 @@
 import { createContext } from "react";
-import { IFieldState, IFormState } from "./types";
+import { IFormContext } from "./types";
 
-export interface IFormContext {
-  setValue: (name: string, value: string) => void;
-  getField: (name: string) => IFieldState;
-  handleFocus: (name: string) => void;
-  handleBlur: (name: string) => void;
-}
+const noop = () => {};
 
-export type FormContextType = (IFormContext & IFormState) | null;
-
-export const FormContext = createContext<FormContextType>(null);
+export const FormContext = createContext<IFormContext>({
+  state: {
+    values: {},
+    errors: {},
+    focused: {},
+    touched: {}
+  },
+  getFieldState: () => ({
+    value: {},
+    error: {},
+    focused: false,
+    touched: false
+  }),
+  setFieldValue: noop,
+  onFieldFocus: noop,
+  onFieldBlur: noop
+});

@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-body, html {
+html, body {
   margin: 0;
   padding: 0;
 }
@@ -14,4 +14,31 @@ body {
   font-family: "Mulish", sans-serif;
   color: $primary-text;
   background-color: #F7F9FB;
+}
+
+$placeholder-color: $mid-grey;
+*::-webkit-input-placeholder {
+  color: $placeholder-color;
+}
+*:-moz-placeholder {
+  /* FF 4-18 */
+  color: $placeholder-color;
+  opacity: 1;
+}
+*::-moz-placeholder {
+  /* FF 19+ */
+  color: $placeholder-color;
+  opacity: 1;
+}
+*:-ms-input-placeholder {
+  /* IE 10+ */
+  color: $placeholder-color;
+}
+*::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $placeholder-color;
+}
+*::placeholder {
+  /* modern browser */
+  color: $placeholder-color;
 }

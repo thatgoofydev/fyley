@@ -1,15 +1,14 @@
-import React, { FC, FunctionComponent, useState } from "react";
-import { IFormState, FormValues, IFieldState } from "./types";
-import { FormContext, FormContextType } from "./FormContext";
+import React, { FunctionComponent, useState } from "react";
+import { FormValues, IFieldState, IFormContext, IFormState } from "./types";
+import { FormContext } from "./FormContext";
 
-interface IProp {
-  // children: ((state: ChildProps) => React.ReactNode) | React.ReactNode;
+interface IFormProps {
   onSubmit: (values: FormValues) => void;
   onValidate: (values: FormValues) => FormValues;
   initialValues?: FormValues;
 }
 
-export const Form: FC<IProp> = ({
+export const Form: FunctionComponent<IFormProps> = ({
   onSubmit,
   onValidate,
   initialValues,
@@ -22,21 +21,12 @@ export const Form: FC<IProp> = ({
     touched: {}
   });
 
-  const setValue = (name: string, value: string) => {
-    setState({
-      ...state,
-      values: {
-        ...state.values,
-        [name]: value
-      },
-      errors: {
-        ...state.errors,
-        [name]: undefined
-      }
-    });
-  };
+  const getFieldState = (name: string): IFieldState => {
+    if (state.touched[name] == undefined) {
+      // Key needs to be set to allow onSubmit to set them all to true.
+      state.touched[name] = false;
+    }
 
-  const getField = (name: string): IFieldState => {
     return {
       value: state.values[name],
       error: state.errors[name],
@@ -45,55 +35,74 @@ export const Form: FC<IProp> = ({
     };
   };
 
-  const handleFocus = (name: string) => {
-    setState({
+  const setFieldValue = (name: string, value: any) => {
+    const newState = {
       ...state,
-      focused: {
-        ...state.focused,
-        [name]: true
+      values: {
+        ...state.values,
+        [name]: value
       }
-    });
+    };
+
+    newState.errors = onValidate(newState.values);
+    setState(newState);
   };
 
-  const handleBlur = (name: string) => {
-    const errors = onValidate(state.values) ?? {};
-
-    setState(prev => ({
-      ...prev,
+  const onFieldFocus = (name: string) => {
+    setState(prevState => ({
+      ...prevState,
       focused: {
-        ...state.focused,
-        [name]: false
-      },
-      touched: {
-        ...state.touched,
+        ...prevState.focused,
         [name]: true
-      },
-      errors
+      }
     }));
   };
 
-  const context: FormContextType = {
-    ...state,
-    setValue,
-    getField,
-    handleFocus,
-    handleBlur
+  const onFieldBlur = (name: string) => {
+    setState(prevState => ({
+      ...prevState,
+      focused: {
+        ...prevState.focused,
+        [name]: false
+      },
+      touched: {
+        ...prevState.touched,
+        [name]: true
+      }
+    }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const errors = onValidate(state.values) ?? {};
-    if (Object.keys(errors).length != 0) {
-      setState(prev => ({ ...prev, errors }));
-    }
+    const newTouched = state.touched;
+    Object.keys(newTouched).forEach(key => (newTouched[key] = true));
 
-    onSubmit(state.values);
+    const newState = {
+      ...state,
+      touched: newTouched,
+      errors: onValidate(state.values)
+    };
+
+    setState(newState);
+
+    console.log(newState.errors);
+    if (!newState.errors || Object.keys(newState.errors).length === 0) {
+      onSubmit(newState.values);
+    }
+  };
+
+  const context: IFormContext = {
+    state,
+    getFieldState,
+    setFieldValue,
+    onFieldFocus,
+    onFieldBlur
   };
 
   return (
     <FormContext.Provider value={context}>
-      <form onSubmit={handleFormSubmit} autoComplete="off">
+      <form onSubmit={handleSubmit} autoComplete="off">
         {children}
       </form>
     </FormContext.Provider>

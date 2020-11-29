@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form should render 1`] = `
+<div>
+  <form
+    autocomplete="off"
+  >
+    <div
+      class="formControlWrapper"
+    >
+      <div
+        class="formControl"
+      >
+        <label
+          for="name"
+        >
+          Name
+        </label>
+        <input
+          autocomplete="off"
+          id="name"
+          name="name"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`Form should render with initial values 1`] = `
+<div>
+  <form
+    autocomplete="off"
+  >
+    <div
+      class="formControlWrapper"
+    >
+      <div
+        class="formControl"
+      >
+        <label
+          for="name"
+        >
+          Name
+        </label>
+        <input
+          autocomplete="off"
+          id="name"
+          name="name"
+          type="text"
+          value="john"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+`;

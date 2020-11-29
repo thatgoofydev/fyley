@@ -15,3 +15,11 @@ export interface IFieldState {
   focused: boolean;
   touched: boolean;
 }
+
+export interface IFormContext {
+  state: IFormState;
+  getFieldState: (name: string) => IFieldState;
+  setFieldValue: (name: string, values: any) => void;
+  onFieldFocus: (name: string) => void;
+  onFieldBlur: (name: string) => void;
+}

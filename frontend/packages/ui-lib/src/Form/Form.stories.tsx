@@ -1,84 +1,46 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { Form } from "./Form";
-import { Field } from "../Field";
+import { Field } from "./Field";
 import { FormValues } from "./types";
+import { Button } from "../Button";
+import { FormControl } from "./FormControl";
 
 export default {
-  title: "Form/Example",
-  component: Form
+  title: "Form/Form",
+  component: Form,
+  subcomponents: {
+    Field
+  }
 } as Meta;
 
-export const FormExample: Story = () => {
-  const onSubmit = (values: FormValues) => {
+export const FormStory: Story = _ => {
+  const handleSubmit = (values: FormValues) => {
+    console.log("submitted:");
     console.log(values);
   };
-
-  const onValidate = (values: FormValues): FormValues => {
+  const handleValidate = (values: FormValues): FormValues => {
     const errors: FormValues = {};
 
-    if (values.name !== "jeroen") {
-      errors.name = "wrong name";
+    if (!values.email) {
+      errors.email = "Email is required";
     }
 
     return errors;
   };
 
-  return (
-    <Form
-      onSubmit={onSubmit}
-      onValidate={onValidate}
-      initialValues={{
-        name: "jer",
-        birthdate: "1998-09-01"
-      }}
-    >
-      <Field label="Full name" name="name" type="text" />
-      <Field label="Birthdate" name="birthdate" type="date" />
+  const initialValues: FormValues = {
+    name: "John Doe"
+  };
 
-      <button type="submit">Submit</button>
+  return (
+    <Form onSubmit={handleSubmit} onValidate={handleValidate} initialValues={initialValues}>
+      <Field name="name" label="Full name" />
+      <Field name="email" label="Email" placeholder="hello@example.com" />
+      <FormControl>
+        <Button label="Submit" type="submit" />
+      </FormControl>
     </Form>
   );
 };
-
-// export const FormExampleTwo: Story = () => {
-//     const onSubmit = (values: FormValues) => {
-//         console.log(values);
-//     };
-//
-//     const onValidate = (values: FormValues): FormValues => {
-//         const errors: FormValues = {};
-//
-//         if (values.name !== "jeroen") {
-//             errors.name = "wrong name";
-//         }
-//
-//         errors.test = "a test";
-//
-//         return errors;
-//     };
-//
-//     return (
-//         <Form
-//             onSubmit={onSubmit}
-//             onValidate={onValidate}
-//             initialValues={{
-//                 name: "jer",
-//                 birthdate: "1998-09-01"
-//             }}
-//         >
-//             {({ errors, getField }) => (
-//                 <>
-//                     <Field label="Full name" name="name" type="text" />
-//                     <Field name="Birthdate" type="date" />
-//
-//                     <button type="submit">Submit</button>
-//
-//                     {JSON.stringify(getField("name"))}
-//
-//                     {errors.test && <p>A test error occured</p>}
-//                 </>
-//             )}
-//         </Form>
-//     );
-// };
+FormStory.storyName = "Form";
