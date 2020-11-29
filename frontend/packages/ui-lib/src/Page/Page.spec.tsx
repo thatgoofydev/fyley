@@ -2,6 +2,8 @@ import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { Page } from "./Page";
 
+afterEach(cleanup);
+
 describe("Page", function () {
   it("should render", function () {
     const { container, getByText } = render(

@@ -1,0 +1,52 @@
+@import "src/base-styling/colors";
+
+.pageError {
+  width: 450px;
+  margin: 120px auto;
+
+  h1 {
+    margin: 0;
+    font-size: 48px;
+  }
+
+  h2 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: $secondary-text;
+  }
+}
+
+.whatNext {
+  font-size: 18px;
+
+  p {
+    margin-bottom: 5px;
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  a {
+    color: $blue;
+  }
+}
+
+.details {
+  margin-top: 20px;
+  text-align: center;
+  background-color: $grey;
+  padding: 5px 10px;
+
+  button {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    font-size: 1em;
+  }
+
+  p {
+    margin: 0;
+    text-align: left;
+  }
+}
