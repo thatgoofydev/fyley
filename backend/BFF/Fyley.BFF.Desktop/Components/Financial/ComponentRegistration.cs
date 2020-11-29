@@ -1,4 +1,5 @@
 ﻿using Fyley.BFF.Desktop.Components.Financial.Accounts.Adapters;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel;
 using Fyley.BFF.Desktop.Components.Financial.Transactions.Adapters;
 using Fyley.BFF.Desktop.Components.Financial.Transactions.ViewModelFactories;
 using Fyley.Components.Financial.Infrastructure;
@@ -14,6 +15,7 @@ namespace Fyley.BFF.Desktop.Components.Financial
             services.AddFinancialServices(configuration);
 
             services.AddScoped<AccountServiceAdapter>();
+            services.AddScoped<AccountViewModelFactory>();
                 
             services.AddScoped<TransactionServiceAdapter>();
             services.AddScoped<TransactionViewModelFactory>();

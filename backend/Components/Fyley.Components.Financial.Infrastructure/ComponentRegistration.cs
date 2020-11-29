@@ -28,6 +28,7 @@ namespace Fyley.Components.Financial.Infrastructure
 
             // Application Services
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAccountQueryService, AccountQueryService>();
             
             // DataAccess
             services.AddScoped<IAccountRepository, AccountRepository>();
