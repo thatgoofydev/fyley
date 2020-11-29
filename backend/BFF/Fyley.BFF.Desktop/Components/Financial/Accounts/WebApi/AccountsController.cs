@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.Adapters;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
@@ -20,10 +21,18 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi
             _viewModelFactory = viewModelFactory;
         }
 
-        [HttpPost("submit")]
-        public Task<IActionResult> Submit([FromBody] SubmitAccountRequest request)
+        [HttpPost("submit/{id}")]
+        public Task<IActionResult> Submit([FromRoute] string id, [FromBody] SubmitAccountRequest request)
         {
-            return ExecuteAsync(async () => await _serviceAdapter.DefineAccount(request));
+            return ExecuteAsync(async () =>
+            {
+                if (id == "new")
+                {
+                    return await _serviceAdapter.DefineAccount(request);
+                }
+
+                return new SubmitAccountResponse(Guid.Empty);
+            });
         }
 
         [HttpPost("list")]
