@@ -1,20 +1,19 @@
 import React, { FunctionComponent } from "react";
 import styles from "./AccountBlankSlate.module.scss";
 
-import { AccountForm, IAccountFormModel } from "../AccountForm/AccountForm";
+import { AccountForm } from "../AccountForm/AccountForm";
+import { AccountNumberType, IAccountFormModel } from "../../helpers/api/submitAccount/models";
 
-export const AccountBlankSlate: FunctionComponent = () => {
+interface IAccountBlankSlateProps {
+  onSubmitted: () => void;
+}
+
+export const AccountBlankSlate: FunctionComponent<IAccountBlankSlateProps> = ({ onSubmitted }) => {
   const model: IAccountFormModel = {
     name: "",
     description: "",
-    accountNumber: ""
-  };
-
-  const onSubmit = (values: IAccountFormModel) => {
-    console.log("Submitted:");
-    console.log(values);
-
-    // TODO submit to api
+    accountNumber: "",
+    accountNumberType: AccountNumberType.IBAN
   };
 
   return (
@@ -25,7 +24,7 @@ export const AccountBlankSlate: FunctionComponent = () => {
         transactions of bank or other financial accounts.
       </p>
       <div className={styles.formWrapper}>
-        <AccountForm account={model} onSubmit={onSubmit} />
+        <AccountForm account={model} onSubmitted={onSubmitted} />
       </div>
     </>
   );

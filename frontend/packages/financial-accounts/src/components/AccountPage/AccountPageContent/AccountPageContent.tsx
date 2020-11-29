@@ -6,7 +6,7 @@ import { useAccountList } from "../../../helpers/api/useAccountList/useAccountLi
 import { AccountBlankSlate } from "../../AccountBlankSlate/AccountBlankSlate";
 
 export const AccountPageContent: FunctionComponent = () => {
-  const { state, data } = useAccountList();
+  const { state, data, refresh } = useAccountList();
 
   if (state === RequestState.LOADING) {
     return <Loader />;
@@ -17,7 +17,7 @@ export const AccountPageContent: FunctionComponent = () => {
   }
 
   if (data.accounts.length === 0) {
-    return <AccountBlankSlate />;
+    return <AccountBlankSlate onSubmitted={refresh} />;
   }
 
   return (

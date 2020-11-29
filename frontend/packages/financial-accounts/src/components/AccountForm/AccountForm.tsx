@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from "react";
-import { Button, Field, Form, FormControl, FormValues } from "@fyley/ui-lib";
+import { Button, Field, Form, FormActions, FormControl, FormValues } from "@fyley/ui-lib";
 import { AccountNumberType, IAccountFormModel } from "../../helpers/api/submitAccount/models";
 import { submitAccount } from "../../helpers/api/submitAccount/submitAccount";
 
 interface IAccountFormProps {
   account: IAccountFormModel;
+  onSubmitted: () => void;
 }
 
-export const AccountForm: FunctionComponent<IAccountFormProps> = ({ account }) => {
+export const AccountForm: FunctionComponent<IAccountFormProps> = ({ account, onSubmitted }) => {
   const handleValidate = (values: FormValues) => {
     const errors: FormValues = {};
 
@@ -22,14 +23,18 @@ export const AccountForm: FunctionComponent<IAccountFormProps> = ({ account }) =
     return errors;
   };
 
-  const handleSubmit = async (values: FormValues) => {
-    // onSubmit(values as IAccountFormModel);
+  const handleSubmit = async (values: FormValues, actions: FormActions) => {
     const result = await submitAccount("new", {
       ...(values as IAccountFormModel),
       accountNumberType: AccountNumberType.IBAN
     });
 
-    console.log(result);
+    if (!result) {
+      return await actions.displayError();
+    }
+
+    await actions.displaySuccess();
+    onSubmitted();
   };
 
   return (
