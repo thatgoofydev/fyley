@@ -2,19 +2,27 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import { FormContext } from "../FormContext";
 import { Field } from "./Field";
-import { IFieldState, IFormContext, IFormState } from "../types";
+import { FormActions, IFieldState, IFormContext, IFormState, SubmitStatus } from "../types";
 
 const noop = () => {};
+const noopAsync = () => Promise.resolve();
 
 const defaultState: IFormState = {
   values: {},
   errors: {},
   touched: {},
-  focused: {}
+  focused: {},
+  submitStatus: SubmitStatus.IDLE
+};
+
+const defaultActions: FormActions = {
+  displaySuccess: noopAsync,
+  displayError: noopAsync
 };
 
 const defaultContext: IFormContext = {
   state: defaultState,
+  actions: defaultActions,
   onFieldBlur: noop,
   onFieldFocus: noop,
   setFieldValue: noop,
@@ -108,6 +116,7 @@ const contextWithState = (state: IFormState): IFormContext => {
 
   return {
     state,
+    actions: defaultActions,
     getFieldState,
     setFieldValue,
     onFieldFocus,

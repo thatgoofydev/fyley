@@ -10,7 +10,6 @@ const defaultProps: IButtonProps = {
   size: "normal",
   color: "blue",
   disabled: false,
-  actionState: "none",
   onClick: noop
 };
 
@@ -50,32 +49,7 @@ describe("Button", function () {
       expect(container).toMatchSnapshot();
     });
 
-    it("when submitting state", function () {
-      const props: IButtonProps = {
-        ...defaultProps,
-        actionState: "submitting"
-      };
-      const { container } = render(<Button {...props} />);
-      expect(container).toMatchSnapshot();
-    });
-
-    it("when success state", function () {
-      const props: IButtonProps = {
-        ...defaultProps,
-        actionState: "success"
-      };
-      const { container } = render(<Button {...props} />);
-      expect(container).toMatchSnapshot();
-    });
-
-    it("when error state", function () {
-      const props: IButtonProps = {
-        ...defaultProps,
-        actionState: "error"
-      };
-      const { container } = render(<Button {...props} />);
-      expect(container).toMatchSnapshot();
-    });
+    // TODO add tests with form to check submit feedback
   });
 
   it("should trigger onClick", function () {
