@@ -1,9 +1,16 @@
 import React, { FunctionComponent, useState } from "react";
-import { FormValues, IFieldState, IFormContext, IFormState } from "./types";
+import {
+  FormActions,
+  FormValues,
+  IFieldState,
+  IFormContext,
+  IFormState,
+  SubmitStatus
+} from "./types";
 import { FormContext } from "./FormContext";
 
 interface IFormProps {
-  onSubmit: (values: FormValues) => void;
+  onSubmit: (values: FormValues, actions: FormActions) => void;
   onValidate: (values: FormValues) => FormValues;
   initialValues?: FormValues;
 }
@@ -18,7 +25,8 @@ export const Form: FunctionComponent<IFormProps> = ({
     values: initialValues || {},
     errors: {},
     focused: {},
-    touched: {}
+    touched: {},
+    submitStatus: SubmitStatus.IDLE
   });
 
   const getFieldState = (name: string): IFieldState => {
@@ -72,27 +80,51 @@ export const Form: FunctionComponent<IFormProps> = ({
     }));
   };
 
+  const displaySubmitStatus = async (status: SubmitStatus): Promise<void> => {
+    setState(prevState => ({
+      ...prevState,
+      submitStatus: status
+    }));
+
+    await sleep(1000);
+
+    setState(prevState => ({
+      ...prevState,
+      submitStatus: SubmitStatus.IDLE
+    }));
+  };
+
+  const actions: FormActions = {
+    displaySuccess: () => displaySubmitStatus(SubmitStatus.SUCCESS),
+    displayError: () => displaySubmitStatus(SubmitStatus.ERROR)
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newTouched = state.touched;
     Object.keys(newTouched).forEach(key => (newTouched[key] = true));
 
-    const newState = {
+    const errors = onValidate(state.values);
+    const shouldCallback = !errors || Object.keys(errors).length === 0;
+
+    const newState: IFormState = {
       ...state,
       touched: newTouched,
-      errors: onValidate(state.values)
+      errors,
+      submitStatus: shouldCallback ? SubmitStatus.SUBMITTING : SubmitStatus.IDLE
     };
 
     setState(newState);
 
-    if (!newState.errors || Object.keys(newState.errors).length === 0) {
-      onSubmit(newState.values);
+    if (shouldCallback) {
+      onSubmit(newState.values, actions);
     }
   };
 
   const context: IFormContext = {
     state,
+    actions,
     getFieldState,
     setFieldValue,
     onFieldFocus,
@@ -107,3 +139,7 @@ export const Form: FunctionComponent<IFormProps> = ({
     </FormContext.Provider>
   );
 };
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

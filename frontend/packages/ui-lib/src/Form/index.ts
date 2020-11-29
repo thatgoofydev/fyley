@@ -1,5 +1,5 @@
 export { Form } from "./Form";
-export { FormValues } from "./types";
+export { FormValues, FormActions } from "./types";
 
 export * from "./FormControl";
 export * from "./Field";

@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import styles from "./Button.module.scss";
 import classNames from "classnames";
+import { useFormSubmit } from "../Form/useFormSubmit";
+import { SubmitStatus } from "../Form/types";
 
 export interface IButtonProps {
   label: string;
@@ -9,7 +11,6 @@ export interface IButtonProps {
   size?: "normal" | "small";
   color?: "blue" | "red";
   disabled?: boolean;
-  actionState?: "submitting" | "success" | "error" | "none";
   onClick?: () => void;
   "data-testid"?: string;
 }
@@ -21,16 +22,21 @@ export const Button: FunctionComponent<IButtonProps> = ({
   size = "normal",
   color = "blue",
   disabled,
-  actionState = "none",
   onClick,
   "data-testid": dataTestId
 }) => {
+  const { inFormContext, status } = useFormSubmit();
+
   const classes: string = classNames(
     styles.button,
     style === "secondary" ? styles.secondary : undefined,
     size === "small" ? styles.small : undefined,
     styles[color],
-    actionState !== "none" ? styles[actionState] : undefined
+    {
+      [styles.submitting]: inFormContext && status === SubmitStatus.SUBMITTING,
+      [styles.success]: inFormContext && status === SubmitStatus.SUCCESS,
+      [styles.error]: inFormContext && status === SubmitStatus.ERROR
+    }
   );
 
   const svgSize = size === "small" ? 18 : 24;
@@ -43,7 +49,7 @@ export const Button: FunctionComponent<IButtonProps> = ({
       data-testid={dataTestId}
     >
       {label}
-      {actionState === "success" && (
+      {status === SubmitStatus.SUCCESS && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={svgSize}
@@ -53,7 +59,7 @@ export const Button: FunctionComponent<IButtonProps> = ({
           <path d="M20.3 2L9 13.6l-5.3-5L0 12.3 9 21 24 5.7z" />
         </svg>
       )}
-      {actionState === "error" && (
+      {status === SubmitStatus.ERROR && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={svgSize}

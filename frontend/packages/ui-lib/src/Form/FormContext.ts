@@ -1,14 +1,20 @@
 import { createContext } from "react";
-import { IFormContext } from "./types";
+import { IFormContext, SubmitStatus } from "./types";
 
 const noop = () => {};
+const noopAsync = () => Promise.resolve();
 
 export const FormContext = createContext<IFormContext>({
   state: {
     values: {},
     errors: {},
     focused: {},
-    touched: {}
+    touched: {},
+    submitStatus: SubmitStatus.IDLE
+  },
+  actions: {
+    displayError: noopAsync,
+    displaySuccess: noopAsync
   },
   getFieldState: () => ({
     value: {},

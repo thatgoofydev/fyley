@@ -2,7 +2,7 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { Form } from "./Form";
 import { Field } from "./Field";
-import { FormValues } from "./types";
+import { FormActions, FormValues } from "./types";
 import { Button } from "../Button";
 import { FormControl } from "./FormControl";
 
@@ -14,11 +14,20 @@ export default {
   }
 } as Meta;
 
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const FormStory: Story = _ => {
-  const handleSubmit = (values: FormValues) => {
+  const handleSubmit = async (values: FormValues, actions: FormActions) => {
+    await sleep(2000);
+
+    await actions.displaySuccess();
+
     console.log("submitted:");
     console.log(values);
   };
+
   const handleValidate = (values: FormValues): FormValues => {
     const errors: FormValues = {};
 

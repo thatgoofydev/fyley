@@ -11,7 +11,7 @@ interface IFieldProps {
 }
 
 export const Field: FunctionComponent<IFieldProps> = ({ name, label, placeholder }) => {
-  const { inContext, onChange, onFocus, onBlur, value, error, focused, touched } = useFieldState(
+  const { inContext, disabled, onChange, onFocus, onBlur, value, error, touched } = useFieldState(
     name
   );
 
@@ -38,6 +38,7 @@ export const Field: FunctionComponent<IFieldProps> = ({ name, label, placeholder
             onChange={handleChange}
             onFocus={onFocus}
             onBlur={onBlur}
+            disabled={disabled}
             autoComplete="off"
           />
         </div>
