@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@fyley/ui-lib": "^1.0.0",
-    "@fyley/utils": "^1.0.0"
+    "@fyley/utils": "^1.0.0",
+    "@fyley/financial-accounts": "^1.0.0"
   },
   "devDependencies": {
   },

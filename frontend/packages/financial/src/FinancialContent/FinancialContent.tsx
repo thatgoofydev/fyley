@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Switch } from "react-router";
 import { Route, useRouteMatch } from "react-router-dom";
 import { Page } from "@fyley/ui-lib";
+import { AccountPage } from "@fyley/financial-accounts";
 
 export const FinancialContent: FunctionComponent = () => {
   const { path } = useRouteMatch();
@@ -12,7 +13,7 @@ export const FinancialContent: FunctionComponent = () => {
         <Page title="Overview">financial overview page</Page>
       </Route>
       <Route path={`${path}/accounts`}>
-        <Page title="Accounts">accounts overview page</Page>
+        <AccountPage />
       </Route>
     </Switch>
   );
