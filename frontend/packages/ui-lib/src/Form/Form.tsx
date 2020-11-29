@@ -86,7 +86,6 @@ export const Form: FunctionComponent<IFormProps> = ({
 
     setState(newState);
 
-    console.log(newState.errors);
     if (!newState.errors || Object.keys(newState.errors).length === 0) {
       onSubmit(newState.values);
     }

@@ -16,6 +16,15 @@ body {
   background-color: #F7F9FB;
 }
 
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 10px 0
+}
+
 $placeholder-color: $mid-grey;
 *::-webkit-input-placeholder {
   color: $placeholder-color;
