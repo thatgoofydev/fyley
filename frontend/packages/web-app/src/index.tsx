@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BaseStyleSetup } from "@fyley/ui-lib";
+import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>

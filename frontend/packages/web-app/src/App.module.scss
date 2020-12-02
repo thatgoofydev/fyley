@@ -1,12 +1,16 @@
 @import "~@fyley/ui-lib/src/base-styling/colors";
 
+$header-height: 60px;
+
 .header {
-  height: 60px;
+  height: $header-height;
   width: 100%;
   display: flex;
   justify-content: space-between;
   background-color: #FFFFFF;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  top: 0;
+  position: fixed;
 
   div {
     flex: 1 1 0;
@@ -84,4 +88,9 @@
       }
     }
   }
+}
+
+.content {
+  padding-top: $header-height;
+  height: calc(100% - #{$header-height});
 }

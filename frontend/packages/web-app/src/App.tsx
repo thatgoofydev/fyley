@@ -96,9 +96,11 @@ function App() {
         <div />
       </header>
 
-      <Switch>
-        <Route path="/financial" component={FinancialContent} />
-      </Switch>
+      <div className={styles.content}>
+        <Switch>
+          <Route path="/financial" component={FinancialContent} />
+        </Switch>
+      </div>
     </>
   );
 }
