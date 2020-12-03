@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { IPageProps, Page } from "./Page";
-import { PageContent } from "./PageContent/PageContent";
+import { PageContent } from "./PageContent";
 
 export default {
   title: "Pages/Page",

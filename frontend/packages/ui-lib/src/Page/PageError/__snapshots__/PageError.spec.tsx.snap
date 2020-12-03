@@ -13,35 +13,31 @@ exports[`PageError should render 1`] = `
       </h1>
     </header>
     <div
-      class="pageContentWrapper"
+      class="pageContent"
     >
       <div
-        class="pageContent"
+        class="pageError"
       >
+        <h1>
+          Oops!
+        </h1>
+        <h2>
+          Looks like something went wrong...
+        </h2>
         <div
-          class="pageError"
+          class="whatNext"
         >
-          <h1>
-            Oops!
-          </h1>
-          <h2>
-            Looks like something went wrong...
-          </h2>
-          <div
-            class="whatNext"
-          >
-            <p>
-              What now?
-            </p>
-            <ul>
-              <li>
-                Try again later.
-              </li>
-              <li>
-                Contact the application administrator.
-              </li>
-            </ul>
-          </div>
+          <p>
+            What now?
+          </p>
+          <ul>
+            <li>
+              Try again later.
+            </li>
+            <li>
+              Contact the application administrator.
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -62,45 +58,41 @@ exports[`PageError with details should render closed 1`] = `
       </h1>
     </header>
     <div
-      class="pageContentWrapper"
+      class="pageContent"
     >
       <div
-        class="pageContent"
+        class="pageError"
       >
+        <h1>
+          Oops!
+        </h1>
+        <h2>
+          Looks like something went wrong...
+        </h2>
         <div
-          class="pageError"
+          class="whatNext"
         >
-          <h1>
-            Oops!
-          </h1>
-          <h2>
-            Looks like something went wrong...
-          </h2>
-          <div
-            class="whatNext"
+          <p>
+            What now?
+          </p>
+          <ul>
+            <li>
+              Try again later.
+            </li>
+            <li>
+              Contact the application administrator.
+            </li>
+          </ul>
+        </div>
+        <div
+          class="details"
+        >
+          <button
+            data-testid="error-toggle"
           >
-            <p>
-              What now?
-            </p>
-            <ul>
-              <li>
-                Try again later.
-              </li>
-              <li>
-                Contact the application administrator.
-              </li>
-            </ul>
-          </div>
-          <div
-            class="details"
-          >
-            <button
-              data-testid="error-toggle"
-            >
-              Show
-               details
-            </button>
-          </div>
+            Show
+             details
+          </button>
         </div>
       </div>
     </div>
@@ -121,48 +113,44 @@ exports[`PageError with details should render opened when toggle clicked 1`] = `
       </h1>
     </header>
     <div
-      class="pageContentWrapper"
+      class="pageContent"
     >
       <div
-        class="pageContent"
+        class="pageError"
       >
+        <h1>
+          Oops!
+        </h1>
+        <h2>
+          Looks like something went wrong...
+        </h2>
         <div
-          class="pageError"
+          class="whatNext"
         >
-          <h1>
-            Oops!
-          </h1>
-          <h2>
-            Looks like something went wrong...
-          </h2>
-          <div
-            class="whatNext"
+          <p>
+            What now?
+          </p>
+          <ul>
+            <li>
+              Try again later.
+            </li>
+            <li>
+              Contact the application administrator.
+            </li>
+          </ul>
+        </div>
+        <div
+          class="details"
+        >
+          <button
+            data-testid="error-toggle"
           >
-            <p>
-              What now?
-            </p>
-            <ul>
-              <li>
-                Try again later.
-              </li>
-              <li>
-                Contact the application administrator.
-              </li>
-            </ul>
-          </div>
-          <div
-            class="details"
-          >
-            <button
-              data-testid="error-toggle"
-            >
-              Hide
-               details
-            </button>
-            <p>
-              Some details about the error that occurred
-            </p>
-          </div>
+            Hide
+             details
+          </button>
+          <p>
+            Some details about the error that occurred
+          </p>
         </div>
       </div>
     </div>
