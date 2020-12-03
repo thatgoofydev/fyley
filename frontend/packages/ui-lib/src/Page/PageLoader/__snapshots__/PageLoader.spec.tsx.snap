@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLoader should render 1`] = `
+<div>
+  <div
+    class="pageContainer"
+  >
+    <header
+      class="pageHeader"
+    >
+      <h1>
+        Page title
+      </h1>
+    </header>
+    <div
+      class="pageContent"
+    >
+      <div
+        class="pageLoader"
+      >
+        <div
+          class="lds-ellipsis"
+        >
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
