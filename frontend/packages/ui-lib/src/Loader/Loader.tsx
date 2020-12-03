@@ -1,13 +1,7 @@
 import React, { FunctionComponent } from "react";
-import "./Loader.scss";
+import styles from "./Loader.module.scss";
+import { PageContent } from "../Page";
 
 export const Loader: FunctionComponent = () => {
-  return (
-    <div className="lds-ellipsis">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  );
+  return <div className={styles.loader} />;
 };
