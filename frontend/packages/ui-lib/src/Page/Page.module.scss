@@ -5,7 +5,7 @@ $page-header-height: 70px;
 
 .pageContainer {
   width: 100%;
-  height: calc(100% - #{$page-header-height});
+  height: 100%;
   max-width: 1200px;
   margin: 0 auto;
 
@@ -22,7 +22,6 @@ $page-header-height: 70px;
 
   .pageContentWrapper {
     background-color: $white;
-    height: 100%;
     min-height: 600px;
     -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.16);
     -moz-box-shadow: 0 0 20px 0 rgba(0,0,0,0.16);

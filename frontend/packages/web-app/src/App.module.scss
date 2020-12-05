@@ -92,5 +92,5 @@ $header-height: 60px;
 
 .content {
   padding-top: $header-height;
-  height: calc(100% - #{$header-height});
+  height: 100%;
 }
