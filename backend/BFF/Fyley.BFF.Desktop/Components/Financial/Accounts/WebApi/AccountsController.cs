@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
 using Fyley.Core.Asp.Controllers;
 using Microsoft.AspNetCore.Mvc;
