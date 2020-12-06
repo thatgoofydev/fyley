@@ -25,7 +25,7 @@ namespace Fyley.Components.Financial.Application.Accounts
                 Description = account.Description,
                 Name = account.Name,
                 AccountNumber = account.AccountNumberValue,
-                AccountNumberType = AccountNumberType.FromValue(account.AccountNumberType).Name
+                AccountNumberType = account.AccountNumberType
             }).ToArray();
             
             return new ListAccountsResponse(accounts);

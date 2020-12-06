@@ -16,7 +16,7 @@ namespace Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts
             public Guid AccountId { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
-            public string AccountNumberType { get; set; }
+            public int AccountNumberType { get; set; }
             public string AccountNumber { get; set; }
         }
     }

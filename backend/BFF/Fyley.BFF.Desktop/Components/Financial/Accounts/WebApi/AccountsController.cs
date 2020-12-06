@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.ServiceClients;
+﻿using System;
+using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
 using Fyley.Core.Asp.Controllers;
@@ -23,7 +23,16 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi
         [HttpPost("submit-form/{id}")]
         public Task<IActionResult> SubmitForm([FromRoute] string id, [FromBody] SubmitAccountRequest request)
         {
-            return ExecuteAsync(async () => await _serviceClient.DefineAccount(id, request));
+            return ExecuteAsync(async () =>
+            {
+                if (id == "new")
+                {
+                    return await _serviceClient.DefineAccount(request);
+                }
+
+                // TODO update existing account
+                return new SubmitAccountResponse(Guid.Empty);
+            });
         }
 
         [HttpPost("list")]

@@ -1,4 +1,4 @@
-﻿using Fyley.BFF.Desktop.Components.Financial.Accounts.ServiceClients;
+﻿using Fyley.BFF.Desktop.Components.Financial.Accounts;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel;
 using Fyley.BFF.Desktop.Components.Financial.Transactions.Adapters;
 using Fyley.BFF.Desktop.Components.Financial.Transactions.ViewModelFactories;

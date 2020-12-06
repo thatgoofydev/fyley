@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
 using Fyley.Components.Financial.Contracts.Accounts.Commands.DefineAccount;
 using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 using Fyley.Components.Financial.Infrastructure.Adapters.Accounts;
 
-namespace Fyley.BFF.Desktop.Components.Financial.Accounts.ServiceClients
+namespace Fyley.BFF.Desktop.Components.Financial.Accounts
 {
     public class AccountServiceClient : IAccountServiceClient
     {
@@ -16,23 +15,17 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.ServiceClients
             _serviceAdapter = serviceAdapter;
         }
 
-        public async Task<SubmitAccountResponse> DefineAccount(string id, SubmitAccountRequest request)
+        public async Task<SubmitAccountResponse> DefineAccount(SubmitAccountRequest request)
         {
-            if (id == "new")
+            var serviceResponse = await _serviceAdapter.DefineAccount(new DefineAccountRequest
             {
-                var serviceResponse = await _serviceAdapter.DefineAccount(new DefineAccountRequest
-                {
-                    Name = request.Name,
-                    Description = request.Description,
-                    AccountNumber = request.AccountNumber,
-                    AccountNumberType = (int) request.AccountNumberType
-                });
+                Name = request.Name,
+                Description = request.Description,
+                AccountNumber = request.AccountNumber,
+                AccountNumberType = (int) request.AccountNumberType
+            });
                 
-                return new SubmitAccountResponse(serviceResponse.Id);
-            }
-            
-            // TODO update account details
-            throw new System.NotImplementedException();
+            return new SubmitAccountResponse(serviceResponse.Id);
         }
 
         public async Task<ListAccountsResponse.AccountDto[]> ListAccounts()
