@@ -24,7 +24,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
         }
 
         [Test]
-        public async Task DefineAccountReturnsId_WithIdNew()
+        public async Task DefineAccountReturnsId()
         {
             // Arrange
             const string name = "Savings";
