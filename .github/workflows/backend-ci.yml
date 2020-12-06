@@ -13,5 +13,5 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.x
-    - run: dotnet build
-    - run: dotnet test
+    - run: dotnet build ./backend/Fyley.sln
+    - run: dotnet test ./backend/Fyley.sln
