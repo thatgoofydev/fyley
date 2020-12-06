@@ -1,6 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.Adapters;
+﻿using System.Threading.Tasks;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.ServiceClients;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
 using Fyley.Core.Asp.Controllers;
@@ -12,27 +11,19 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi
     [Route("bff/desktop/accounts")]
     public class AccountsController : BaseController
     {
-        private readonly AccountServiceAdapter _serviceAdapter;
-        private readonly AccountViewModelFactory _viewModelFactory;
+        private readonly IAccountViewModelFactory _viewModelFactory;
+        private readonly IAccountServiceClient _serviceClient;
 
-        public AccountsController(AccountServiceAdapter serviceAdapter, AccountViewModelFactory viewModelFactory)
+        public AccountsController(IAccountViewModelFactory viewModelFactory, IAccountServiceClient serviceClient)
         {
-            _serviceAdapter = serviceAdapter;
             _viewModelFactory = viewModelFactory;
+            _serviceClient = serviceClient;
         }
 
-        [HttpPost("submit/{id}")]
-        public Task<IActionResult> Submit([FromRoute] string id, [FromBody] SubmitAccountRequest request)
+        [HttpPost("submit-form/{id}")]
+        public Task<IActionResult> SubmitForm([FromRoute] string id, [FromBody] SubmitAccountRequest request)
         {
-            return ExecuteAsync(async () =>
-            {
-                if (id == "new")
-                {
-                    return await _serviceAdapter.DefineAccount(request);
-                }
-
-                return new SubmitAccountResponse(Guid.Empty);
-            });
+            return ExecuteAsync(async () => await _serviceClient.DefineAccount(id, request));
         }
 
         [HttpPost("list")]

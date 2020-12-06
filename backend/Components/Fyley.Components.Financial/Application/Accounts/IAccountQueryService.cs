@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Fyley.Components.Financial.Contracts.Accounts.AccountQueryService.ListAccounts;
+using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 
 namespace Fyley.Components.Financial.Application.Accounts
 {

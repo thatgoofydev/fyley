@@ -1,24 +1,24 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.ServiceClients;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.List;
-using Fyley.Components.Financial.Application.Accounts;
 
 namespace Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel
 {
-    public class AccountViewModelFactory
+    public class AccountViewModelFactory : IAccountViewModelFactory
     {
-        private readonly IAccountQueryService _queryService;
+        private readonly IAccountServiceClient _queryService;
 
-        public AccountViewModelFactory(IAccountQueryService queryService)
+        public AccountViewModelFactory(IAccountServiceClient serviceClient)
         {
-            _queryService = queryService;
+            _queryService = serviceClient;
         }
 
         public async Task<ListResponse> List()
         {
-            var data = await _queryService.List();
+            var accounts = await _queryService.ListAccounts();
 
-            var accountViewModels = data.Accounts.Select(account => new ListResponse.AccountViewModel
+            var accountViewModels = accounts.Select(account => new ListResponse.AccountViewModel
             {
                 AccountId = account.AccountId,
                 Name = account.Name,

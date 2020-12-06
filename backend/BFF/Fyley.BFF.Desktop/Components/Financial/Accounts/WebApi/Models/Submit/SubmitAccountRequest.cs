@@ -8,14 +8,14 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit
     {
         public string Name { get; [UsedImplicitly] set; }
         public string Description { get; [UsedImplicitly] set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public AccountNumberType AccountNumberType { get; [UsedImplicitly] set; }
+        public AccountNumberTypes AccountNumberType { get; [UsedImplicitly] set; }
         public string AccountNumber { get; [UsedImplicitly] set; }
-    }
 
-    public enum AccountNumberType
-    {
-        Iban,
-        Other
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AccountNumberTypes
+        {
+            Other = 1,
+            Iban = 2
+        }
     }
 }

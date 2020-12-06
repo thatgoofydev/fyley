@@ -3,6 +3,7 @@ using Fyley.Components.Financial.Application.Accounts;
 using Fyley.Components.Financial.Application.Accounts.DataAccess;
 using Fyley.Components.Financial.Application.Transactions;
 using Fyley.Components.Financial.Application.Transactions.DataAccess;
+using Fyley.Components.Financial.Infrastructure.Adapters.Accounts;
 using Fyley.Components.Financial.Infrastructure.DataAccess;
 using Fyley.Components.Financial.Infrastructure.DataAccess.Accounts;
 using Fyley.Components.Financial.Infrastructure.DataAccess.Transactions;
@@ -33,6 +34,9 @@ namespace Fyley.Components.Financial.Infrastructure
             // DataAccess
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountQueries, AccountQueries>();
+            
+            // Adapters
+            services.AddScoped<IAccountServiceAdapter, AccountServiceAdapter>();
 
             #endregion Accounts
             

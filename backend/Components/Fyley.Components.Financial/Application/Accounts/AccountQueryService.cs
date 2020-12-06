@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Fyley.Components.Financial.Application.Accounts.DataAccess;
-using Fyley.Components.Financial.Contracts.Accounts.AccountQueryService.ListAccounts;
+using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 using Fyley.Components.Financial.Domain.Shared;
 
 namespace Fyley.Components.Financial.Application.Accounts

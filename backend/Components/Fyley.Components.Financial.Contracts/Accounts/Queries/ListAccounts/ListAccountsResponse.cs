@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fyley.Components.Financial.Contracts.Accounts.AccountQueryService.ListAccounts
+namespace Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts
 {
     public class ListAccountsResponse
     {
