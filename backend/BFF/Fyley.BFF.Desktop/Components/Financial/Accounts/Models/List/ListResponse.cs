@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.List
+namespace Fyley.BFF.Desktop.Components.Financial.Accounts.Models.List
 {
     public class ListResponse
     {

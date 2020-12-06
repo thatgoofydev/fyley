@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Accounts;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.List;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.List;
 using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 using NSubstitute;
 using NUnit.Framework;

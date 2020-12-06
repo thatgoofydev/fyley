@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Accounts;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit;
 using Fyley.Components.Financial.Contracts.Accounts.Commands.DefineAccount;
 using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 using Fyley.Components.Financial.Infrastructure.Adapters.Accounts;

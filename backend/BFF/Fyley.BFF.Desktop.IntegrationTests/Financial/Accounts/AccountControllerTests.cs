@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit;
 using Fyley.BFF.Desktop.IntegrationTests.Helpers;
 using NUnit.Framework;
 

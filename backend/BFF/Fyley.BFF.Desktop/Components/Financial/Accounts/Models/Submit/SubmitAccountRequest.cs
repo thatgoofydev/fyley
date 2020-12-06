@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit
+namespace Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit
 {
     public class SubmitAccountRequest
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
+using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit;
 using Fyley.Core.Asp.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi
+namespace Fyley.BFF.Desktop.Components.Financial.Accounts
 {
     [ApiController]
     [Route("bff/desktop/accounts")]
