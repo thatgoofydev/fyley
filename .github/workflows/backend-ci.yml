@@ -13,5 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.x
-    - run: dotnet build ./backend/Fyley.sln
-    - run: dotnet test ./backend/Fyley.sln --filter FullyQualifiedName!~IntegrationTests
+    - name: Install dependencies
+      run: dotnet restore  
+    - name: Build
+      run: dotnet build ./backend/Fyley.sln --configuration Release --no-restore 
+    - name: Test
+      run: dotnet test ./backend/Fyley.sln --no-restore --verbosity normal --filter FullyQualifiedName!~IntegrationTests
