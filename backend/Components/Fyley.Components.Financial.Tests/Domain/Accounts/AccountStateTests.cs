@@ -1,14 +1,14 @@
-﻿using Fyley.Components.Financial.Domain.Accounts;
+﻿using FluentAssertions;
+using Fyley.Components.Financial.Domain.Accounts;
 using Fyley.Components.Financial.Domain.Accounts.Events;
 using Fyley.Components.Financial.Domain.Shared;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.Components.Financial.Tests.Domain.Accounts
 {
-    [TestFixture]
     public class AccountStateTests
     {
-        [Test]
+        [Fact]
         public void Apply_AccountDefined_ShouldUpdateFields()
         {
             // Arrange
@@ -23,18 +23,9 @@ namespace Fyley.Components.Financial.Tests.Domain.Accounts
             state.Apply(@event);
             
             // Assert
-            Assert.That(
-                state.Name, 
-                Is.EqualTo(new AccountName("Savings"))
-            );
-            Assert.That(
-                state.Description,
-                Is.EqualTo(new AccountDescription("Description"))
-            );
-            Assert.That(
-                state.AccountNumber,
-                Is.EqualTo(new AccountNumber(AccountNumberType.Iban, "BE13131141229739"))
-            );
+            state.Name.Should().Be(new AccountName("Savings"));
+            state.Description.Should().Be(new AccountDescription("Description"));
+            state.AccountNumber.Should().Be(new AccountNumber(AccountNumberType.Iban, "BE13131141229739"));
         }
     }
 }

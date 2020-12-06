@@ -1,29 +1,29 @@
 ﻿using System;
+using FluentAssertions;
 using Fyley.Components.Financial.Domain.Shared;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.Components.Financial.Tests.Domain.Shared
 {
-    [TestFixture]
     public class OtherAccountNumberTypeTests
     {
         public class ConstructorShould : OtherAccountNumberTypeTests
         {
-            [Test]
+            [Fact]
             public void SetCorrectValues()
             {
                 // Arrange + Act
                 var accountType = AccountNumberType.Other;
                 
                 // Assert
-                Assert.That(accountType.Value, Is.EqualTo(1));
-                Assert.That(accountType.Name, Is.EqualTo("Other"));
+                accountType.Value.Should().Be(1);
+                accountType.Name.Should().Be("Other");
             }
         }
 
         public class IsValidShould : OtherAccountNumberTypeTests
         {
-            [Test]
+            [Fact]
             public void ReturnSuccess_WhenValueIsNull()
             {
                 // Arrange
@@ -33,10 +33,10 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
                 var result = accountType.IsValid(null);
                 
                 // Assert
-                Assert.That(result.IsValid, Is.True);
+                result.IsValid.Should().BeTrue();
             }
             
-            [Test]
+            [Fact]
             public void ReturnSuccess_WhenValueIsRandomString()
             {
                 // Arrange
@@ -47,15 +47,16 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
                 var result = accountType.IsValid(value);
                 
                 // Assert
-                Assert.That(result.IsValid, Is.True);
+                result.IsValid.Should().BeTrue();
             }
         }
 
         public class FormatShould : OtherAccountNumberTypeTests
         {
-            [TestCase("test1", "test1")]
-            [TestCase("test2", "test2")]
-            [TestCase("test3", "test3")]
+            [Theory]
+            [InlineData("test1", "test1")]
+            [InlineData("test2", "test2")]
+            [InlineData("test3", "test3")]
             public void ReturnInputValue(string inputValue, string expectedReturnValue)
             {
                 // Arrange
@@ -65,7 +66,7 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
                 var result = accountType.Format(inputValue);
                 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedReturnValue));
+                result.Should().Be(expectedReturnValue);
             }
         }
     }

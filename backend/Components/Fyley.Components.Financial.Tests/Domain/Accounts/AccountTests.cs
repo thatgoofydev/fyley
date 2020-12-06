@@ -1,14 +1,14 @@
 ﻿using System;
 using DDDCore.Domain.Events;
+using FluentAssertions;
 using Fyley.Components.Financial.Domain.Accounts;
 using Fyley.Components.Financial.Domain.Accounts.Events;
 using Fyley.Components.Financial.Domain.Shared;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.Components.Financial.Tests.Domain.Accounts
 {
     // ReSharper disable ObjectCreationAsStatement
-    [TestFixture]
     public class AccountTests
     {
         private static readonly AccountId Id = new AccountId(Guid.NewGuid()); 
@@ -18,37 +18,37 @@ namespace Fyley.Components.Financial.Tests.Domain.Accounts
             
         public class ConstructorShould : AccountTests
         {
-            [Test]
+            [Fact]
             public void ThrowArgumentNullException_WhenNameIsNull()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentNullException>(() =>
                     new Account(null, Description, AccountNumber));
-                
-                Assert.That(exception.ParamName, Is.EqualTo("name"));
+
+                exception.ParamName.Should().Be("name");
             }
             
-            [Test]
+            [Fact]
             public void ThrowArgumentNullException_WhenDescriptionIsNull()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentNullException>(() =>
                     new Account(Name, null, AccountNumber));
                 
-                Assert.That(exception.ParamName, Is.EqualTo("description"));
+                exception.ParamName.Should().Be("description");
             }
             
-            [Test]
+            [Fact]
             public void ThrowArgumentNullException_WhenAccountNumberIsNull()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentNullException>(() =>
                     new Account(Name, Description, null));
                 
-                Assert.That(exception.ParamName, Is.EqualTo("accountNumber"));
+                exception.ParamName.Should().Be("accountNumber");
             }
 
-            [Test]
+            [Fact]
             public void EmitEvent()
             {
                 // Arrange
@@ -58,55 +58,51 @@ namespace Fyley.Components.Financial.Tests.Domain.Accounts
                 var events = account.FlushUncommitedEvents();
                 
                 // Assert
-                Assert.That(events, Has.Exactly(1).Matches<DomainEvent>(@event =>
-                {
-                    var e = (AccountDefined) @event.AggregateEvent;
-                    return e.Name == Name
-                           && e.AccountNumber == AccountNumber;
-                }));
-                Assert.That(account.Name, Is.EqualTo(Name));
-                Assert.That(account.Description, Is.EqualTo(Description));
-                Assert.That(account.AccountNumber, Is.EqualTo(AccountNumber));
+                events.Should().OnlyContain(@event =>
+                    ((AccountDefined) @event.AggregateEvent).Name == Name
+                    && ((AccountDefined) @event.AggregateEvent).AccountNumber == AccountNumber
+                );
+                account.Name.Should().Be(Name);
+                account.Description.Should().Be(Description);
+                account.AccountNumber.Should().Be(AccountNumber);
             }
         }
 
         public class Construct2Should : AccountTests
         {
-            [Test]
+            [Fact]
             public void ThrowArgumentNullException_WhenIdIsNull()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentNullException>(() =>
                     new Account(null, new AccountState(), 10));
-                
-                Assert.That(exception.ParamName, Is.EqualTo("id"));
+
+                exception.ParamName.Should().Be("id");
             }
             
-            [Test]
+            [Fact]
             public void ThrowArgumentNullException_WhenStateIsNull()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentNullException>(() =>
                     new Account(Id, null, 10));
-                
-                Assert.That(exception.ParamName, Is.EqualTo("state"));
+                exception.ParamName.Should().Be("state");
             }
             
-            [Test]
+            [Fact]
             public void ThrowArgumentException_WhenVersionIsLowerThanNegative1()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentException>(() =>
                     new Account(Id, new AccountState(), -2));
-                
-                Assert.That(exception.ParamName, Is.EqualTo("version"));
+                exception.ParamName.Should().Be("version");
             }
             
-            [Test]
+            [Fact]
             public void Success()
             {
                 // Act + Assert
-                Assert.DoesNotThrow(() => new Account(Id, new AccountState(), 0));
+                new Account(Id, new AccountState(), 0);
             }
         }
     }

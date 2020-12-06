@@ -1,22 +1,23 @@
-﻿using Fyley.Components.Financial.Domain.Accounts;
-using NUnit.Framework;
+﻿using FluentAssertions;
+using Fyley.Components.Financial.Domain.Accounts;
+using Xunit;
 
 namespace Fyley.Components.Financial.Tests.Domain.Accounts
 {
-    [TestFixture]
     public class AccountDescriptionTests
     {
         public class ConstructorShould
         {
-            [TestCase("name", "name")]
-            [TestCase(null, null)]
+            [Theory]
+            [InlineData("name", "name")]
+            [InlineData(null, null)]
             public void SetValue(string value, string expected)
             {
                 // Act
                 var result = new AccountDescription(value);
                 
                 // Assert
-                Assert.That(result.Value, Is.EqualTo(expected));
+                result.Value.Should().Be(expected);
             }
         }
     }

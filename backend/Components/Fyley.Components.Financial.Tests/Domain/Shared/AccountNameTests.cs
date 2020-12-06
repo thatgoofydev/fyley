@@ -1,49 +1,49 @@
 ﻿using System;
+using FluentAssertions;
 using Fyley.Components.Financial.Domain.Shared;
 using Fyley.Components.Financial.Domain.Shared.Errors;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.Components.Financial.Tests.Domain.Shared
 {
     // ReSharper disable ObjectCreationAsStatement
-    [TestFixture]
     public class AccountNameTests
     { 
         public class ConstructorShould : AccountNameTests
         {
-            [Test]
+            [Fact]
             public void ThrowArgumentNullException_WhenValueIsNull()
             {
                 // Act + Assert
                 var exception = Assert.Throws<ArgumentNullException>(() => 
                     new AccountName(null));
-                
-                Assert.That(exception.ParamName, Is.EqualTo("value"));
+
+                exception.ParamName.Should().Be("value");
             }
 
-            [Test]
+            [Fact]
             public void ThrowAccountNameToLong_WhenNameToLong()
             {
                 var exception = Assert.Throws<AccountNameToLong>(() => 
                     new AccountName("abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz"));
                 
-                Assert.That(exception.Message, Contains.Substring("is to long"));
+                exception.Message.Should().Contain("is to long");
             }
 
-            [Test]
+            [Fact]
             public void NotChangeValue()
             {
                 // Act
                 var accountName = new AccountName("Some account name");
                 
                 // Assert
-                Assert.That(accountName.Value, Is.EqualTo("Some account name"));
+                accountName.Value.Should().Be("Some account name");
             }
         }
 
         public class EqualShould : AccountNameTests
         {
-            [Test]
+            [Fact]
             public void Equal()
             {
                 // Arrange
@@ -54,10 +54,10 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
                 var result = accountName1.Equals(accountName2);
 
                 // Assert
-                Assert.That(result, Is.True);
+                result.Should().BeTrue();
             }
             
-            [Test]
+            [Fact]
             public void NotEqual()
             {
                 // Arrange
@@ -68,7 +68,7 @@ namespace Fyley.Components.Financial.Tests.Domain.Shared
                 var result = accountName1.Equals(accountName2);
 
                 // Assert
-                Assert.That(result, Is.False);
+                result.Should().BeFalse();
             }
         }
     }
