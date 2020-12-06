@@ -1,5 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.List
 {
@@ -17,8 +19,15 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.List
             public Guid AccountId { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
-            public string AccountNumberType { get; set; }
+            public AccountNumberType AccountNumberType { get; set; }
             public string AccountNumber { get; set; }
+        }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AccountNumberType
+        {
+            Other = 1,
+            Iban = 2
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Fyley.BFF.Desktop.Components.Financial.Accounts.ViewModel
                 Name = account.Name,
                 Description = account.Description,
                 AccountNumber = account.AccountNumber,
-                AccountNumberType = account.AccountNumberType
+                AccountNumberType = (ListResponse.AccountNumberType) account.AccountNumberType
             }).ToArray();
             
             return new ListResponse(accountViewModels);
