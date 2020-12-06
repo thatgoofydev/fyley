@@ -14,4 +14,4 @@ jobs:
       with:
         dotnet-version: 3.1.x
     - run: dotnet build ./backend/Fyley.sln
-    - run: dotnet test ./backend/Fyley.sln
+    - run: dotnet test ./backend/Fyley.sln --filter FullyQualifiedName!~IntegrationTests
