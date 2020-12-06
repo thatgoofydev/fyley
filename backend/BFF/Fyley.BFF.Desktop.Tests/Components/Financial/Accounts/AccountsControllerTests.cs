@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Fyley.BFF.Desktop.Components.Financial.Accounts;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.List;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit;
 using Fyley.Core.Asp.Models;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
 {
-    [TestFixture]
     public class AccountsControllerTests
     {
-        private IAccountViewModelFactory _viewModelFactory;
-        private IAccountServiceClient _serviceClient;
-        private AccountsController _controller;
+        private readonly IAccountViewModelFactory _viewModelFactory;
+        private readonly IAccountServiceClient _serviceClient;
+        private readonly AccountsController _controller;
 
-        [SetUp]
-        public void SetUp()
+        protected AccountsControllerTests()
         {
             _viewModelFactory = Substitute.For<IAccountViewModelFactory>();
             _serviceClient = Substitute.For<IAccountServiceClient>();
@@ -33,7 +31,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
             private const string AccountNumber = "BE18456141662665";
             private const SubmitAccountRequest.AccountNumberTypes AccountNumberType = SubmitAccountRequest.AccountNumberTypes.Iban;
             
-            [Test]
+            [Fact]
             public async Task CallServiceClientAndReturn_WhenNewAccount()
             {
                 // Arrange
@@ -54,9 +52,9 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
                 var objResult = result as ObjectResult;
                 var response = objResult?.Value as ApiResponse<SubmitAccountResponse>;
                 
-                Assert.That(response, Is.Not.Null);
-                Assert.That(response.Ok, Is.True);
-                Assert.That(response.Data.Id, Is.EqualTo(returnId));
+                response.Should().NotBeNull();
+                response.Ok.Should().BeTrue();
+                response.Data.Id.Should().Be(returnId);
                 await AssertServiceClientMockCalled_DefineAccount(request);
             }
 
@@ -85,7 +83,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
                         && req.AccountNumberType.Equals(request.AccountNumberType)));
             }
             
-            [Test]
+            [Fact]
             public async Task ReturnEmptyGuid_WhenExistingAccount()
             {
                 // Arrange
@@ -105,9 +103,9 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
                 var objResult = result as ObjectResult;
                 var response = objResult?.Value as ApiResponse<SubmitAccountResponse>;
                 
-                Assert.That(response, Is.Not.Null);
-                Assert.That(response.Ok, Is.True);
-                Assert.That(response.Data.Id, Is.EqualTo(Guid.Empty));
+                response.Should().NotBeNull();
+                response.Ok.Should().BeTrue();
+                response.Data.Id.Should().BeEmpty();
             }
         }
 
@@ -119,7 +117,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
             private const string AccountNumber = "BE18456141662665";
             private const ListResponse.AccountNumberType AccountNumberType = ListResponse.AccountNumberType.Iban;
             
-            [Test]
+            [Fact]
             public async Task CallViewModelFactoryList()
             {
                 var viewModelFactoryResponse = new ListResponse(new []
@@ -142,18 +140,20 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
                 var result = await _controller.List();
                 
                 // Arrange
-                var objResult = result as ObjectResult;
-                var response = objResult?.Value as ApiResponse<ListResponse>;
+                var objResult = result as OkObjectResult;
+                Assert.NotNull(objResult);
+                var response = objResult.Value as ApiResponse<ListResponse>;
                 
-                Assert.That(response, Is.Not.Null);
-                Assert.That(response.Data.Accounts, Has.Length.EqualTo(1));
-                var single = response.Data.Accounts[0];
-                
-                Assert.That(single.AccountId, Is.EqualTo(AccountId));
-                Assert.That(single.Name, Is.EqualTo(Name));
-                Assert.That(single.Description, Is.EqualTo(Description));
-                Assert.That(single.AccountNumber, Is.EqualTo(AccountNumber));
-                Assert.That(single.AccountNumberType, Is.EqualTo(AccountNumberType));
+                Assert.NotNull(response);
+                response.Data.Accounts.Should().HaveCount(1);
+
+                response.Data.Accounts.Should().ContainSingle(single =>
+                    single.AccountId.Equals(AccountId)
+                    && single.Name.Equals(Name)
+                    && single.Description.Equals(Description)
+                    && single.AccountNumber.Equals(AccountNumber)
+                    && single.AccountNumberType.Equals(AccountNumberType)
+                );
                 
                 await _viewModelFactory
                     .Received(1)

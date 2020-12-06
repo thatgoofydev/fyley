@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Fyley.BFF.Desktop.Components.Financial.Accounts;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.List;
 using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
 {
-    [TestFixture]
     public class AccountViewModelFactoryTests
     {
-        private IAccountServiceClient _serviceClient;
-        private IAccountViewModelFactory _viewModelFactory;
-
-        [SetUp]
-        public void SetUp()
+        private readonly IAccountServiceClient _serviceClient;
+        private readonly IAccountViewModelFactory _viewModelFactory;
+        
+        public AccountViewModelFactoryTests()
         {
             _serviceClient = Substitute.For<IAccountServiceClient>();
             _viewModelFactory = new AccountViewModelFactory(_serviceClient);
@@ -30,7 +29,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
             private const string AccountNumber = "Savings";
             private const int AccountNumberType = 2;
 
-            [Test]
+            [Fact]
             public async Task ReturnNotNull()
             {
                 // Arrange
@@ -40,13 +39,15 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
                 var result = await _viewModelFactory.List();
 
                 // Assert
-                Assert.That(result, Is.Not.Null);
-                Assert.That(result.Accounts, Has.Length.EqualTo(1));
-                Assert.That(result.Accounts[0].AccountId, Is.EqualTo(Id));
-                Assert.That(result.Accounts[0].Name, Is.EqualTo(Name));
-                Assert.That(result.Accounts[0].Description, Is.EqualTo(Description));
-                Assert.That(result.Accounts[0].AccountNumber, Is.EqualTo(AccountNumber));
-                Assert.That(result.Accounts[0].AccountNumberType, Is.EqualTo((ListResponse.AccountNumberType)AccountNumberType));
+                result.Should().NotBeNull();
+
+                result.Accounts.Should().ContainSingle(single =>
+                    single.AccountId.Equals(Id)
+                    && single.Name.Equals(Name)
+                    && single.Description.Equals(Description)
+                    && single.AccountNumber.Equals(AccountNumber)
+                    && single.AccountNumberType.Equals((ListResponse.AccountNumberType)AccountNumberType)
+                );
 
                 await _serviceClient
                     .Received(1)

@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Fyley.BFF.Desktop.Components.Financial.Accounts;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit;
 using Fyley.Components.Financial.Contracts.Accounts.Commands.DefineAccount;
 using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;
 using Fyley.Components.Financial.Infrastructure.Adapters.Accounts;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
 {
-    [TestFixture]
     public class AccountServiceClientTests
     {
-        private IAccountServiceAdapter _serviceAdapter;
-        private AccountServiceClient _serviceClient;
-
-        [SetUp]
-        public void SetUp()
+        private readonly IAccountServiceAdapter _serviceAdapter;
+        private readonly AccountServiceClient _serviceClient;
+        
+        public AccountServiceClientTests()
         {
             _serviceAdapter = Substitute.For<IAccountServiceAdapter>();
             _serviceClient = new AccountServiceClient(_serviceAdapter);
         }
 
-        [Test]
+        [Fact]
         public async Task DefineAccountReturnsId()
         {
             // Arrange
@@ -55,7 +54,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
             var result = await _serviceClient.DefineAccount(request);
 
             // Assert
-            Assert.That(result.Id, Is.Not.Null);
+            result.Id.Should().NotBeEmpty();
 
             await _serviceAdapter
                 .Received(1)
@@ -66,7 +65,7 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
                     && req.AccountNumberType.Equals(accountNumberType)));
         }
 
-        [Test]
+        [Fact]
         public async Task ListAccountsReturnsAccounts()
         {
             // Arrange
@@ -94,13 +93,13 @@ namespace Fyley.BFF.Desktop.Tests.Components.Financial.Accounts
             var result = await _serviceClient.ListAccounts();
 
             // Assert
-            Assert.That(result, Has.Length.EqualTo(1));
-            var single = result[0];
-            Assert.That(single.AccountId, Is.EqualTo(id));
-            Assert.That(single.Name, Is.EqualTo(name));
-            Assert.That(single.Description, Is.EqualTo(description));
-            Assert.That(single.AccountNumber, Is.EqualTo(accountNumber));
-            Assert.That(single.AccountNumberType, Is.EqualTo(accountNumberType));
+            result.Should().ContainSingle(single =>
+                single.AccountId.Equals(id)
+                && single.Name.Equals(name)
+                && single.Description.Equals(description)
+                && single.AccountNumber.Equals(accountNumber)
+                && single.AccountNumberType.Equals(accountNumberType)
+            );
         }
     }
 }
