@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.Models.Submit;
 using Fyley.BFF.Desktop.IntegrationTests.Helpers;
-using NUnit.Framework;
+using Xunit;
 
 namespace Fyley.BFF.Desktop.IntegrationTests.Financial.Accounts
 {
-    [TestFixture]
     public class AccountControllerTests : IDisposable
     {
         private IntegrationTestFixture _fixture;
         private HttpClient _http;
         
-        [SetUp]
-        public void SetUp()
+        public AccountControllerTests()
         {
             _fixture = new IntegrationTestFixture();
             _http = _fixture.GetClient();
         }
 
-        [Test]
+        [Fact]
         public async Task SubmitForm_ReturnsRandomId_WhenIdIsNew()
         {
             // Arrange
@@ -36,12 +35,12 @@ namespace Fyley.BFF.Desktop.IntegrationTests.Financial.Accounts
             var response = await _http.PostJsonAsync("/bff/desktop/accounts/submit-form/new", request);
 
             // Assert
-            Assert.That(response.IsSuccessStatusCode);
+            response.IsSuccessStatusCode.Should().BeTrue();
 
             var apiResponse = await response.ReadApiResponseOf<SubmitAccountResponse>();
-            Assert.That(apiResponse.Ok, Is.True);
-            Assert.That(apiResponse.Error, Is.Null);
-            Assert.That(apiResponse.Data.Id, Is.Not.Null);
+            apiResponse.Ok.Should().BeTrue();
+            apiResponse.Error.Should().BeNull();
+            apiResponse.Data.Id.Should().NotBe(Guid.Empty);
         }
 
         public void Dispose()
