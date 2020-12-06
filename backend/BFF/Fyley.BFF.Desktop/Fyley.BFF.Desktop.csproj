@@ -6,10 +6,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Base\Fyley.Core.Asp\Fyley.Core.Asp.csproj" />
-      <ProjectReference Include="..\..\Components\Fyley.Components.Accounts.Infrastructure\Fyley.Components.Accounts.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Components\Fyley.Components.Accounts\Fyley.Components.Accounts.csproj" />
-      <ProjectReference Include="..\..\Components\Fyley.Components.Dossiers.Infrastructure\Fyley.Components.Dossiers.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Components\Fyley.Components.Dossiers\Fyley.Components.Dossiers.csproj" />
       <ProjectReference Include="..\..\Components\Fyley.Components.Financial.Infrastructure\Fyley.Components.Financial.Infrastructure.csproj" />
     </ItemGroup>
 
