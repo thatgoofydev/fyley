@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Fyley.Components.Financial.Application.Accounts;
 using Fyley.Components.Financial.Contracts.Accounts.Commands.DefineAccount;
 using Fyley.Components.Financial.Contracts.Accounts.Queries.ListAccounts;

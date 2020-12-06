@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Fyley.BFF.Desktop.Components.Financial.Accounts.WebApi.Models.Submit;
 using Fyley.BFF.Desktop.IntegrationTests.Helpers;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Fyley.BFF.Desktop.IntegrationTests.Financial.Accounts
