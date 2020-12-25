@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+option csharp_namespace = "Fyley.Grpc.Shared";
+
+package shared;
+
+message Status {
+  string code = 1;
+  string message = 2;
+  repeated google.protobuf.Any details = 3;
+}
+
+message BadRequest {
+  message FieldViolation {
+    string field = 1;
+    string description = 2;
+  }
+  
+  repeated FieldViolation field_violations = 1;
+}
