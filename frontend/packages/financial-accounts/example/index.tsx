@@ -1,12 +1,15 @@
 import React, { FC } from "react";
 import ReactDom from "react-dom";
-import { AccountPage } from "../src/components/AccountPage";
+import { AccountPage } from "../src";
+import { BrowserRouter } from "react-router-dom";
 
 const ExampleApp: FC = () => {
   return (
-    <main>
-      <AccountPage />
-    </main>
+    <BrowserRouter>
+      <main>
+        <AccountPage />
+      </main>
+    </BrowserRouter>
   );
 };
 

@@ -1,31 +1,62 @@
-import React, { FunctionComponent } from "react";
-import { NavLink } from "react-router-dom";
+import React, { FunctionComponent, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import { HeaderNavItem } from "@fyley/ui-lib";
 
-export interface IFinancialNavMenuProps {
-  isOpen: boolean;
-  baseRoute: string;
-  onClick: () => void;
+enum FinancialNavOptions {
+  Overview = "overview",
+  Accounts = "accounts"
 }
 
-export const FinancialNavMenu: FunctionComponent<IFinancialNavMenuProps> = ({
-  isOpen,
+const useFinancialNav = (baseRoute: string, onItemClicked: () => void) => {
+  const [currentOption, setOption] = useState<FinancialNavOptions>();
+  const history = useHistory();
+  const location = useLocation();
+
+  const navigateTo = (route: FinancialNavOptions) => {
+    history.push(`${baseRoute}/${route.toString()}`);
+    onItemClicked();
+    setOption(route);
+  };
+
+  const isActive = location.pathname.startsWith(baseRoute);
+
+  return {
+    currentOption,
+    isActive,
+    navigateTo
+  };
+};
+
+interface IFinancialHeaderNavProps {
+  baseRoute: string;
+  open: boolean;
+  onItemClicked: () => void;
+}
+
+export const FinancialHeaderNavItem: FunctionComponent<IFinancialHeaderNavProps> = ({
   baseRoute,
-  onClick
+  open,
+  onItemClicked
 }) => {
-  if (!isOpen) return <></>;
+  const { currentOption, isActive, navigateTo } = useFinancialNav(baseRoute, onItemClicked);
+  const history = useHistory();
+  const location = useLocation();
+
+  const navigateToOverview = () => navigateTo(FinancialNavOptions.Overview);
+  const navigateToAccounts = () => navigateTo(FinancialNavOptions.Accounts);
 
   return (
-    <ul>
-      <li>
-        <NavLink to={`${baseRoute}/overview`} onClick={onClick} activeClassName="active">
-          Overview
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={`${baseRoute}/accounts`} onClick={onClick}>
-          Accounts
-        </NavLink>
-      </li>
-    </ul>
+    <HeaderNavItem open={open} active={isActive} label="Financial" onItemClicked={onItemClicked}>
+      <HeaderNavItem
+        label={FinancialNavOptions.Overview}
+        active={currentOption === FinancialNavOptions.Overview}
+        onItemClicked={() => navigateTo(FinancialNavOptions.Overview)}
+      />
+      <HeaderNavItem
+        label={FinancialNavOptions.Accounts}
+        active={currentOption === FinancialNavOptions.Accounts}
+        onItemClicked={() => navigateTo(FinancialNavOptions.Accounts)}
+      />
+    </HeaderNavItem>
   );
 };

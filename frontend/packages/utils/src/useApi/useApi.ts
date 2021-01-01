@@ -43,7 +43,7 @@ export const useApi = <TData, TRequest = void>(
     });
 
     const requestParameters = getRequestParameters<TRequest>(requestContent);
-    const finalUrl = `https://localhost:5001/bff/desktop${url}`;
+    const finalUrl = `https://localhost:5001/bff${url}`;
     fetch(finalUrl, requestParameters)
       .then(async response => {
         const dataResponse = (await response.json()) as ApiResponse<TData>;

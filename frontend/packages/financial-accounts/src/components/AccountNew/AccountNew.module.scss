@@ -1,0 +1,36 @@
+@import "~@fyley/ui-lib/src/base-styling/colors";
+
+.pageHeader {
+  .headerTop {
+    display: flex;
+    padding-bottom: 7px;
+    border-bottom: 1px solid $border-grey;
+    color: $primary-text;
+    margin-bottom: 16px;
+
+    h2 {
+      flex: 1;
+
+      a {
+        position: relative;
+        text-decoration: none;
+        color: $blue;
+
+        &::after {
+          position: absolute;
+          content: '';
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-bottom: 1.5px solid $blue;
+        }
+      }
+    }
+  }
+
+  .pageDescription {
+    padding-bottom: 24px;
+    color: $secondary-text;
+    line-height: 1.3em;
+  }
+}

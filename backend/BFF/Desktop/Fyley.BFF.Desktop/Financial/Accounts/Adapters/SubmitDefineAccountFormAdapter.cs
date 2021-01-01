@@ -15,7 +15,7 @@ namespace Fyley.BFF.Desktop.Financial.Accounts.Adapters
             _accountServiceClient = accountServiceClient;
         }
 
-        public async Task<DefineAccountFormResponse> Handle(DefineAccountFormViewModel request)
+        public async Task<DefineAccountFormResponse> Handle(AccountFormViewModel request)
         {
             // TODO validate request
             

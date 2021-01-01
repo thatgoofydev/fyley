@@ -1,0 +1,36 @@
+@import "~@fyley/ui-lib/src/base-styling/colors";
+
+$header-height: 60px;
+
+.header {
+  height: $header-height;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #FAFBFC;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  top: 0;
+  position: fixed;
+
+  div {
+    flex: 1 1 0;
+  }
+
+  h1 {
+    margin: 0;
+    letter-spacing: 4.3px;
+    padding: 15px 30px;
+    font-size: 24px;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      justify-content: center;
+    }
+  }
+}

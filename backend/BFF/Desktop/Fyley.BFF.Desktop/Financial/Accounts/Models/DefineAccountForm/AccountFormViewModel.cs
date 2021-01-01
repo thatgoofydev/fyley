@@ -1,6 +1,6 @@
 ﻿namespace Fyley.BFF.Desktop.Financial.Accounts.Models.DefineAccountForm
 {
-    public class DefineAccountFormViewModel
+    public class AccountFormViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

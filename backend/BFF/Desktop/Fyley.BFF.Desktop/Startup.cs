@@ -1,10 +1,12 @@
 using Fyley.BFF.Desktop.Financial.Accounts;
 using Fyley.BFF.Desktop.Services;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 
 namespace Fyley.BFF.Desktop
 {
@@ -22,9 +24,13 @@ namespace Fyley.BFF.Desktop
             services.RegisterGrpcServices(_configuration);
 
             services.RegisterAccounts();
-            
-            services.AddControllers();
+
             services.AddCors();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

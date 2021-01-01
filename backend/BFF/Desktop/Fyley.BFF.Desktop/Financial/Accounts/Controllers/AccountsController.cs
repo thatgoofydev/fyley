@@ -23,7 +23,7 @@ namespace Fyley.BFF.Desktop.Financial.Accounts.Controllers
         }
         
         [HttpPost("submit_define_account_form")]
-        public Task<IActionResult> SubmitDefineAccountForm([FromBody] DefineAccountFormViewModel request)
+        public Task<IActionResult> SubmitDefineAccountForm([FromBody] AccountFormViewModel request)
         {
             return ExecuteAsync(async () => await _submitDefineAccountFormAdapter.Handle(request));
         }
