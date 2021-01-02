@@ -26,8 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{0123
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.BFF.Desktop", "BFF\Desktop\Fyley.BFF.Desktop\Fyley.BFF.Desktop.csproj", "{4E4A4279-B8C8-4104-8696-0F36DEA875F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fyley.BFF.Desktop.Tests", "BFF\Desktop\Fyley.BFF.Desktop.Tests\Fyley.BFF.Desktop.Tests.csproj", "{9AE8E0D7-AA63-48D6-877D-3FF30EA2A0B8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,7 +42,6 @@ Global
 		{98E6C0F6-AC17-4125-B65A-E68560F7B752} = {6082CCA3-F0B5-4B19-88B1-AA435F2B38C1}
 		{0123ACEF-E879-4199-8DFC-F4A7083275C7} = {EC997F74-2F22-4486-8D48-B4A94F44BD17}
 		{4E4A4279-B8C8-4104-8696-0F36DEA875F5} = {0123ACEF-E879-4199-8DFC-F4A7083275C7}
-		{9AE8E0D7-AA63-48D6-877D-3FF30EA2A0B8} = {0123ACEF-E879-4199-8DFC-F4A7083275C7}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{77067D48-565C-4801-9CA0-9C65B48A4029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -79,9 +76,5 @@ Global
 		{4E4A4279-B8C8-4104-8696-0F36DEA875F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4A4279-B8C8-4104-8696-0F36DEA875F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4A4279-B8C8-4104-8696-0F36DEA875F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9AE8E0D7-AA63-48D6-877D-3FF30EA2A0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AE8E0D7-AA63-48D6-877D-3FF30EA2A0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AE8E0D7-AA63-48D6-877D-3FF30EA2A0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AE8E0D7-AA63-48D6-877D-3FF30EA2A0B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

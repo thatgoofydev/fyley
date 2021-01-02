@@ -11,6 +11,7 @@ namespace Fyley.BFF.Desktop.Financial.Accounts
             services.AddScoped<AccountListViewModelFactory>();
 
             services.AddScoped<SubmitDefineAccountFormAdapter>();
+            services.AddScoped<ArchiveAccountAdapter>();
         }
     }
 }

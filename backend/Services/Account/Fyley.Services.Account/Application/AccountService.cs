@@ -30,5 +30,17 @@ namespace Fyley.Services.Account.Application
             
             return account.Id;
         }
+
+        public async Task ArchiveAccount(AccountId accountId)
+        {
+            Guard.ArgumentNotNull(nameof(accountId), accountId);
+
+            var account = await _accountRepository.FetchAsync(accountId);
+
+            account.Archive();
+            
+            await _accountRepository.Update(account);
+            await _unitOfWork.Commit();
+        }
     }
 }

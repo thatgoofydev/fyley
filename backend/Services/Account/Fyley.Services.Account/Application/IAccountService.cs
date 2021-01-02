@@ -6,5 +6,6 @@ namespace Fyley.Services.Account.Application
     public interface IAccountService
     {
         Task<AccountId> DefineAccount(AccountName name, AccountDescription description, AccountNumber accountNumber);
+        Task ArchiveAccount(AccountId accountId);
     }
 }

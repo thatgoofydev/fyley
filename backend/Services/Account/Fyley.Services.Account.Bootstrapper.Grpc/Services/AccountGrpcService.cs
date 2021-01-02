@@ -50,11 +50,17 @@ namespace Fyley.Services.Account.Bootstrapper.Grpc.Services
                     Type = (AccountNumber.Types.Type) account.AccountNumberType
                 }
             });
-            // todo apply field mask
 
             var response = new ListAccountsResponse();
             response.Accounts.AddRange(accounts);
             return response;
+        }
+
+        public override async Task<ArchiveAccountResponse> ArchiveAccount(ArchiveAccountRequest request, ServerCallContext context)
+        {
+            var accountId = new AccountId(Guid.Parse(request.Id));
+            await _accountService.ArchiveAccount(accountId);
+            return new ArchiveAccountResponse();
         }
     }
 }

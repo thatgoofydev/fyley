@@ -19,14 +19,7 @@ namespace Fyley.BFF.Desktop.Financial.Accounts.Factories
 
         public async Task<AccountListViewModel> Create()
         {
-            var mask = new FieldMask();
-            mask.Paths.Add("id");
-            mask.Paths.Add("name");
-            
-            var result = await _accountServiceClient.ListAccountsAsync(new ListAccountsRequest
-            {
-                FieldMask = mask 
-            });
+            var result = await _accountServiceClient.ListAccountsAsync(new ListAccountsRequest());
 
             var accounts = result.Accounts.Select(account => new AccountDto
             {

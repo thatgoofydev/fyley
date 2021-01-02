@@ -15,7 +15,7 @@ namespace Fyley.Services.Account.Infrastructure
         {
         }
 
-        public override void Configure(ModelBuilder modelBuilder)
+        protected override void Configure(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
         }

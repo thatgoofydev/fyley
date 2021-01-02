@@ -6,11 +6,13 @@ using JetBrains.Annotations;
 namespace Fyley.Services.Account.Domain
 {
     public class AccountState : IAggregateState,
-        IHandle<AccountDefined>
+        IHandle<AccountDefined>,
+        IHandle<AccountArchived>
     {
         public AccountName Name { get; [UsedImplicitly] set; }
         public AccountDescription Description { get; [UsedImplicitly] set; }
         public AccountNumber AccountNumber { get; [UsedImplicitly] set; }
+        public bool IsArchived { get; [UsedImplicitly] set; }
         
         [UsedImplicitly]
         public AccountState()
@@ -21,6 +23,11 @@ namespace Fyley.Services.Account.Domain
             Name = @event.Name;
             Description = @event.Description;
             AccountNumber = @event.AccountNumber;
+        }
+
+        public void Apply(AccountArchived @event)
+        {
+            IsArchived = true;
         }
     }
 }

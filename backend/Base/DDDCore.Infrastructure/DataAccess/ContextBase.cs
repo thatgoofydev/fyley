@@ -28,7 +28,7 @@ namespace DDDCore.Infrastructure.DataAccess
             Configure(modelBuilder);
         }
 
-        public abstract void Configure(ModelBuilder modelBuilder);
+        protected abstract void Configure(ModelBuilder modelBuilder);
 
         public async Task Commit()
         {

@@ -1,7 +1,5 @@
 ﻿syntax = "proto3";
 
-import "google/protobuf/field_mask.proto";
-
 option csharp_namespace = "Fyley.Services.Account";
 
 package account;
@@ -9,6 +7,7 @@ package account;
 service AccountService {
   rpc DefineAccount (DefineAccountRequest) returns (DefineAccountResponse);
   rpc ListAccounts (ListAccountsRequest) returns (ListAccountsResponse);
+  rpc ArchiveAccount (ArchiveAccountRequest) returns (ArchiveAccountResponse);
 }
 
 /* DefineAccount */
@@ -26,11 +25,19 @@ message DefineAccountResponse {
 /* ListAccounts */
 
 message ListAccountsRequest {
-  google.protobuf.FieldMask fieldMask = 1;
 }
 
 message ListAccountsResponse {
   repeated Account accounts = 1;
+}
+
+/* ArchiveAccount */
+
+message ArchiveAccountRequest {
+  string id = 1;
+}
+
+message ArchiveAccountResponse {
 }
 
 /* Models */

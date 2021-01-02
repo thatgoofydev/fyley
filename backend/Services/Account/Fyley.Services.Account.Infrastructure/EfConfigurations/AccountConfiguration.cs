@@ -24,6 +24,8 @@ namespace Fyley.Services.Account.Infrastructure.EfConfigurations
 
                 accountNumberBuilder.Property(e => e.Value);
             });
+            
+            builder.Property(e => e.IsArchived);
         }
     }
 }

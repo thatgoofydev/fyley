@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DDDCore.Domain.Events;
 
 namespace DDDCore.Domain.Aggregates
@@ -10,6 +11,7 @@ namespace DDDCore.Domain.Aggregates
         where TState : class, IAggregateState
     {
         private readonly Dictionary<Type, Delegate> _eventAppliers = new Dictionary<Type, Delegate>();
+        private readonly Dictionary<Type, MethodInfo> _eventApplierMethods = new Dictionary<Type, MethodInfo>();
         private readonly ICollection<IAggregateEvent> _uncommitedEvents = new LinkedList<IAggregateEvent>();
         
         public TIdentifier Id { get; }
@@ -60,7 +62,8 @@ namespace DDDCore.Domain.Aggregates
 
         private void ApplyEvent(IAggregateEvent @event)
         {
-            _eventAppliers[@event.GetType()]?.DynamicInvoke(@event);
+            _eventApplierMethods[@event.GetType()].Invoke(State, new object[] { @event });
+            // _eventAppliers[@event.GetType()]?.DynamicInvoke(@event);
         }
         
         private void RegisterEventAppliers()
@@ -73,9 +76,11 @@ namespace DDDCore.Domain.Aggregates
             {
                 var aggregateEventType = emitInterface.GenericTypeArguments.First();
                 var applyMethod = emitInterface.GetMethod(nameof(IHandle<IAggregateEvent>.Apply));
-                var delegateType = typeof(Action<>).MakeGenericType(aggregateEventType);
-                var action = Delegate.CreateDelegate(delegateType, State, applyMethod ?? throw new InvalidOperationException());
-                _eventAppliers.Add(aggregateEventType, action);
+                _eventApplierMethods.Add(aggregateEventType, applyMethod);
+                
+                // var delegateType = typeof(Action<>).MakeGenericType(aggregateEventType);
+                // var action = Delegate.CreateDelegate(delegateType, State, applyMethod ?? throw new InvalidOperationException());
+                // _eventAppliers.Add(aggregateEventType, action);
             }
         }
     }

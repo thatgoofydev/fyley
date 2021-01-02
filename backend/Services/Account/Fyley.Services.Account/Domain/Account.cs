@@ -9,7 +9,8 @@ namespace Fyley.Services.Account.Domain
         public AccountName Name => State.Name;
         public AccountDescription Description => State.Description;
         public AccountNumber AccountNumber => State.AccountNumber;
-        
+        public bool IsArchived => State.IsArchived;
+
         public Account(AccountName name, AccountDescription description, AccountNumber accountNumber)
         {
             if (name == null) throw new ArgumentNullException(nameof(name));
@@ -20,5 +21,10 @@ namespace Fyley.Services.Account.Domain
 
         public Account(AccountId id, AccountState state, long version) : base(id, state, version)
         { }
+
+        public void Archive()
+        {
+            Emit(new AccountArchived());
+        }
     }
 }
