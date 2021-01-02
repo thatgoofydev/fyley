@@ -27,6 +27,7 @@ namespace Fyley.Services.Account.Infrastructure
                     a.AccountNumber_Type as AccountNumberType,
                     a.AccountNumber_Value as AccountNumberValue
                 FROM Accounts.Accounts a
+                WHERE a.IsArchived = 0
             ";
 
             var data = await connection.QueryAsync<ListAccountQueryModel>(sqlQuery);
