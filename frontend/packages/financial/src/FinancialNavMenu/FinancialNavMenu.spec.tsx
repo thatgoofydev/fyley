@@ -1,13 +1,13 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import { FinancialNavMenu, IFinancialNavMenuProps } from "./FinancialNavMenu";
+import { FinancialHeaderNavItem, IFinancialHeaderNavProps } from "./FinancialNavMenu";
 import { MemoryRouter } from "react-router-dom";
 
 const noop = () => {};
-const defaultProps: IFinancialNavMenuProps = {
-  isOpen: true,
+const defaultProps: IFinancialHeaderNavProps = {
+  open: true,
   baseRoute: "/financial",
-  onClick: noop
+  onItemClicked: noop
 };
 
 afterEach(cleanup);
@@ -16,7 +16,7 @@ describe("FinancialNavMenu", function () {
   it("should render", function () {
     const { container } = render(
       <MemoryRouter>
-        <FinancialNavMenu {...defaultProps} />
+        <FinancialHeaderNavItem {...defaultProps} />
       </MemoryRouter>
     );
     expect(container).toMatchSnapshot();
@@ -25,7 +25,7 @@ describe("FinancialNavMenu", function () {
   it("should add class to active route", function () {
     const { container } = render(
       <MemoryRouter initialEntries={["/financial/overview"]}>
-        <FinancialNavMenu {...defaultProps} />
+        <FinancialHeaderNavItem {...defaultProps} />
       </MemoryRouter>
     );
     expect(container).toMatchSnapshot();

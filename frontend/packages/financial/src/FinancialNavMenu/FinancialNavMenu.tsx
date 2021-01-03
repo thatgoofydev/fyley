@@ -27,7 +27,7 @@ const useFinancialNav = (baseRoute: string, onItemClicked: () => void) => {
   };
 };
 
-interface IFinancialHeaderNavProps {
+export interface IFinancialHeaderNavProps {
   baseRoute: string;
   open: boolean;
   onItemClicked: () => void;

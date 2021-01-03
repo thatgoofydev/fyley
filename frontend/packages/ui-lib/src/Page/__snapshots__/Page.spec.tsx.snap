@@ -13,7 +13,7 @@ exports[`Page should render 1`] = `
       </h1>
     </header>
     <div
-      class="pageContent"
+      class="pageContentWrapper"
     >
       <p>
         Some content

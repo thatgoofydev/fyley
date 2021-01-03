@@ -13,7 +13,7 @@ exports[`PageError should render 1`] = `
       </h1>
     </header>
     <div
-      class="pageContent"
+      class="pageContentWrapper"
     >
       <div
         class="pageError"
@@ -58,7 +58,7 @@ exports[`PageError with details should render closed 1`] = `
       </h1>
     </header>
     <div
-      class="pageContent"
+      class="pageContentWrapper"
     >
       <div
         class="pageError"
@@ -113,7 +113,7 @@ exports[`PageError with details should render opened when toggle clicked 1`] = `
       </h1>
     </header>
     <div
-      class="pageContent"
+      class="pageContentWrapper"
     >
       <div
         class="pageError"

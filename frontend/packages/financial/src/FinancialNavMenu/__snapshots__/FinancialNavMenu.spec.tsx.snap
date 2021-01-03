@@ -2,44 +2,72 @@
 
 exports[`FinancialNavMenu should add class to active route 1`] = `
 <div>
-  <ul>
-    <li>
-      <a
-        aria-current="page"
-        class="active"
-        href="/financial/overview"
+  <li
+    class="HeaderNavItem-module_navItem__qJl0a HeaderNavItem-module_open__528yj"
+  >
+    <span
+      class="HeaderNavItem-module_labelWithSub__2BcOK HeaderNavItem-module_active__1fUqf"
+    >
+      Financial
+    </span>
+    <ul
+      class="HeaderNavItem-module_subNav__3MoHr"
+    >
+      <li
+        class="HeaderNavItem-module_navItem__qJl0a"
       >
-        Overview
-      </a>
-    </li>
-    <li>
-      <a
-        href="/financial/accounts"
+        <span
+          class=""
+        >
+          overview
+        </span>
+      </li>
+      <li
+        class="HeaderNavItem-module_navItem__qJl0a"
       >
-        Accounts
-      </a>
-    </li>
-  </ul>
+        <span
+          class=""
+        >
+          accounts
+        </span>
+      </li>
+    </ul>
+  </li>
 </div>
 `;
 
 exports[`FinancialNavMenu should render 1`] = `
 <div>
-  <ul>
-    <li>
-      <a
-        href="/financial/overview"
+  <li
+    class="HeaderNavItem-module_navItem__qJl0a HeaderNavItem-module_open__528yj"
+  >
+    <span
+      class="HeaderNavItem-module_labelWithSub__2BcOK"
+    >
+      Financial
+    </span>
+    <ul
+      class="HeaderNavItem-module_subNav__3MoHr"
+    >
+      <li
+        class="HeaderNavItem-module_navItem__qJl0a"
       >
-        Overview
-      </a>
-    </li>
-    <li>
-      <a
-        href="/financial/accounts"
+        <span
+          class=""
+        >
+          overview
+        </span>
+      </li>
+      <li
+        class="HeaderNavItem-module_navItem__qJl0a"
       >
-        Accounts
-      </a>
-    </li>
-  </ul>
+        <span
+          class=""
+        >
+          accounts
+        </span>
+      </li>
+    </ul>
+  </li>
 </div>
 `;

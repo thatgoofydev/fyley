@@ -13,19 +13,14 @@ exports[`PageLoader should render 1`] = `
       </h1>
     </header>
     <div
-      class="pageContent"
+      class="pageContentWrapper"
     >
       <div
         class="pageLoader"
       >
         <div
-          class="lds-ellipsis"
-        >
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
+          class="loader"
+        />
       </div>
     </div>
   </div>

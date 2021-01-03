@@ -13,7 +13,7 @@ exports[`FinancialContent should render 1`] = `
       </h1>
     </header>
     <div
-      class="Page-module_pageContent__3_kgD"
+      class="Page-module_pageContentWrapper__gcCZp"
     >
       financial overview page
     </div>
