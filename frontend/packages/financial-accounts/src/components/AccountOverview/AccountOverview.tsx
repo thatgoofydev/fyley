@@ -34,6 +34,9 @@ export const AccountOverview: FunctionComponent = () => {
     history.push(`${path}/${id}`);
   };
 
+  const archiveAccount = (id: string) => {
+  };
+
   return (
     <>
       <header className={styles.pageHeader}>
@@ -73,7 +76,12 @@ export const AccountOverview: FunctionComponent = () => {
               >
                 Edit
               </button>
-              <button className={classNames(styles.button, styles.danger)}>Remove</button>
+              <button
+                onClick={() => archiveAccount(account.accountId)}
+                className={classNames(styles.button, styles.danger)}
+              >
+                Archive
+              </button>
             </div>
           </div>
         ))}
