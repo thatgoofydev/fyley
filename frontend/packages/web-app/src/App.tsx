@@ -1,14 +1,16 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { FinancialContent } from "@fyley/financial";
 
 import styles from "./App.module.scss";
-import { Header } from "./components/Header/Header";
+import { Header } from "./components/layout";
+
+import { FinancialContent } from "./components/financial";
 
 function App() {
   return (
     <>
       <Header />
+
       <div className={styles.content}>
         <Switch>
           <Route path="/financial" component={FinancialContent} />

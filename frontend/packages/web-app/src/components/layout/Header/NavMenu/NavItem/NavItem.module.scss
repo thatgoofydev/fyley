@@ -1,0 +1,50 @@
+@import "~@fyley/ui-lib/src/base-styling/colors";
+
+.navItem {
+  display: block;
+
+  span, a {
+    display: block;
+    padding: 20px;
+    height: 100%;
+    cursor: pointer;
+    color: rgba($primary-text, .6);
+    text-decoration: none;
+    text-align: center;
+
+    &.active {
+      border-bottom: 2px solid $blue;
+      color: $primary-text;
+    }
+
+    &:hover, &:focus {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: $primary-text;
+    }
+  }
+
+  .subNav {
+    position: absolute;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+
+    background-color: $white;
+    -webkit-box-shadow: 2px 2px 10px 0 rgba(0,0,0,0.2);
+    -moz-box-shadow: 2px 2px 10px 0 rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 10px 0 rgba(0,0,0,0.2);
+
+    .navItem {
+      a, span {
+        width: 180px;
+        padding: 20px 30px;
+        text-align: left;
+
+        &.active {
+          color: $blue;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
