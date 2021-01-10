@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import styles from "./App.module.scss";
 import { Header } from "./components/layout";
@@ -14,6 +14,9 @@ function App() {
       <div className={styles.content}>
         <Switch>
           <Route path="/financial" component={FinancialContent} />
+
+          <Route path="/notfound" render={() => <>TODO notfound</>} />
+          <Redirect from="*" to="/notfound" />
         </Switch>
       </div>
     </>
