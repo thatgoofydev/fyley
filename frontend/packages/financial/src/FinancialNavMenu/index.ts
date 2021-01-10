@@ -1,1 +1,0 @@
-export { FinancialHeaderNavItem } from "./FinancialNavMenu";
