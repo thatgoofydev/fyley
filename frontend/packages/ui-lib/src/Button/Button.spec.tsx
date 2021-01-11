@@ -1,14 +1,11 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import { Button, IButtonProps } from "./Button";
+import { Button, ButtonProps } from "./Button";
 
 const noop = () => {};
-const defaultProps: IButtonProps = {
+const defaultProps: ButtonProps = {
   label: "Button",
-  style: "primary",
   type: "button",
-  size: "normal",
-  color: "blue",
   disabled: false,
   onClick: noop
 };
@@ -22,28 +19,10 @@ describe("Button", function () {
       expect(container).toMatchSnapshot();
     });
 
-    it("when small size", function () {
-      const props: IButtonProps = {
-        ...defaultProps,
-        size: "small"
-      };
-      const { container } = render(<Button {...props} />);
-      expect(container).toMatchSnapshot();
-    });
-
     it("when disabled", function () {
-      const props: IButtonProps = {
+      const props: ButtonProps = {
         ...defaultProps,
         disabled: true
-      };
-      const { container } = render(<Button {...props} />);
-      expect(container).toMatchSnapshot();
-    });
-
-    it("when secondary style", function () {
-      const props: IButtonProps = {
-        ...defaultProps,
-        style: "secondary"
       };
       const { container } = render(<Button {...props} />);
       expect(container).toMatchSnapshot();
@@ -55,7 +34,7 @@ describe("Button", function () {
   it("should trigger onClick", function () {
     const onClickCallback = jest.fn();
 
-    const props: IButtonProps = {
+    const props: ButtonProps = {
       ...defaultProps,
       onClick: onClickCallback,
       "data-testid": "btn"

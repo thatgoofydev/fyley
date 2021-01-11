@@ -1,21 +1,45 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
-import { Button, IButtonProps } from "./Button";
+import { Button, ButtonProps } from "./Button";
+import { Form, FormActions } from "../Form";
 
 export default {
   title: "Buttons/Button",
   component: Button
 } as Meta;
 
-export const ButtonStory: Story<IButtonProps> = args => {
+export const SimpleButtonStory: Story<ButtonProps> = args => {
   return <Button {...args} />;
 };
-ButtonStory.storyName = "Button";
-ButtonStory.args = {
+SimpleButtonStory.storyName = "Simple";
+SimpleButtonStory.args = {
   label: "Button",
-  style: "primary",
-  size: "normal",
   type: "button",
-  color: "blue",
+  disabled: false,
+  color: "normal"
+};
+
+export const StateButtonStory: Story<ButtonProps> = args => {
+  const noopValidate = () => ({});
+
+  const onSubmit = async (values: any, actions: FormActions) => {
+    await sleep(2000);
+    await actions.displaySuccess();
+  };
+
+  return (
+    <Form onSubmit={onSubmit} onValidate={noopValidate}>
+      <Button {...args} />
+    </Form>
+  );
+};
+StateButtonStory.storyName = "State";
+StateButtonStory.args = {
+  buttonType: "state",
+  label: "Button",
   disabled: false
 };
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

@@ -3,8 +3,8 @@
 exports[`Button should render correctly when default 1`] = `
 <div>
   <button
-    class="button blue"
-    type="button"
+    class="button"
+    type="submit"
   >
     Button
   </button>
@@ -14,31 +14,9 @@ exports[`Button should render correctly when default 1`] = `
 exports[`Button should render correctly when disabled 1`] = `
 <div>
   <button
-    class="button blue"
+    class="button"
     disabled=""
-    type="button"
-  >
-    Button
-  </button>
-</div>
-`;
-
-exports[`Button should render correctly when secondary style 1`] = `
-<div>
-  <button
-    class="button secondary blue"
-    type="button"
-  >
-    Button
-  </button>
-</div>
-`;
-
-exports[`Button should render correctly when small size 1`] = `
-<div>
-  <button
-    class="button small blue"
-    type="button"
+    type="submit"
   >
     Button
   </button>

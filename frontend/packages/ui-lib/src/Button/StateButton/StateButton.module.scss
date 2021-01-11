@@ -1,0 +1,60 @@
+@import "src/base-styling/colors";
+@import "src/Button/ButtonBase.module";
+
+.submitting, .success, .error {
+  position: relative;
+  color: transparent;
+  cursor: default;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    fill: white;
+    animation: pulse 0.3s linear 1;
+  }
+}
+
+.submitting::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateX(-50%) translateY(-50%);
+
+  border: 2px solid darken($bg-color, 20%);
+  border-right: 3px solid darken($bg-color, 40%);
+  border-radius: 50%;
+  animation: rotate .8s linear infinite;
+}
+
+.success {
+  background-color: $green;
+  border-color: $green;
+}
+
+.error {
+  background-color: $red;
+  border-color: $red;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  25%{
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+  }
+  75% {
+    transform: translateX(-50%) translateY(-50%) scale(1.3);
+  }
+}

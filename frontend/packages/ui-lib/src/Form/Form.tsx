@@ -86,7 +86,7 @@ export const Form = <T extends Object>({
       submitStatus: status
     }));
 
-    await sleep(800);
+    await sleep(1200);
 
     setState(prevState => ({
       ...prevState,

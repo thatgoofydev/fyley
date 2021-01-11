@@ -1,11 +1,10 @@
 import React, { VoidFunctionComponent } from "react";
 import classNames from "classnames";
 
-import styles from "./SimpleButton.module.scss";
+import { ButtonColors } from "../Button";
+import styles from "../ButtonBase.module.scss";
 
-export type ButtonColors = "normal" | "danger" | "warning";
-
-export type ISimpleButtonProps = {
+export type SimpleButtonProps = {
   label: string;
   color?: ButtonColors;
   type?: "submit" | "reset" | "button";
@@ -16,7 +15,7 @@ export type ISimpleButtonProps = {
   "data-testid"?: string;
 };
 
-export const SimpleButton: VoidFunctionComponent<ISimpleButtonProps> = ({
+export const SimpleButton: VoidFunctionComponent<SimpleButtonProps> = ({
   label,
   color = "normal",
   type,
