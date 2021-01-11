@@ -17,6 +17,5 @@ ButtonStory.args = {
   size: "normal",
   type: "button",
   color: "blue",
-  disabled: false,
-  actionState: "none"
+  disabled: false
 };

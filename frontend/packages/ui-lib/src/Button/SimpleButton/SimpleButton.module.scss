@@ -1,0 +1,44 @@
+@import "src/base-styling/colors";
+
+$button-colors: ("danger": $red, "warning": $orange);
+$bg-color: #FAFBFC;
+
+.button {
+  border-radius: 2px;
+  background-color: $bg-color;
+  border: 1px solid rgba(#1B1F23, 0.16);
+  padding: 2px 14px;
+  line-height: 20px;
+  color: $primary-text;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($bg-color, 5%);
+  }
+
+  &:disabled {
+    background-color: rgba($bg-color, 0.6);
+    color: rgba($primary-text, 0.4);
+    cursor: not-allowed;
+  }
+
+  &:active {
+    background-color: lighten($bg-color, 10%);
+  }
+
+  @each $name, $color in $button-colors {
+    &.#{$name} {
+      color: $color;
+
+      &:hover {
+        color: white;
+        background-color: $color;
+      }
+
+      &:active {
+        color: white;
+        background-color: lighten($color, 10%);
+      }
+    }
+  }
+}
