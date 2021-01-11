@@ -2,7 +2,7 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { Form } from "./Form";
 import { Field } from "./Field";
-import { FormActions, FormValues } from "./types";
+import { FormActions, FormErrors, FormValues } from "./types";
 import { Button } from "../Button";
 import { FormControl } from "./FormControl";
 
@@ -34,7 +34,7 @@ export const FormStory: Story = _ => {
   }
 
   const onValidate = (values: FormModel) => {
-    const errors: FormValues = {}
+    const errors: FormErrors<FormModel> = {}
 
     if (!values.name) {
       errors.name = "Name is required";

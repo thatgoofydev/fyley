@@ -1,6 +1,9 @@
-export interface FormValues<T = any> {
-  [field: string]: T;
+export type FormValues<T, P> = {
+  [key in keyof T]?: P;
 }
+
+export type FormBooleans<T> = FormValues<T, boolean>;
+export type FormErrors<T> = FormValues<T, string>;
 
 export interface FormActions {
   displaySuccess: () => Promise<void>;
@@ -16,15 +19,15 @@ export enum SubmitStatus {
 
 export interface IFormState<T> {
   values: T;
-  errors: FormValues<string>;
-  focused: FormValues<boolean>;
-  touched: FormValues<boolean>;
+  errors: FormErrors<T>;
+  focused: FormBooleans<T>;
+  touched: FormBooleans<T>;
   submitStatus: SubmitStatus;
 }
 
 export interface IFieldState {
   value: any | undefined;
-  error: string;
+  error: string | undefined;
   focused: boolean;
   touched: boolean;
 }
@@ -32,8 +35,8 @@ export interface IFieldState {
 export interface IFormContext<T> {
   state: IFormState<T>;
   actions: FormActions;
-  getFieldState: (name: string) => IFieldState;
-  setFieldValue: (name: string, values: any) => void;
-  onFieldFocus: (name: string) => void;
-  onFieldBlur: (name: string) => void;
+  getFieldState: (name: keyof T) => IFieldState;
+  setFieldValue: (name: keyof T, values: any) => void;
+  onFieldFocus: (name: keyof T) => void;
+  onFieldBlur: (name: keyof T) => void;
 }
