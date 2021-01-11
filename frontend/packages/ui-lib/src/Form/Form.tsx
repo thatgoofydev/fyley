@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 import {
   FormActions,
   FormValues,
@@ -9,20 +9,20 @@ import {
 } from "./types";
 import { FormContext } from "./FormContext";
 
-interface IFormProps {
-  onSubmit: (values: FormValues, actions: FormActions) => void;
-  onValidate: (values: FormValues) => FormValues;
-  initialValues?: FormValues;
+interface IFormProps<T> {
+  initialValues?: T;
+  onValidate: (values: T) => FormValues;
+  onSubmit: (values: T, actions: FormActions) => void | Promise<void>;
 }
 
-export const Form: FunctionComponent<IFormProps> = ({
+export const Form = <T extends Object>({
   onSubmit,
   onValidate,
   initialValues,
   children
-}) => {
-  const [state, setState] = useState<IFormState>({
-    values: initialValues || {},
+}: IFormProps<T> & { children?: ReactNode }): ReactElement => {
+  const [state, setState] = useState<IFormState<T>>({
+    values: initialValues || ({} as T),
     errors: {},
     focused: {},
     touched: {},
@@ -36,7 +36,7 @@ export const Form: FunctionComponent<IFormProps> = ({
     }
 
     return {
-      value: state.values[name],
+      value: state.values ? (state.values as any)[name] : undefined,
       error: state.errors[name],
       focused: state.focused[name],
       touched: state.touched[name]
@@ -86,7 +86,7 @@ export const Form: FunctionComponent<IFormProps> = ({
       submitStatus: status
     }));
 
-    await sleep(1000);
+    await sleep(800);
 
     setState(prevState => ({
       ...prevState,
@@ -108,7 +108,7 @@ export const Form: FunctionComponent<IFormProps> = ({
     const errors = onValidate(state.values);
     const shouldCallback = !errors || Object.keys(errors).length === 0;
 
-    const newState: IFormState = {
+    const newState: IFormState<T> = {
       ...state,
       touched: newTouched,
       errors,
@@ -122,7 +122,7 @@ export const Form: FunctionComponent<IFormProps> = ({
     }
   };
 
-  const context: IFormContext = {
+  const context: IFormContext<T> = {
     state,
     actions,
     getFieldState,

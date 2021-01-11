@@ -18,32 +18,40 @@ function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+interface FormModel {
+  name: string;
+  email?: Date;
+}
+
+interface Something {
+  test: string;
+}
+
 export const FormStory: Story = _ => {
-  const handleSubmit = async (values: FormValues, actions: FormActions) => {
-    await sleep(2000);
 
-    await actions.displaySuccess();
+  const initialValues: FormModel = {
+    name: ""
+  }
 
-    console.log("submitted:");
-    console.log(values);
-  };
+  const onValidate = (values: FormModel) => {
+    const errors: FormValues = {}
 
-  const handleValidate = (values: FormValues): FormValues => {
-    const errors: FormValues = {};
-
-    if (!values.email) {
-      errors.email = "Email is required";
+    if (!values.name) {
+      errors.name = "Name is required";
     }
 
     return errors;
-  };
+  }
 
-  const initialValues: FormValues = {
-    name: "John Doe"
-  };
+  const onSubmit = async (values: FormModel, actions: FormActions) => {
+    await sleep(2000);
+    await actions.displaySuccess();
+    await sleep(2000);
+    await actions.displayError();
+  }
 
   return (
-    <Form onSubmit={handleSubmit} onValidate={handleValidate} initialValues={initialValues}>
+    <Form initialValues={initialValues} onValidate={onValidate} onSubmit={onSubmit}>
       <Field name="name" label="Full name" />
       <Field name="email" label="Email" placeholder="hello@example.com" />
       <FormControl>

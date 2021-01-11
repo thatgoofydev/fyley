@@ -14,23 +14,23 @@ export enum SubmitStatus {
   ERROR
 }
 
-export interface IFormState {
-  values: FormValues;
-  errors: FormValues;
+export interface IFormState<T> {
+  values: T;
+  errors: FormValues<string>;
   focused: FormValues<boolean>;
   touched: FormValues<boolean>;
   submitStatus: SubmitStatus;
 }
 
 export interface IFieldState {
-  value: any;
-  error: any;
+  value: any | undefined;
+  error: string;
   focused: boolean;
   touched: boolean;
 }
 
-export interface IFormContext {
-  state: IFormState;
+export interface IFormContext<T> {
+  state: IFormState<T>;
   actions: FormActions;
   getFieldState: (name: string) => IFieldState;
   setFieldValue: (name: string, values: any) => void;
