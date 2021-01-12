@@ -4,7 +4,7 @@ $button-colors: ("danger": $red, "warning": $orange);
 $bg-color: #FAFBFC;
 
 .button {
-  border-radius: 2px;
+  border-radius: 4px;
   background-color: $bg-color;
   border: 1px solid darken($bg-color, 15%);
   padding: 2px 14px;
