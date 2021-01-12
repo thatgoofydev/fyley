@@ -44,10 +44,10 @@ export const FormStory: Story = _ => {
   }
 
   const onSubmit = async (values: FormModel, actions: FormActions) => {
-    await sleep(2000);
+    await sleep(1500);
     await actions.displaySuccess();
-    await sleep(2000);
-    await actions.displayError();
+    console.log(values);
+  };
   }
 
   return (
