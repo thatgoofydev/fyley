@@ -1,1 +1,0 @@
-export { HeaderNavItem } from "./HeaderNavItem";
