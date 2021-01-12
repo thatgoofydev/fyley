@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Field, Form, FormActions, FormControl, FormValues } from "@fyley/ui-lib";
+import { Button, Field, Form, FormActions, FormControl, FormErrors } from "@fyley/ui-lib";
 import { AccountNumberType } from "../AccountNew/defineAccount";
 
 interface IAccountFormProps<T extends IFormData> {
@@ -26,13 +26,13 @@ export const AccountForm = <T extends IFormData>({
   onSubmit,
   onSubmitted
 }: IAccountFormProps<T>) => {
-  const handleSubmit = async (values: FormValues, actions: FormActions) => {
+  const handleSubmit = async (values: T, actions: FormActions) => {
     const result = await onSubmit({
       name: values.name,
       description: values.description,
       accountNumber: {
         type: AccountNumberType.Iban,
-        value: values["accountNumber.value"]
+        value: (values as any)["accountNumber.value"]
       }
     } as T);
 
@@ -44,8 +44,8 @@ export const AccountForm = <T extends IFormData>({
     if (onSubmitted) onSubmitted();
   };
 
-  const handleValidate = (values: FormValues) => {
-    const errors: FormValues = {};
+  const handleValidate = (values: T) => {
+    const errors: FormErrors<T> = {};
 
     if (!values.name) {
       errors.name = "Name is required";
