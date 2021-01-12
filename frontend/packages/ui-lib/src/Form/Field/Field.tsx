@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { useFieldState } from "../useFieldState";
-import styles from "./Field.module.scss";
-import classNames from "classnames";
-import { FormControl } from "../FormControl/FormControl";
+import { BasicField, BasicFieldProps } from "./BasicField/BasicField";
+import { SelectField, SelectFieldProps } from "./SelectField/SelectField";
 
 interface IFieldProps {
   name: string;
@@ -10,40 +8,12 @@ interface IFieldProps {
   placeholder?: string;
 }
 
-export const Field: FunctionComponent<IFieldProps> = ({ name, label, placeholder }) => {
-  const { inContext, disabled, onChange, onFocus, onBlur, value, error, touched } = useFieldState(
-    name
-  );
+export type FieldProps = BasicFieldProps | SelectFieldProps;
 
-  if (!inContext) {
-    console.error("Field should be used inside a 'Form' component");
-    return <></>;
+export const Field: FunctionComponent<FieldProps> = ({ type, ...props }) => {
+  if (type === "select") {
+    return <SelectField {...props} />;
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => onChange(event.target.value);
-
-  const showError = error && touched;
-  const classes = classNames({ [styles.error]: showError });
-  return (
-    <>
-      <FormControl className={classes}>
-        <div className={styles.formControl}>
-          <label htmlFor={name}>{label}</label>
-          <input
-            id={name}
-            type="text"
-            name={name}
-            value={value || ""}
-            placeholder={placeholder}
-            onChange={handleChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            disabled={disabled}
-            autoComplete="off"
-          />
-        </div>
-        {showError && <p className={styles.errorText}>{error}</p>}
-      </FormControl>
-    </>
-  );
+  return <BasicField type={type} {...props} />;
 };

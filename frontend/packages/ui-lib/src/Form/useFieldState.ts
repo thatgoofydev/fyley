@@ -11,7 +11,9 @@ interface FormStateActions {
 }
 
 const noop = () => {};
-export const useFieldState = (name: string): FormStateActions & Omit<IFieldState, "focused"> => {
+export const useFieldState = (
+  name: string
+): FormStateActions & Omit<IFieldState, "focused" | "touched"> & { showError: boolean } => {
   const context = useContext(FormContext);
 
   if (!context) {
@@ -24,7 +26,7 @@ export const useFieldState = (name: string): FormStateActions & Omit<IFieldState
 
       value: undefined,
       error: undefined,
-      touched: false
+      showError: false
     };
   }
 
@@ -32,13 +34,16 @@ export const useFieldState = (name: string): FormStateActions & Omit<IFieldState
   const onFocus = () => context.onFieldFocus(name);
   const onBlur = () => context.onFieldBlur(name);
 
+  const fieldState = context.getFieldState(name);
+  const showError = !!fieldState.error && fieldState.touched;
+
   return {
     inContext: true,
     disabled: context.state.submitStatus !== SubmitStatus.IDLE,
     onChange,
     onFocus,
     onBlur,
-
-    ...context.getFieldState(name)
+    showError,
+    ...fieldState
   };
 };
