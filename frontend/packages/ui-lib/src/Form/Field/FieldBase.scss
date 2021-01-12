@@ -1,0 +1,24 @@
+@import "src/base-styling/colors";
+
+@mixin labelBase() {
+  display: block;
+  color: $primary-text;
+  margin-bottom: 4px;
+}
+
+@mixin inputBase() {
+  display: block;
+  background-color: #FAFBFC;
+  border: 1px solid #E1E4E8;
+  border-radius: 4px;
+  width: 100%;
+
+  padding: 7px 14px;
+  color: $primary-text;
+}
+
+@mixin errorTextBase() {
+  margin: 4px 0 0 14px;
+  color: $red;
+  font-size: 12px;
+}

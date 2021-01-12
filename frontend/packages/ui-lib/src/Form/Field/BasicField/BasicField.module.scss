@@ -1,0 +1,13 @@
+@import "src/Form/Field/FieldBase";
+
+.label {
+  @include labelBase();
+}
+
+.input {
+  @include inputBase();
+}
+
+.errorText {
+  @include errorTextBase();
+}
