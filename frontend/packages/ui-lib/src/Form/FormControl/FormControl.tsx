@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
-import styles from "./FormControl.module.scss";
 import classNames from "classnames";
+
+import styles from "./FormControl.module.scss";
 
 interface IFormControlProps {
   children: React.ReactNode;

@@ -1,4 +1,6 @@
 .formControlWrapper {
+  width: 400px;
+
   & + .formControlWrapper {
     margin-top: 10px;
   }
