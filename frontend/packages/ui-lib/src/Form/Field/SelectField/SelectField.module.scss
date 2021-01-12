@@ -1,0 +1,26 @@
+@import "src/Form/Field/FieldBase";
+
+.label {
+  @include labelBase();
+}
+
+.select {
+  @include inputBase();
+
+  &.selectOption {
+    color: $secondary-text;
+  }
+
+  option {
+    color: $primary-text;
+
+    &.selectOption {
+      color: $secondary-text;
+    }
+  }
+}
+
+
+.errorText {
+  @include errorTextBase();
+}
