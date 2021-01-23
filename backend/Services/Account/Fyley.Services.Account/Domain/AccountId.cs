@@ -5,7 +5,9 @@ namespace Fyley.Services.Account.Domain
 {
     public class AccountId : Identifier
     {
-        public AccountId(Guid value) : base(nameof(Account), value)
+        private const string AggregateName = "Account";
+        
+        public AccountId(Guid value) : base(AggregateName, value)
         { }
     }
 }
